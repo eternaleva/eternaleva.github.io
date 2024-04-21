@@ -30,10 +30,9 @@
 <meta property="og:description" content="SpringMVC是Spring框架里的一员，负责web表示层的解决方案 SpringMVC的优点 Spring MVC中提供一个DispatcherServlet, 无需额外开发。(即运行一个Servlet就行) springMVC中使用基于xml的配置文件，可以编辑，无需重新编译应用程序。 SpringMVC可以实例化控制器（Controller），并根据用户的输入来构造bean。 Sprin">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-20T12:44:09.000Z">
-<meta property="article:modified_time" content="2024-04-21T14:50:28.585Z">
+<meta property="article:modified_time" content="2024-04-21T17:02:45.062Z">
 <meta property="article:author" content="Tian">
 <meta property="article:tag" content="Spring">
-<meta property="article:tag" content="SpringFramework">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/08/20/Spring-MVC/">
@@ -125,12 +124,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">41</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">49</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -218,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-21 22:50:28" itemprop="dateModified" datetime="2024-04-21T22:50:28+08:00">2024-04-21</time>
+                <time title="修改时间：2024-04-22 01:02:45" itemprop="dateModified" datetime="2024-04-22T01:02:45+08:00">2024-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -409,10 +408,10 @@
 <h3 id="接收并封装非Json数据"><a href="#接收并封装非Json数据" class="headerlink" title="接收并封装非Json数据"></a>接收并封装非Json数据</h3><h4 id="使用request获取（不建议使用）"><a href="#使用request获取（不建议使用）" class="headerlink" title="使用request获取（不建议使用）"></a>使用request获取（不建议使用）</h4><p>网页url附带参数 a=xxx&amp;b=xxx<br>使用request.getParameter(“a”) …拿到参数<br><br></p>
 <h4 id="使用Handler直接获取并封装"><a href="#使用Handler直接获取并封装" class="headerlink" title="使用Handler直接获取并封装"></a>使用Handler直接获取并封装</h4><ul>
 <li><p>常规接收<br>方法使用@ResponseBody注解，直接在方法形参上写 <em>包装类数据类型 参数名</em> 即可，SpringMVC会自动封装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(String username, String password)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(username, password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(String username, String password)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(username, password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>接收并封装日期格式数据<br>SpringMVC没有提供直接转换Date格式的转换器，需要在参数中使用注解 <em>@DateTimeFormat(pattern=”yyyy-mm-dd”)</em> 来制定指定格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(@DateTimeFormat(pattern&#x3D;&quot;yyyy-mm-dd&quot;) Date birthDay)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(birthday);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(@DateTimeFormat(pattern&#x3D;&quot;yyyy-mm-dd&quot;) Date birthDay)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(birthday);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>接收文件<br>文件上传需要使用组件CommonMultipartResolver</p>
 <ul>
@@ -423,11 +422,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;multipartResolver&quot; class&#x3D;&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</span><br><span class="line">    &#x2F;&#x2F;设置最大上传文件大小</span><br><span class="line">    &lt;property name&#x3D;&quot;maxUploadSize&quot; value&#x3D;&quot;51200&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>step3. 接收方法的形参为MultipartFile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;获取上传文件的原名字</span><br><span class="line">    String fileName &#x3D; uploadFile.getOriginalFileName()</span><br><span class="line">    File file &#x3D; new File(“~&#x2F;Documents&quot;, fileName);</span><br><span class="line">    &#x2F;&#x2F;把接收的文件保存起来</span><br><span class="line">    try</span><br><span class="line">    &#123;</span><br><span class="line">        uploadFile.transferTo(file);</span><br><span class="line">    &#125;</span><br><span class="line">    catch(IOException e)</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;获取上传文件的原名字</span><br><span class="line">    String fileName &#x3D; uploadFile.getOriginalFileName()</span><br><span class="line">    File file &#x3D; new File(“~&#x2F;Documents&quot;, fileName);</span><br><span class="line">    &#x2F;&#x2F;把接收的文件保存起来</span><br><span class="line">    try</span><br><span class="line">    &#123;</span><br><span class="line">        uploadFile.transferTo(file);</span><br><span class="line">    &#125;</span><br><span class="line">    catch(IOException e)</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>tip：多文件上传，form表单input使用multiple，接收使用数组MultipartFile[]来接收</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;...&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;file&quot; multiple name&#x3D;&quot;...&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile[] uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    for(File file : uploadFile)</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;处理上传文件</span><br><span class="line">    &#125;</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile[] uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    for(File file : uploadFile)</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;处理上传文件</span><br><span class="line">    &#125;</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -718,7 +717,6 @@ tip：要判断参数接收到中文是否乱码，可以在代码中打印查�
           
           <div class="post-tags">
               <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
-              <a href="/tags/SpringFramework/" rel="tag"><i class="fa fa-tag"></i> SpringFramework</a>
           </div>
 	
         
@@ -807,7 +805,7 @@ tip：要判断参数接收到中文是否乱码，可以在代码中打印查�
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -849,12 +847,12 @@ tip：要判断参数接收到中文是否乱码，可以在代码中打印查�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">218k</span>
+    <span title="站点总字数">223k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:04</span>
+    <span title="站点阅读时长">6:11</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>

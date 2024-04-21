@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="微服务概念微服务架构分类 dubbo SpringCloud SpringCloudAlibaba  服务拆分和远程调用 不同微服务，不开发相同业务 微服务相对独立，不要访问其他微服务数据库 微服务将自己的业务暴露，供其他服务调用  SpringCloud微服务远程调用RestTemplate使用RestTemplate对象，发送http请求到对应微服务，然后获取数据。  提供者暴露接口给其他微服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud">
+<meta property="og:url" content="http://yoursite.com/2021/11/19/SpringCloud/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="微服务概念微服务架构分类 dubbo SpringCloud SpringCloudAlibaba  服务拆分和远程调用 不同微服务，不开发相同业务 微服务相对独立，不要访问其他微服务数据库 微服务将自己的业务暴露，供其他服务调用  SpringCloud微服务远程调用RestTemplate使用RestTemplate对象，发送http请求到对应微服务，然后获取数据。  提供者暴露接口给其他微服">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/11/19/SpringCloud/%E9%85%8D%E7%BD%AEnacos.png">
+<meta property="article:published_time" content="2021-11-19T06:11:23.000Z">
+<meta property="article:modified_time" content="2024-04-21T09:14:05.578Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="微服务">
+<meta property="article:tag" content="SpringCloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/11/19/SpringCloud/%E9%85%8D%E7%BD%AEnacos.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/11/19/SpringCloud/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SpringCloud | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/11/19/SpringCloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringCloud
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-19 14:11:23" itemprop="dateCreated datePublished" datetime="2021-11-19T14:11:23+08:00">2021-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 17:14:05" itemprop="dateModified" datetime="2024-04-21T17:14:05+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="微服务概念"><a href="#微服务概念" class="headerlink" title="微服务概念"></a>微服务概念</h1><h2 id="微服务架构分类"><a href="#微服务架构分类" class="headerlink" title="微服务架构分类"></a>微服务架构分类</h2><ol>
+<li>dubbo</li>
+<li>SpringCloud</li>
+<li>SpringCloudAlibaba</li>
+</ol>
+<h2 id="服务拆分和远程调用"><a href="#服务拆分和远程调用" class="headerlink" title="服务拆分和远程调用"></a>服务拆分和远程调用</h2><ol>
+<li>不同微服务，不开发相同业务</li>
+<li>微服务相对独立，不要访问其他微服务数据库</li>
+<li>微服务将自己的业务暴露，供其他服务调用</li>
+</ol>
+<h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h2 id="微服务远程调用"><a href="#微服务远程调用" class="headerlink" title="微服务远程调用"></a>微服务远程调用</h2><h2 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h2><p>使用RestTemplate对象，发送http请求到对应微服务，然后获取数据。 </p>
+<h2 id="提供者"><a href="#提供者" class="headerlink" title="提供者"></a>提供者</h2><p>暴露接口给其他微服务调用的</p>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><p>调用其他接口的微服务<br>两者之间关系是相对的</p>
+<h2 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h2><p>向消费者提供服务提供者的具体信息，有负载均衡，感知提供者状态。</p>
+<h2 id="Eureka注册中心"><a href="#Eureka注册中心" class="headerlink" title="Eureka注册中心"></a>Eureka注册中心</h2><h2 id="Eureka客户"><a href="#Eureka客户" class="headerlink" title="Eureka客户"></a>Eureka客户</h2><h2 id="SpringBoot配置Eureka"><a href="#SpringBoot配置Eureka" class="headerlink" title="SpringBoot配置Eureka"></a>SpringBoot配置Eureka</h2><ol>
+<li>导包（服务导server，客户端导client）<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>启动eureka配置<br>在BootStarter上增加注解<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaServer</span><br></pre></td></tr></table></figure></li>
+<li>配置yml<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8888</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eureka-server</span> <span class="comment">#eureka服务名称</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span> <span class="comment">#eureka地址信息</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://127.0.0.1:8888/erueka</span> <span class="comment">#默认服务地址</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Eureka服务注册"><a href="#Eureka服务注册" class="headerlink" title="Eureka服务注册"></a>Eureka服务注册</h2><ol>
+<li>导包</li>
+<li>配置yml<br>1）成为注册中心<br>2）服务注册到注册中心</li>
+</ol>
+<h2 id="Eureka服务拉取"><a href="#Eureka服务拉取" class="headerlink" title="Eureka服务拉取"></a>Eureka服务拉取</h2><h2 id="Eureka负载均衡"><a href="#Eureka负载均衡" class="headerlink" title="Eureka负载均衡"></a>Eureka负载均衡</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@LoadBanlanced</span><br></pre></td></tr></table></figure>
+<h2 id="Eureka集群"><a href="#Eureka集群" class="headerlink" title="Eureka集群"></a>Eureka集群</h2><ol>
+<li>创建多个Eureka各为注册中心，不同端口，互相注册到其他的注册中心</li>
+<li>其他服务注册到各个Eureka的注册中心</li>
+</ol>
+<h2 id="ribbon负载均衡（已过时）"><a href="#ribbon负载均衡（已过时）" class="headerlink" title="ribbon负载均衡（已过时）"></a>ribbon负载均衡（已过时）</h2><h3 id="ribbon自定义负载均衡"><a href="#ribbon自定义负载均衡" class="headerlink" title="ribbon自定义负载均衡"></a>ribbon自定义负载均衡</h3><ol>
+<li>自定义Rule（全局）</li>
+<li>配置文件，指定微服务策略<h3 id="ribbon饥饿加载"><a href="#ribbon饥饿加载" class="headerlink" title="ribbon饥饿加载"></a>ribbon饥饿加载</h3>刚开始运行eureka不会加载实例，第一次访问时才会加载（懒加载）<br>饥饿加载：刚运行时，将实例一并加载。<br>在yml里面配置。</li>
+</ol>
+<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><p>比eureka功能丰富，alibaba下面，国内受欢迎高<br>通用ribbon负载均衡</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装服务，并启用</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>导包<br>项目父工程导入管理依赖（负责管理nacos所有依赖的版本）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring-cloud-alibaba-dependencies</span><br></pre></td></tr></table></figure>
+<p>子工程导客户端依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring-cloud-starter-alibaba-nacos-discovery</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置nacos地址：server-addr</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">spring</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">xxxService</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务，则会自动注册导nacos</p>
+</li>
+</ol>
+<h2 id="Nacos集群"><a href="#Nacos集群" class="headerlink" title="Nacos集群"></a>Nacos集群</h2><h3 id="分级存储模型"><a href="#分级存储模型" class="headerlink" title="分级存储模型"></a>分级存储模型</h3><ol>
+<li>服务集群</li>
+<li>服务实例</li>
+</ol>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><p>yml文件，xxx就是一个区域的名字，该服务就注册在这个区域内</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.cloud.nacos.discovery.cluster-name:</span> <span class="string">xxx</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="跨集群调用"><a href="#跨集群调用" class="headerlink" title="跨集群调用"></a>跨集群调用</h3><h2 id="NacosRule"><a href="#NacosRule" class="headerlink" title="NacosRule"></a>NacosRule</h2><p>yml里面配置NacosRule</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">xxx....ribbon.NacosRule</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>优先选择本地服务，本地服务停掉后才会跨集群调用</li>
+<li>可以配置权重访问的（0.1-1之间）按照权重比值分配<br>权重可以配置为0，表示不会访问，可以用来做服务升级（用户不感知）</li>
+</ol>
+<h2 id="环境隔离Namespace"><a href="#环境隔离Namespace" class="headerlink" title="环境隔离Namespace"></a>环境隔离Namespace</h2><p>不同的namespace不能访问。</p>
+<ol>
+<li>新建命名空间</li>
+<li>在服务的yml里配置对应namespace的id</li>
+</ol>
+<h2 id="Nacos和Eureka区别"><a href="#Nacos和Eureka区别" class="headerlink" title="Nacos和Eureka区别"></a>Nacos和Eureka区别</h2><ol>
+<li>Nacos临时实例和永久实例</li>
+<li>Nacos有主动推送（如果有实例挂掉，会进行通知）</li>
+<li>都有定时主动pull</li>
+<li>都有心跳检测</li>
+</ol>
+<h3 id="临时实例"><a href="#临时实例" class="headerlink" title="临时实例"></a>临时实例</h3><p>ephemeral：true为临时，false为永久<br>Nacos默认集群模式AP，存在非临时实例则为CP模式</p>
+<h2 id="Nacos配置管理"><a href="#Nacos配置管理" class="headerlink" title="Nacos配置管理"></a>Nacos配置管理</h2><p>可以实现</p>
+<ol>
+<li>配置更改热更新</li>
+<li>多环境配置共享<h3 id="统一配置管理"><a href="#统一配置管理" class="headerlink" title="统一配置管理"></a>统一配置管理</h3></li>
+<li>在nacos中添加配置文件</li>
+<li>在微服务中引用nacos的Config依赖</li>
+<li>创建bootstrap.yml，配置nacos地址</li>
+<li>启动服务时，服务会先从nacos读取配置文件，然后加载配置，运行该实例</li>
+</ol>
+<h3 id="热更新"><a href="#热更新" class="headerlink" title="热更新"></a>热更新</h3><ol>
+<li>在@Value注入的变量所在的类上，配置@RefreshScope</li>
+<li>专门一个配置类上，@ConfigureationProperties</li>
+</ol>
+<h3 id="多环境配置共享"><a href="#多环境配置共享" class="headerlink" title="多环境配置共享"></a>多环境配置共享</h3><p>在nacos里创建 xxxService.yml 里面配置该服务共享的配置<br>相同配置的优先级：xxxService-xxx.yml &gt; xxxService.yml &gt; 本地配置</p>
+<h2 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h2><p>Feign是使用Http协议的</p>
+<h2 id="定义和使用Feign客户端"><a href="#定义和使用Feign客户端" class="headerlink" title="定义和使用Feign客户端"></a>定义和使用Feign客户端</h2><h3 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h3><h3 id="服务类上加-EnableFeignClients"><a href="#服务类上加-EnableFeignClients" class="headerlink" title="服务类上加@EnableFeignClients"></a>服务类上加@EnableFeignClients</h3><h3 id="编写Feign接口"><a href="#编写Feign接口" class="headerlink" title="编写Feign接口"></a>编写Feign接口</h3><p>使用注解<code>@FeignClient(&quot;xxxService&quot;)</code>，然后编写方法，并用SpringMVC注解标明请求URL。</p>
+<div class="note info">
+            <p>Feign本身自带负载均衡包依赖。</p>
+          </div>
+
+
+<h2 id="自定义Feign配置"><a href="#自定义Feign配置" class="headerlink" title="自定义Feign配置"></a>自定义Feign配置</h2><ol>
+<li>日志</li>
+<li>解码</li>
+<li>编码</li>
+</ol>
+<h3 id="基于配置文件"><a href="#基于配置文件" class="headerlink" title="基于配置文件"></a>基于配置文件</h3><p>日志：</p>
+<ol>
+<li>default：全局</li>
+<li>xxxService：指定服务</li>
+</ol>
+<h3 id="基于配置类"><a href="#基于配置类" class="headerlink" title="基于配置类"></a>基于配置类</h3><ol>
+<li>写一个配置类</li>
+<li>配置一个Logger.level的Bean<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger.<span class="function">level <span class="title">feignLogLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Logger.level.BASIC;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在对应需要调用服务的类上进行全局/指定配置</li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(defaultConfiguration = FeignConfig.class)</span></span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &quot;xxxService&quot;, configuration = FeignConfig.class)</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="Feign调优"><a href="#Feign调优" class="headerlink" title="Feign调优"></a>Feign调优</h2><p>Feign底层：</p>
+<ol>
+<li>URLConnection：不支持连接池</li>
+<li>Apache HttpClient：</li>
+<li>OKHttp</li>
+</ol>
+<p>具体的连接数和路由数要通过压力测试来进行</p>
+<h3 id="使用连接池替换URLConnection"><a href="#使用连接池替换URLConnection" class="headerlink" title="使用连接池替换URLConnection"></a>使用连接池替换URLConnection</h3><ol>
+<li>导包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feign-httpclient</span><br></pre></td></tr></table></figure></li>
+<li>配置文件进行配置<br>feign.httpclient.enable<br>feign.httpclient.max-connections<br>feign.httpclient.max-connections-per-route<h3 id="日志除了debug时候用full，其他时尽可能用BASIC或者NULL"><a href="#日志除了debug时候用full，其他时尽可能用BASIC或者NULL" class="headerlink" title="日志除了debug时候用full，其他时尽可能用BASIC或者NULL"></a>日志除了debug时候用full，其他时尽可能用BASIC或者NULL</h3></li>
+</ol>
+<h2 id="feign的目前最佳实践"><a href="#feign的目前最佳实践" class="headerlink" title="feign的目前最佳实践"></a>feign的目前最佳实践</h2><h3 id="继承（不推荐，因为紧耦合）"><a href="#继承（不推荐，因为紧耦合）" class="headerlink" title="继承（不推荐，因为紧耦合）"></a>继承（不推荐，因为紧耦合）</h3><p>给消费者的feign的FeignClient和提供者的Controller定义统一的父接口作为标准。</p>
+<h3 id="独立模块"><a href="#独立模块" class="headerlink" title="独立模块"></a>独立模块</h3><p>将Feign抽取为独立模块，接口相关的POJO、默认的Feign配置放到这个模块，提供给消费者使用（引入该模块依赖）。</p>
+<div class="note info">
+            <p>当FeignClient不在SpringBootApplication的扫描包时，解决办法：</p><ol><li><p>指定FeignClient所在包<br> @EnableFeignClients(basePackages = “xxx.xxx.xxx”</p></li><li><p>指定FeignClient的字节码<br> @EnableFeignClients(clients = {UserClient.class})</p></li></ol>
+          </div>
+
+
+<h2 id="SpringCloud-LoadBalancer"><a href="#SpringCloud-LoadBalancer" class="headerlink" title="SpringCloud LoadBalancer"></a>SpringCloud LoadBalancer</h2><ol>
+<li>RoundRobin（默认）</li>
+<li>Random</li>
+</ol>
+<h3 id="自定义负载均衡"><a href="#自定义负载均衡" class="headerlink" title="自定义负载均衡"></a>自定义负载均衡</h3><p>配置一个Config的Bean，返回特定需要的负载实例即可</p>
+<h3 id="LoadBalancer-OpenFeign"><a href="#LoadBalancer-OpenFeign" class="headerlink" title="LoadBalancer + OpenFeign"></a>LoadBalancer + OpenFeign</h3><h2 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h2><ol>
+<li>身份认证和权限校验</li>
+<li>服务路由、负载均衡</li>
+<li>请求限流</li>
+</ol>
+<p>SpringCloud网关的两个实现：</p>
+<ol>
+<li>Zuul：基于Servlet的阻塞式编程。（过时）</li>
+<li>Gateway：基于Spring5的WebFlux，响应式编程实现，具有更好的性能。</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>导包<br>spring-cloud的gateway和nacos-discovery<br>做服务发现<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;gateway.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;nacos-discovery.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>配置nacos服务地址和路由选择<br>核心配置：<br>1）路由id<br>2）路由url<br>3）路由断言<br>4）过滤器<br><img src="/2021/11/19/SpringCloud/%E9%85%8D%E7%BD%AEnacos.png"></li>
+</ol>
+<h3 id="路由断言和路由断言工厂"><a href="#路由断言和路由断言工厂" class="headerlink" title="路由断言和路由断言工厂"></a>路由断言和路由断言工厂</h3><p>PathRoutePredicateFactory<br>Sprig提供了11种Predicate工厂</p>
+<h3 id="路由过滤器"><a href="#路由过滤器" class="headerlink" title="路由过滤器"></a>路由过滤器</h3><p>Spring提供了31种过滤工厂，配置按照（key, word）形式</p>
+<h4 id="DefaultFilter"><a href="#DefaultFilter" class="headerlink" title="DefaultFilter"></a>DefaultFilter</h4><p>默认过滤器</p>
+<h4 id="GlobalFilter"><a href="#GlobalFilter" class="headerlink" title="GlobalFilter"></a>GlobalFilter</h4><p>全局过滤器<br>gateway的default-filters是根据配置来进行过滤的，过滤操作是固定的。<br>而如果想自定义根据一定逻辑条件进行过滤，可以用global-filters（需要自己手写类实现GlobalFilter接口，通过代码实现）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Order(int value)</span> </span><br><span class="line"><span class="comment">//执行顺序优先级</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="过滤器执行顺序"><a href="#过滤器执行顺序" class="headerlink" title="过滤器执行顺序"></a>过滤器执行顺序</h4><p>DefaultFilter -&gt; 当前的路由Filter -&gt; GlobalFilter<br>并且按照order的值进行排序（值越小，优先级越高）<br>配置文件的按照配置顺序，order值从1开始，往后并且递增。</p>
+<p>也可以自定义Order值（过滤器实现Order类），设定过滤器顺序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="跨域处理"><a href="#跨域处理" class="headerlink" title="跨域处理"></a>跨域处理</h3><p>网关可以配置CORS跨域</p>
+<h2 id="SpringCloudConfig"><a href="#SpringCloudConfig" class="headerlink" title="SpringCloudConfig"></a>SpringCloudConfig</h2><p>使用云端配置服务中心，直接从配置中心调取对应的服务配置</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><ol>
+<li><p>依赖</p>
+</li>
+<li><p>开启服务</p>
+</li>
+<li><p>注册到注册中心</p>
+</li>
+<li><p>创建仓库<br>github或者本地仓库<br>里面写配置文件</p>
+</li>
+<li><p>读取配置<br>在配置读取里面有不同</p>
+</li>
+<li><p>github</p>
+</li>
+<li><p>本地</p>
+</li>
+</ol>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><ol>
+<li>依赖</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag"><i class="fa fa-tag"></i> 微服务</a>
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i> SpringCloud</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/17/MapStruct/" rel="prev" title="MapStruct">
+      <i class="fa fa-chevron-left"></i> MapStruct
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/01/RabbitMQ/" rel="next" title="RabbitMQ">
+      RabbitMQ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">微服务概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">微服务架构分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">服务拆分和远程调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud"><span class="nav-number">2.</span> <span class="nav-text">SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">微服务远程调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RestTemplate"><span class="nav-number">2.2.</span> <span class="nav-text">RestTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E8%80%85"><span class="nav-number">2.3.</span> <span class="nav-text">提供者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-number">2.4.</span> <span class="nav-text">消费者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka"><span class="nav-number">2.5.</span> <span class="nav-text">Eureka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">2.6.</span> <span class="nav-text">Eureka注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E5%AE%A2%E6%88%B7"><span class="nav-number">2.7.</span> <span class="nav-text">Eureka客户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot%E9%85%8D%E7%BD%AEEureka"><span class="nav-number">2.8.</span> <span class="nav-text">SpringBoot配置Eureka</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.9.</span> <span class="nav-text">Eureka服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E6%9C%8D%E5%8A%A1%E6%8B%89%E5%8F%96"><span class="nav-number">2.10.</span> <span class="nav-text">Eureka服务拉取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.11.</span> <span class="nav-text">Eureka负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka%E9%9B%86%E7%BE%A4"><span class="nav-number">2.12.</span> <span class="nav-text">Eureka集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%88%E5%B7%B2%E8%BF%87%E6%97%B6%EF%BC%89"><span class="nav-number">2.13.</span> <span class="nav-text">ribbon负载均衡（已过时）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ribbon%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.13.1.</span> <span class="nav-text">ribbon自定义负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ribbon%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.13.2.</span> <span class="nav-text">ribbon饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos"><span class="nav-number">2.14.</span> <span class="nav-text">Nacos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.15.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.16.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4"><span class="nav-number">2.17.</span> <span class="nav-text">Nacos集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BA%A7%E5%AD%98%E5%82%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.17.1.</span> <span class="nav-text">分级存储模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">2.17.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E9%9B%86%E7%BE%A4%E8%B0%83%E7%94%A8"><span class="nav-number">2.17.3.</span> <span class="nav-text">跨集群调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NacosRule"><span class="nav-number">2.18.</span> <span class="nav-text">NacosRule</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BBNamespace"><span class="nav-number">2.19.</span> <span class="nav-text">环境隔离Namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E5%92%8CEureka%E5%8C%BA%E5%88%AB"><span class="nav-number">2.20.</span> <span class="nav-text">Nacos和Eureka区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.20.1.</span> <span class="nav-text">临时实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-number">2.21.</span> <span class="nav-text">Nacos配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-number">2.21.1.</span> <span class="nav-text">统一配置管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-number">2.21.2.</span> <span class="nav-text">热更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-number">2.21.3.</span> <span class="nav-text">多环境配置共享</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign"><span class="nav-number">2.22.</span> <span class="nav-text">Feign</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%92%8C%E4%BD%BF%E7%94%A8Feign%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.23.</span> <span class="nav-text">定义和使用Feign客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%8C%85"><span class="nav-number">2.23.1.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%B1%BB%E4%B8%8A%E5%8A%A0-EnableFeignClients"><span class="nav-number">2.23.2.</span> <span class="nav-text">服务类上加@EnableFeignClients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99Feign%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.23.3.</span> <span class="nav-text">编写Feign接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Feign%E9%85%8D%E7%BD%AE"><span class="nav-number">2.24.</span> <span class="nav-text">自定义Feign配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.24.1.</span> <span class="nav-text">基于配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">2.24.2.</span> <span class="nav-text">基于配置类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E8%B0%83%E4%BC%98"><span class="nav-number">2.25.</span> <span class="nav-text">Feign调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%9B%BF%E6%8D%A2URLConnection"><span class="nav-number">2.25.1.</span> <span class="nav-text">使用连接池替换URLConnection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E9%99%A4%E4%BA%86debug%E6%97%B6%E5%80%99%E7%94%A8full%EF%BC%8C%E5%85%B6%E4%BB%96%E6%97%B6%E5%B0%BD%E5%8F%AF%E8%83%BD%E7%94%A8BASIC%E6%88%96%E8%80%85NULL"><span class="nav-number">2.25.2.</span> <span class="nav-text">日志除了debug时候用full，其他时尽可能用BASIC或者NULL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feign%E7%9A%84%E7%9B%AE%E5%89%8D%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">2.26.</span> <span class="nav-text">feign的目前最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%B4%A7%E8%80%A6%E5%90%88%EF%BC%89"><span class="nav-number">2.26.1.</span> <span class="nav-text">继承（不推荐，因为紧耦合）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E6%A8%A1%E5%9D%97"><span class="nav-number">2.26.2.</span> <span class="nav-text">独立模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloud-LoadBalancer"><span class="nav-number">2.27.</span> <span class="nav-text">SpringCloud LoadBalancer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">2.27.1.</span> <span class="nav-text">自定义负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LoadBalancer-OpenFeign"><span class="nav-number">2.27.2.</span> <span class="nav-text">LoadBalancer + OpenFeign</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gateway"><span class="nav-number">2.28.</span> <span class="nav-text">Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.28.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%96%AD%E8%A8%80%E5%92%8C%E8%B7%AF%E7%94%B1%E6%96%AD%E8%A8%80%E5%B7%A5%E5%8E%82"><span class="nav-number">2.28.2.</span> <span class="nav-text">路由断言和路由断言工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">2.28.3.</span> <span class="nav-text">路由过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DefaultFilter"><span class="nav-number">2.28.3.1.</span> <span class="nav-text">DefaultFilter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GlobalFilter"><span class="nav-number">2.28.3.2.</span> <span class="nav-text">GlobalFilter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">2.28.3.3.</span> <span class="nav-text">过滤器执行顺序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86"><span class="nav-number">2.28.4.</span> <span class="nav-text">跨域处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloudConfig"><span class="nav-number">2.29.</span> <span class="nav-text">SpringCloudConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.29.1.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.29.2.</span> <span class="nav-text">客户端</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

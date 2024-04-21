@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="简介Servlet是用来开发动态Web资源。Servlet是个接口（interface类）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet">
+<meta property="og:url" content="http://yoursite.com/2021/04/06/Servlet/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="简介Servlet是用来开发动态Web资源。Servlet是个接口（interface类）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/JavaEE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/%E8%AE%BF%E9%97%AEServlet%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/1.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/2.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/4.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/5.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/6.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/7.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/8.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/9.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/10.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/11.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/%E4%B8%8B%E8%BD%BD%E5%93%8D%E5%BA%94%E5%A4%B4.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/%E4%B8%8A%E4%BC%A0form.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/%E4%B8%8A%E4%BC%A0form1.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/06/Servlet/%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E5%86%85%E5%AE%B9.png">
+<meta property="article:published_time" content="2021-04-06T04:02:24.000Z">
+<meta property="article:modified_time" content="2024-04-21T14:46:43.659Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/04/06/Servlet/JavaEE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/04/06/Servlet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Servlet | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/06/Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Servlet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 12:02:24" itemprop="dateCreated datePublished" datetime="2021-04-06T12:02:24+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:46:43" itemprop="dateModified" datetime="2024-04-21T22:46:43+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">Web服务器</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Servlet是用来开发动态Web资源。Servlet是个接口（interface类）</p>
+<span id="more"></span>
+
+<h1 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h1><h2 id="GenericServlet"><a href="#GenericServlet" class="headerlink" title="GenericServlet"></a>GenericServlet</h2><h2 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h2><div class="note info">
+            <ol><li>编译所需要的javax.servlet并不在JDK中，可以使用-classpath 指定一个jar包。（在Tomcat的lib中有servlet-api.jar）</li><li>servlet没有独立的运行能力。</li></ol>
+          </div>
+
+<h1 id="Class文件和Tomcat关联"><a href="#Class文件和Tomcat关联" class="headerlink" title="Class文件和Tomcat关联"></a>Class文件和Tomcat关联</h1><p>通过发布应用，使用标准JavaEE项目目录结构<br><img src="/2021/04/06/Servlet/JavaEE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png"></p>
+<h1 id="访问Servlet"><a href="#访问Servlet" class="headerlink" title="访问Servlet"></a>访问Servlet</h1><p>任何WEB-INF下的都不能被浏览器访问到，需要使用配置映射。<br><img src="/2021/04/06/Servlet/%E8%AE%BF%E9%97%AEServlet%E9%85%8D%E7%BD%AE.png"></p>
+<div class="note info">
+            <p>如何希望Servlet输出到浏览器文本中，应该将内容写到相应报文的实体中（ServletResponse)<br>res.getWriter().println(xxx);</p>
+          </div>
+
+<h2 id="Servlet执行过程"><a href="#Servlet执行过程" class="headerlink" title="Servlet执行过程"></a>Servlet执行过程</h2><ol>
+<li>浏览器访问地址，浏览器会构建http请求报文</li>
+<li>报文到达主机后，connector会获取到它，把请求报文封装为Request对象，并生成Response对象，用来填充相应数据。</li>
+<li>将Request和Response对象交给Engine，Engine挑选哪个Host来处理。</li>
+<li>Host来挑选对应的Context来处理，传递两个对象。</li>
+<li>Context拿到对应服务器应用，实例化对象，调用Service方法，返回Response对象到Connector。</li>
+<li>Connector读取Response的内容，封装成一定格式的响应报文，返回给浏览器。</li>
+</ol>
+<div class="note info">
+            <p>Servlet只会实例化对象一次。（单例模式）</p>
+          </div>
+<h1 id="使用IDEA开发Servlet"><a href="#使用IDEA开发Servlet" class="headerlink" title="使用IDEA开发Servlet"></a>使用IDEA开发Servlet</h1><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p><img src="/2021/04/06/Servlet/1.png"><br><img src="/2021/04/06/Servlet/2.png"><br><img src="/2021/04/06/Servlet/3.png"><br><img src="/2021/04/06/Servlet/4.png"></p>
+<h2 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h2><p><img src="/2021/04/06/Servlet/5.png"><br><img src="/2021/04/06/Servlet/6.png"><br><img src="/2021/04/06/Servlet/7.png"><br><img src="/2021/04/06/Servlet/8.png"><br><img src="/2021/04/06/Servlet/9.png"><br><img src="/2021/04/06/Servlet/10.png"></p>
+<h2 id="使用GenericServlet"><a href="#使用GenericServlet" class="headerlink" title="使用GenericServlet"></a>使用GenericServlet</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class MyTest extends GenericServlet &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException &#123;</span><br><span class="line">    res.getWriter().println(123);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用HttpServlet（推荐，分发更细致）"><a href="#使用HttpServlet（推荐，分发更细致）" class="headerlink" title="使用HttpServlet（推荐，分发更细致）"></a>使用HttpServlet（推荐，分发更细致）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MyTest extends HttpServlet &#123;</span><br><span class="line">  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">    resp.getWriter().println(123);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>为什么继承GenericServlet要实现Servlet方法，而HttpServlet不用？<br>因为GenericServlet是抽象方法，HttpServlet已经实现过了。</p>
+          </div>
+
+<h2 id="使用注解-WebServlet（配置了后不用在web-xml里配置）"><a href="#使用注解-WebServlet（配置了后不用在web-xml里配置）" class="headerlink" title="使用注解@WebServlet（配置了后不用在web.xml里配置）"></a>使用注解@WebServlet（配置了后不用在web.xml里配置）</h2><p><img src="/2021/04/06/Servlet/11.png"><br>如果name为“value”，可以进一步简化。</p>
+<h1 id="IDEA和TomCat的关联"><a href="#IDEA和TomCat的关联" class="headerlink" title="IDEA和TomCat的关联"></a>IDEA和TomCat的关联</h1><p>实际上IDEA会复制Tomcat的核心内容，然后利用这些内容重新部署运行一个TomCat。</p>
+<h2 id="开发目录和部署目录"><a href="#开发目录和部署目录" class="headerlink" title="开发目录和部署目录"></a>开发目录和部署目录</h2><p>开发目录是自己写代码的区域，是Java文件。<br>部署目录是运行/调试时，按照某个规则，将class文件和web相关联</p>
+<h1 id="Servlet生命周期函数"><a href="#Servlet生命周期函数" class="headerlink" title="Servlet生命周期函数"></a>Servlet生命周期函数</h1><p>LifeCycleServlet</p>
+<h2 id="Init"><a href="#Init" class="headerlink" title="Init"></a>Init</h2><p>只会执行一次，初次访问Servlet执行。<br>一般用于预加载初始化操作，比如查询数据库等，可以放在init里。</p>
+<div class="note info">
+            <p>loadOnStartup=非负数(注解或者web.xml里面配置）可以让init随应用加载而执行。Servlet5里面。</p>
+          </div>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>每次请求都会执行一次。</p>
+<h2 id="Destory"><a href="#Destory" class="headerlink" title="Destory"></a>Destory</h2><h1 id="Url-Pattern细节"><a href="#Url-Pattern细节" class="headerlink" title="Url-Pattern细节"></a>Url-Pattern细节</h1><ol>
+<li>一个Servlet可以配置多个Url-Pattern</li>
+<li>多个Servlet不能配置同一个Url-Pattern</li>
+<li>写法：/xxx 或者 *.后缀</li>
+</ol>
+<h2 id="Url-Pattern的匹配优先级"><a href="#Url-Pattern的匹配优先级" class="headerlink" title="Url-Pattern的匹配优先级"></a>Url-Pattern的匹配优先级</h2><p>/开头的优先级始终高于*.后缀。<br>匹配越精细，优先级越高</p>
+<h2 id="特殊Url-Pattern（-）"><a href="#特殊Url-Pattern（-）" class="headerlink" title="特殊Url-Pattern（*）"></a>特殊Url-Pattern（*）</h2><p>/* 和 /<br>/* 的优先级很高<br>/ 可以访问jsp，是因为tomcat的servlet中配置jsp访问。/ 是默认的Servlet的处理，给没有任何匹配的Url-Pattern的applet来响应的。</p>
+<div class="note info">
+            <p>DefaultServlet（/）处理流程：</p><ol><li>到对应目录，找到对应的文件。找到，以流的形式写出。（但是如果自己实现了/ 的处理，则会按照自己写的来进行处理）</li><li>没找到，则404相应。</li></ol>
+          </div>
+
+<div class="note info">
+            <p>动态资源和静态资源的界限</p>
+          </div>
+
+<h1 id="ServletConfig"><a href="#ServletConfig" class="headerlink" title="ServletConfig"></a>ServletConfig</h1><h2 id="获取ServletConfig对象"><a href="#获取ServletConfig对象" class="headerlink" title="获取ServletConfig对象"></a>获取ServletConfig对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServletConfig servletConfig &#x3D; getServletConfig()</span><br></pre></td></tr></table></figure>
+<h2 id="获取ServletContext"><a href="#获取ServletContext" class="headerlink" title="获取ServletContext"></a>获取ServletContext</h2><p>当前应用下的任何一个Servlet都可以获取到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServletContext servletContext &#x3D; getServletContext()</span><br></pre></td></tr></table></figure>
+<h3 id="获取全局初始化参数"><a href="#获取全局初始化参数" class="headerlink" title="获取全局初始化参数"></a>获取全局初始化参数</h3><p>全局参数在web-app下配置（或者web.xml）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;配置</span><br><span class="line">&lt;servlet&gt;</span><br><span class="line">  &lt;servlet-name&gt;config&lt;&#x2F;servlet-name&gt;</span><br><span class="line">  &lt;servlet-class&gt;com.cskaoyan.config.ConfigServlet&lt;&#x2F;servlet-class&gt;</span><br><span class="line">  &lt;init-param&gt;</span><br><span class="line">    &lt;param-name&gt;name&lt;&#x2F;param-name&gt;</span><br><span class="line">    &lt;param-value&gt;zhangsan&lt;&#x2F;param-value&gt;</span><br><span class="line">  &lt;&#x2F;init-param&gt;</span><br><span class="line">&lt;&#x2F;servlet&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取全局初始化</span><br><span class="line">protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">  &#x2F;&#x2F;拿到servletConfig对象  继承父类的方法</span><br><span class="line">  ServletConfig servletConfig &#x3D; getServletConfig();</span><br><span class="line">  String name &#x3D; servletConfig.getInitParameter(&quot;name&quot;);</span><br><span class="line">  System.out.println(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="共享数据参数"><a href="#共享数据参数" class="headerlink" title="共享数据参数"></a>共享数据参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;设置</span><br><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">  ServletContext servletContext &#x3D; getServletContext();</span><br><span class="line">  &#x2F;&#x2F;JDBC  商场的商品信息  List&lt;Type&gt;  电器  衣服  化妆品</span><br><span class="line">  servletContext.setAttribute(&quot;name&quot;, &quot;iphone&quot;);</span><br><span class="line">  &#x2F;&#x2F;servletContext.removeAttribute(&quot;name&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;其他Servlet获取</span><br><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">  ServletContext servletContext &#x3D; getServletContext();</span><br><span class="line">  String name &#x3D; (String) servletContext.getAttribute(&quot;name&quot;);</span><br><span class="line">  System.out.println(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取JavaEE的绝对路径"><a href="#获取JavaEE的绝对路径" class="headerlink" title="获取JavaEE的绝对路径"></a>获取JavaEE的绝对路径</h3><p>因为EE项目的文件是由tomcat来复制一份再进行调用的，所以获取到的文件路径会是tomcat的路径。要获取到真正的绝对路径，需要使用getReadPath()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String path1 &#x3D; getServletContext().getRealPath(&quot;1.html&quot;);</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>WEB-INFO是无法被浏览器访问到的。</p>
+          </div>
+
+<h1 id="ServletRequest"><a href="#ServletRequest" class="headerlink" title="ServletRequest"></a>ServletRequest</h1><p>ServletRequest对请求报文的封装。</p>
+<h2 id="获取请求报文"><a href="#获取请求报文" class="headerlink" title="获取请求报文"></a>获取请求报文</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">获取请求方法</span><br><span class="line">String method &#x3D; request.getMethod();</span><br><span class="line">&#x2F;&#x2F;获取请求资源</span><br><span class="line">String requestURI &#x3D; request.getRequestURI();</span><br><span class="line">String requestURL &#x3D; request.getRequestURL().toString();</span><br><span class="line">&#x2F;&#x2F;获取版本协议</span><br><span class="line">String protocol &#x3D; request.getProtocol();</span><br><span class="line">&#x2F;&#x2F;获取请求头</span><br><span class="line">String host &#x3D; request.getHeader(&quot;Host&quot;);</span><br><span class="line">System.out.println(host);</span><br><span class="line"></span><br><span class="line">Enumeration&lt;String&gt; headerNames &#x3D; request.getHeaderNames();</span><br><span class="line">while (headerNames.hasMoreElements()) &#123;</span><br><span class="line">  String headerName &#x3D; headerNames.nextElement();</span><br><span class="line">  String header &#x3D; request.getHeader(headerName);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;获取请求体</span><br><span class="line">request.getInputStream()</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>Get和Post的区别：实际上并没有太大区别，只是语义上的不同。</p>
+          </div>
+
+<h2 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String remoteAddr &#x3D; request.getRemoteAddr();</span><br><span class="line">int remotePort &#x3D; request.getRemotePort();</span><br><span class="line">String localAddr &#x3D; request.getLocalAddr();</span><br><span class="line">int localPort &#x3D; request.getLocalPort();</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取单个参数</span><br><span class="line">String username &#x3D; request.getParameter(&quot;username&quot;);</span><br><span class="line">&#x2F;&#x2F;获取数组参数</span><br><span class="line">String[] hobbies &#x3D; request.getParameterValues(&quot;hobby&quot;);</span><br><span class="line">&#x2F;&#x2F;获取多个参数（如果多个表单比较麻烦，可以用这个方法）</span><br><span class="line">Enumeration&lt;String&gt; names &#x3D; request.getParameterNames();</span><br><span class="line">while (names.hasMoreElements()) &#123;</span><br><span class="line">  处理</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="封装到Bean"><a href="#封装到Bean" class="headerlink" title="封装到Bean"></a>封装到Bean</h2><p>Dbutils：BeanHandler、BeanListHandler<br>Bean：属性值必须为private；set和get必须为public；拥有无参构造方法。</p>
+<div class="note info">
+            <p>不能采用判断key的方式，来修改值和获取值，这样会很繁琐。<br>封装Bean采用的是反射技术，获取所有的set和get方法。<br>设置值 setValue = value;<br>获取值 getValue();</p>
+          </div>
+
+<div class="note info">
+            <p>JavaEE项目导包，需要放在WEB-INF/lib中，这样Tomcat才能找到对应的jar包。（运行时必须要有）</p>
+          </div>
+
+<h3 id="BeanUtils"><a href="#BeanUtils" class="headerlink" title="BeanUtils"></a>BeanUtils</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user &#x3D; new User();		&#x2F;&#x2F;创建一个Bean对象</span><br><span class="line">BeanUtils.populate(user, request.getParameterMap());  把内容封装到user里</span><br></pre></td></tr></table></figure>
+
+<h2 id="请求参数中文乱码"><a href="#请求参数中文乱码" class="headerlink" title="请求参数中文乱码"></a>请求参数中文乱码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(&quot;utf-8&quot;)</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>Tomcat8处理请求行使用的编码格式是utf-8</p>
+          </div>
+
+<h2 id="form表单的路径写法"><a href="#form表单的路径写法" class="headerlink" title="form表单的路径写法"></a>form表单的路径写法</h2><p>form action=”…path…”</p>
+<h3 id="全路径写法"><a href="#全路径写法" class="headerlink" title="全路径写法"></a>全路径写法</h3><p>因为环境经常需要变更，除非是决定不改，否则不建议使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form action&#x3D;&quot;http:&#x2F;&#x2F;localhost&#x2F;app&#x2F;servlet1”</span><br></pre></td></tr></table></figure>
+<h3 id="相对路径"><a href="#相对路径" class="headerlink" title="相对路径"></a>相对路径</h3><p>过分依赖于当前页面，如果修改了当前页面路径，则无法访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form action&#x3D;&quot;servlet1&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="以-的路径写法"><a href="#以-的路径写法" class="headerlink" title="以/ 的路径写法"></a>以/ 的路径写法</h3><p>比较好的方式，/应用名/资源名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form action&#x3D;&quot;&#x2F;app&#x2F;servlet1&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="获取路径"><a href="#获取路径" class="headerlink" title="获取路径"></a>获取路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestURI();</span><br><span class="line">request.getRequestURL().toSrting();</span><br><span class="line">request.getContextPath();</span><br><span class="line">request.getServletPath();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dispatcher路径写法"><a href="#Dispatcher路径写法" class="headerlink" title="Dispatcher路径写法"></a>Dispatcher路径写法</h2><h3 id="全路径写法（X）"><a href="#全路径写法（X）" class="headerlink" title="全路径写法（X）"></a>全路径写法（X）</h3><p>error，不行。</p>
+<h3 id="相对路径-1"><a href="#相对路径-1" class="headerlink" title="相对路径"></a>相对路径</h3><p>可以，推荐使用</p>
+<h3 id="开头路径"><a href="#开头路径" class="headerlink" title="/开头路径"></a>/开头路径</h3><p>/资源名就行</p>
+<div class="note info">
+            <p>/开头的什么时候加应用名，什么时候不用：<br>如果主体是服务器，那么不要加应用名（路径给服务器使用）<br>如果主体是浏览器，那么一定要加（路径给浏览器用）</p>
+          </div>
+
+<h2 id="转发和包含"><a href="#转发和包含" class="headerlink" title="转发和包含"></a>转发和包含</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</span><br><span class="line">  &#x2F;&#x2F;y:源组件  s:目标组件的路径</span><br><span class="line">  response.setHeader(&quot;Connection&quot;,&quot;close&quot;);</span><br><span class="line">  response.getWriter().println(&quot;dispatcher1&quot;);</span><br><span class="line">  RequestDispatcher dispatcher &#x3D; request.getRequestDispatcher(&quot;&#x2F;dispatcher2&quot;);</span><br><span class="line">  &#x2F;&#x2F;转发</span><br><span class="line">  dispatcher.forward(request, response);</span><br><span class="line">  &#x2F;&#x2F;包含</span><br><span class="line">  dispatcher.include(request, response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="转发"><a href="#转发" class="headerlink" title="转发"></a>转发</h3><p>A转发给B，A的主动权会交给B来处理。<br>转发：留头不留体</p>
+<h3 id="包含"><a href="#包含" class="headerlink" title="包含"></a>包含</h3><p>A将B的内容包含在自己身上，主动权仍旧在A上。<br>包含：留头也留体 </p>
+<h2 id="Context域"><a href="#Context域" class="headerlink" title="Context域"></a>Context域</h2><p>Servlet的一块空间，可以用来存取数据。随着应用创建而创建，销毁而销毁，仅有一个，空间较大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setAttribute(key, value);</span><br><span class="line">getAttribute(key);</span><br><span class="line">removeAttribute(key);</span><br></pre></td></tr></table></figure>
+<h2 id="Request域"><a href="#Request域" class="headerlink" title="Request域"></a>Request域</h2><p>地址每次进行一个请求，就会生成一个Request域。（每次刷新，每次的Request都会不同）<br>但是多个组件可以共享一个Request域，共享里面的Map内容。但是仅限于转发和包含的源组件和目标组件。</p>
+<div class="note info">
+            <p>思考思考Request的使用场景：比如查询Servlet，拿到了数据，转发给另一个Servlet，就可以使用。</p>
+          </div>
+
+
+
+<h1 id="ServletResponse"><a href="#ServletResponse" class="headerlink" title="ServletResponse"></a>ServletResponse</h1><p>对响应报文的封装，HttpServletResponse。</p>
+<h2 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h2><ol>
+<li>版本</li>
+<li>状态码</li>
+<li>描述<h2 id="设置响应报文"><a href="#设置响应报文" class="headerlink" title="设置响应报文"></a>设置响应报文</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">response.setStatus(200);</span><br><span class="line">response.setHeader(&quot;Content-Type&quot;,&quot;text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="输出字符到客户端"><a href="#输出字符到客户端" class="headerlink" title="输出字符到客户端"></a>输出字符到客户端</h2></li>
+</ol>
+<h3 id="响应报文乱码问题"><a href="#响应报文乱码问题" class="headerlink" title="响应报文乱码问题"></a>响应报文乱码问题</h3><p>客户端使用其自己系统的编码格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;如果知道客户的编码格式，可以手动修改</span><br><span class="line">response.setCharacterEncoding(&quot;utf-8&quot;);</span><br></pre></td></tr></table></figure>
+<p>更好的方式是，将服务器使用的编码格式，告诉给客户端。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;text&#x2F;html:设置服务器编码格式</span><br><span class="line">&#x2F;&#x2F;charset&#x3D;utf-8:告诉客户端服务器使用的编码格式</span><br><span class="line">response.setHeader(&quot;Content-Type&quot;,&quot;text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;这种方式也行</span><br><span class="line">response.setContentType(&quot;text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;手写编码输出</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出字节到客户端"><a href="#输出字节到客户端" class="headerlink" title="输出字节到客户端"></a>输出字节到客户端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String realPath &#x3D; getServletContext().getRealPath(&quot;1.jpg&quot;);</span><br><span class="line">File file &#x3D; new File(realPath);</span><br><span class="line">FileInputStream inputStream &#x3D; new FileInputStream(file);</span><br><span class="line">ServletOutPutStream outputStream &#x3D; response.getOutPutStream();</span><br><span class="line">byte[] bytes &#x3D; new byte[1024];</span><br><span class="line">int length &#x3D; 0;</span><br><span class="line">while((length &#x3D; inputStream.read(bytes)) !&#x3D; -1) &#123;</span><br><span class="line">  outputStream.write(bytes, 0, length);</span><br><span class="line">&#125;</span><br><span class="line">outputStream.flush();</span><br></pre></td></tr></table></figure>
+
+<h2 id="页面刷新"><a href="#页面刷新" class="headerlink" title="页面刷新"></a>页面刷新</h2><h3 id="定时刷新"><a href="#定时刷新" class="headerlink" title="定时刷新"></a>定时刷新</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全路径</span><br><span class="line">response.setHeader(&quot;refresh&quot;, &quot;2,url&#x3D;https:&#x2F;&#x2F;www.baidu.com&quot;);</span><br><span class="line">&#x2F;&#x2F;相对路径</span><br><span class="line">response.setHeader(&quot;refresh&quot;, &quot;2,url&#x3D;baidu.html&quot;);</span><br><span class="line">&#x2F;&#x2F; &#x2F;应用名&#x2F;资源</span><br><span class="line">response.setHeader(&quot;refresh&quot;, &quot;2,url&#x3D;request.getContextPath() + &quot;&#x2F;baidu.html&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.sendRedirect(&quot;https:&#x2F;&#x2F;cn.bing.com&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="页面跳转比较"><a href="#页面跳转比较" class="headerlink" title="页面跳转比较"></a>页面跳转比较</h3><p>转发、定时刷新、重定向的区别：</p>
+<ol>
+<li>转发只发送一次请求，其他可以发送多次。</li>
+<li>转发的执行主体是服务器，其他执行主体是浏览器。</li>
+<li>转发只能在应用内跳转，其他不受影响。</li>
+<li>转发是request对象引导的，其他是response对象引导的。</li>
+<li>转发可以共享request域，其他不可以。</li>
+<li>重定向状态码是302、307，其他都是200。</li>
+<li>转发地址栏不发生改变，其他会改变。</li>
+</ol>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>浏览器的默认行为：</p>
+<ol>
+<li>对于可以打开的文件，比如html、TXT、css、js、图片等，默认会帮你执行打开操作</li>
+<li>对于无法打开的文件，比如audio、video、exe、zip，默认会帮你执行下载操作</li>
+</ol>
+<p>如果想对可以打开的文件进行下载，要使用下载响应头。<br><img src="/2021/04/06/Servlet/%E4%B8%8B%E8%BD%BD%E5%93%8D%E5%BA%94%E5%A4%B4.png"><br>应用场景：管理系统，报表的导出之类。</p>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>把文件封装到请求体内，然后服务器解析请求报文，取出请求体的IO流。</p>
+<h2 id="form表单"><a href="#form表单" class="headerlink" title="form表单"></a>form表单</h2><p>input type 设置为 file method 为 post<br><img src="/2021/04/06/Servlet/%E4%B8%8A%E4%BC%A0form.png"></p>
+<h2 id="问题一：如果仅上传文件名，而没有数据"><a href="#问题一：如果仅上传文件名，而没有数据" class="headerlink" title="问题一：如果仅上传文件名，而没有数据"></a>问题一：如果仅上传文件名，而没有数据</h2><p>form表单要添加enctype=multipart/form-data<br><img src="/2021/04/06/Servlet/%E4%B8%8A%E4%BC%A0form1.png"></p>
+<div class="note info">
+            <p>数据内容大小，看content-length</p>
+          </div>
+<h2 id="问题二：使用API获取上传的文件，会显示损坏，无法打开"><a href="#问题二：使用API获取上传的文件，会显示损坏，无法打开" class="headerlink" title="问题二：使用API获取上传的文件，会显示损坏，无法打开"></a>问题二：使用API获取上传的文件，会显示损坏，无法打开</h2><p><img src="/2021/04/06/Servlet/%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E5%86%85%E5%AE%B9.png"><br>但是图片已经损坏，无法打开。用txt文件上传，打开后发现有内容分割在txt文件中。</p>
+<h2 id="问题三：如果form表单数据和文件同时上传，原先的请求参数则无法获取到内容"><a href="#问题三：如果form表单数据和文件同时上传，原先的请求参数则无法获取到内容" class="headerlink" title="问题三：如果form表单数据和文件同时上传，原先的请求参数则无法获取到内容"></a>问题三：如果form表单数据和文件同时上传，原先的请求参数则无法获取到内容</h2><p>因为添加了enctype=multipart/form-data，就请求参数的API则无法使用。添加之后，数据结构会发生改变 ，getParamter的API无法使用。</p>
+<h2 id="使用第三方工具"><a href="#使用第三方工具" class="headerlink" title="使用第三方工具"></a>使用第三方工具</h2><p>fileupload<br>依赖：Commons-fileupload<br><a target="_blank" rel="noopener" href="http://commons.apache.org/proper/commons-fileupload/">http://commons.apache.org/proper/commons-fileupload/</a></p>
+<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fileItem.getString(&quot;utf-8&quot;);</span><br><span class="line">&#x2F;&#x2F;上传名中文乱码问题</span><br><span class="line">upload.setHeaderEncoding(&quot;utf-8&quot;);</span><br><span class="line">&#x2F;&#x2F;上传文件大小设置</span><br><span class="line">upload.setFileSizeMax(1024);	&#x2F;&#x2F;单位是byte</span><br></pre></td></tr></table></figure>
+<h2 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h2>
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/15/Java%E7%89%88%E6%9C%AC%E7%89%B9%E5%BE%81/" rel="prev" title="Java版本特征">
+      <i class="fa fa-chevron-left"></i> Java版本特征
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/06/Tomcat/" rel="next" title="Tomcat">
+      Tomcat <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">子类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GenericServlet"><span class="nav-number">2.1.</span> <span class="nav-text">GenericServlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpServlet"><span class="nav-number">2.2.</span> <span class="nav-text">HttpServlet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class%E6%96%87%E4%BB%B6%E5%92%8CTomcat%E5%85%B3%E8%81%94"><span class="nav-number">3.</span> <span class="nav-text">Class文件和Tomcat关联</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AEServlet"><span class="nav-number">4.</span> <span class="nav-text">访问Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">Servlet执行过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8IDEA%E5%BC%80%E5%8F%91Servlet"><span class="nav-number">5.</span> <span class="nav-text">使用IDEA开发Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEtomcat"><span class="nav-number">5.2.</span> <span class="nav-text">配置tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GenericServlet"><span class="nav-number">5.3.</span> <span class="nav-text">使用GenericServlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8HttpServlet%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%8C%E5%88%86%E5%8F%91%E6%9B%B4%E7%BB%86%E8%87%B4%EF%BC%89"><span class="nav-number">5.4.</span> <span class="nav-text">使用HttpServlet（推荐，分发更细致）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3-WebServlet%EF%BC%88%E9%85%8D%E7%BD%AE%E4%BA%86%E5%90%8E%E4%B8%8D%E7%94%A8%E5%9C%A8web-xml%E9%87%8C%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">使用注解@WebServlet（配置了后不用在web.xml里配置）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDEA%E5%92%8CTomCat%E7%9A%84%E5%85%B3%E8%81%94"><span class="nav-number">6.</span> <span class="nav-text">IDEA和TomCat的关联</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95%E5%92%8C%E9%83%A8%E7%BD%B2%E7%9B%AE%E5%BD%95"><span class="nav-number">6.1.</span> <span class="nav-text">开发目录和部署目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">Servlet生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Init"><span class="nav-number">7.1.</span> <span class="nav-text">Init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">7.2.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Destory"><span class="nav-number">7.3.</span> <span class="nav-text">Destory</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Url-Pattern%E7%BB%86%E8%8A%82"><span class="nav-number">8.</span> <span class="nav-text">Url-Pattern细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Url-Pattern%E7%9A%84%E5%8C%B9%E9%85%8D%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">8.1.</span> <span class="nav-text">Url-Pattern的匹配优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8AUrl-Pattern%EF%BC%88-%EF%BC%89"><span class="nav-number">8.2.</span> <span class="nav-text">特殊Url-Pattern（*）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServletConfig"><span class="nav-number">9.</span> <span class="nav-text">ServletConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96ServletConfig%E5%AF%B9%E8%B1%A1"><span class="nav-number">9.1.</span> <span class="nav-text">获取ServletConfig对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96ServletContext"><span class="nav-number">9.2.</span> <span class="nav-text">获取ServletContext</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%A8%E5%B1%80%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%82%E6%95%B0"><span class="nav-number">9.2.1.</span> <span class="nav-text">获取全局初始化参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%E5%8F%82%E6%95%B0"><span class="nav-number">9.2.2.</span> <span class="nav-text">共享数据参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96JavaEE%E7%9A%84%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">9.2.3.</span> <span class="nav-text">获取JavaEE的绝对路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServletRequest"><span class="nav-number">10.</span> <span class="nav-text">ServletRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="nav-number">10.1.</span> <span class="nav-text">获取请求报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8API"><span class="nav-number">10.2.</span> <span class="nav-text">常用API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">10.3.</span> <span class="nav-text">获取请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%88%B0Bean"><span class="nav-number">10.4.</span> <span class="nav-text">封装到Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanUtils"><span class="nav-number">10.4.1.</span> <span class="nav-text">BeanUtils</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81"><span class="nav-number">10.5.</span> <span class="nav-text">请求参数中文乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#form%E8%A1%A8%E5%8D%95%E7%9A%84%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95"><span class="nav-number">10.6.</span> <span class="nav-text">form表单的路径写法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95"><span class="nav-number">10.6.1.</span> <span class="nav-text">全路径写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">10.6.2.</span> <span class="nav-text">相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5-%E7%9A%84%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95"><span class="nav-number">10.6.3.</span> <span class="nav-text">以&#x2F; 的路径写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84"><span class="nav-number">10.6.4.</span> <span class="nav-text">获取路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dispatcher%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95"><span class="nav-number">10.7.</span> <span class="nav-text">Dispatcher路径写法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%B7%AF%E5%BE%84%E5%86%99%E6%B3%95%EF%BC%88X%EF%BC%89"><span class="nav-number">10.7.1.</span> <span class="nav-text">全路径写法（X）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84-1"><span class="nav-number">10.7.2.</span> <span class="nav-text">相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A4%B4%E8%B7%AF%E5%BE%84"><span class="nav-number">10.7.3.</span> <span class="nav-text">&#x2F;开头路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E5%92%8C%E5%8C%85%E5%90%AB"><span class="nav-number">10.8.</span> <span class="nav-text">转发和包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91"><span class="nav-number">10.8.1.</span> <span class="nav-text">转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E5%90%AB"><span class="nav-number">10.8.2.</span> <span class="nav-text">包含</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context%E5%9F%9F"><span class="nav-number">10.9.</span> <span class="nav-text">Context域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request%E5%9F%9F"><span class="nav-number">10.10.</span> <span class="nav-text">Request域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ServletResponse"><span class="nav-number">11.</span> <span class="nav-text">ServletResponse</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">11.1.</span> <span class="nav-text">响应报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="nav-number">11.2.</span> <span class="nav-text">设置响应报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%AD%97%E7%AC%A6%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">11.3.</span> <span class="nav-text">输出字符到客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">11.3.1.</span> <span class="nav-text">响应报文乱码问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%AD%97%E8%8A%82%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">11.4.</span> <span class="nav-text">输出字节到客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0"><span class="nav-number">11.5.</span> <span class="nav-text">页面刷新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E5%88%B7%E6%96%B0"><span class="nav-number">11.5.1.</span> <span class="nav-text">定时刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">11.5.2.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E6%AF%94%E8%BE%83"><span class="nav-number">11.5.3.</span> <span class="nav-text">页面跳转比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">11.6.</span> <span class="nav-text">下载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">12.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#form%E8%A1%A8%E5%8D%95"><span class="nav-number">12.1.</span> <span class="nav-text">form表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%A6%82%E6%9E%9C%E4%BB%85%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%90%8D%EF%BC%8C%E8%80%8C%E6%B2%A1%E6%9C%89%E6%95%B0%E6%8D%AE"><span class="nav-number">12.2.</span> <span class="nav-text">问题一：如果仅上传文件名，而没有数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8API%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BC%9A%E6%98%BE%E7%A4%BA%E6%8D%9F%E5%9D%8F%EF%BC%8C%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80"><span class="nav-number">12.3.</span> <span class="nav-text">问题二：使用API获取上传的文件，会显示损坏，无法打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E5%A6%82%E6%9E%9Cform%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE%E5%92%8C%E6%96%87%E4%BB%B6%E5%90%8C%E6%97%B6%E4%B8%8A%E4%BC%A0%EF%BC%8C%E5%8E%9F%E5%85%88%E7%9A%84%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%88%99%E6%97%A0%E6%B3%95%E8%8E%B7%E5%8F%96%E5%88%B0%E5%86%85%E5%AE%B9"><span class="nav-number">12.4.</span> <span class="nav-text">问题三：如果form表单数据和文件同时上传，原先的请求参数则无法获取到内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B7%A5%E5%85%B7"><span class="nav-number">12.5.</span> <span class="nav-text">使用第三方工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="nav-number">12.5.1.</span> <span class="nav-text">其他配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF"><span class="nav-number">12.6.</span> <span class="nav-text">会话技术</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

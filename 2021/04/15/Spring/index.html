@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="简介Spring是JavaSE&#x2F;JavaEE分层应用的轻量级开源框架。核心以IOC和AOP。提供了展示层SpringMVC和持久层Spring JDBC等以及业务层事务管理等众多企业级应用技术。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring">
+<meta property="og:url" content="http://yoursite.com/2021/04/15/Spring/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="简介Spring是JavaSE&#x2F;JavaEE分层应用的轻量级开源框架。核心以IOC和AOP。提供了展示层SpringMVC和持久层Spring JDBC等以及业务层事务管理等众多企业级应用技术。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/XML%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%A4%9A%E4%B8%AAXML%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%93%BE%E6%8E%A5.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ApplicationContext.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/alias.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%88%9D%E5%A7%8B%E5%8C%96.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E5%88%9D%E5%A7%8B%E5%8C%96.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82%E5%88%9D%E5%A7%8B%E5%8C%96.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/FactoryBean.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bean-Array.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bean-ListSet.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bean-Map.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bean-Property.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A51.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A52.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A53.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Setter%E6%B3%A8%E5%85%A5.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%BC%95%E7%94%A8%E5%85%B6%E4%BB%96Bean.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%BC%95%E7%94%A8%E7%88%B6%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%86%85%E9%83%A8Bean.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%90%88%E5%B9%B6%E9%9B%86%E5%90%88.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Null.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E7%A9%BAString.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bean-Scopes.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Init-method.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Destroy-method.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/getBean%E4%B9%8B%E5%89%8D%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/singleton.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/prototype.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E6%A0%87%E7%AD%BE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ApplicationContext%E7%9A%84API.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BE%9D%E8%B5%96.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/properties%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%B7%BB%E5%8A%A0context-schema.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/property-placeholder.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E6%B3%A8%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%96%B0%E6%B3%A8%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/AnnotationConfigApplicationContext.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring-test.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E6%B5%8B%E8%AF%95%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Web%E7%9B%91%E5%90%AC%E5%99%A8.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E7%9B%91%E5%90%AC%E5%99%A8.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/context-param.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E7%9B%91%E5%90%AC%E5%99%A8%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E8%8E%B7%E5%8F%96applicatonContext%E5%B7%A5%E5%85%B7%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ContextLoaderListener.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/WebApplicationContextUtils.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/spring-webmvc.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/DispatcherServlet.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/springwebmvc.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Controller.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/SpringWebMVC%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring-WebMVC%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/RequestMapping.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B01.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B01.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B0%E5%80%BC.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%80%9A%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/produces.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/consumes.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ViewResolver.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring-WebMVC%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/void.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ModelAndView.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ResponseBody.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ReturnJson.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E4%B8%BAJson.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring-WebMVC%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/mvc-annotation.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%8E%A5%E6%94%B6%E6%97%A5%E6%9C%9F.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ajax.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ajax-2.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/RequestParam.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Restful.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/CharacterEncodingFilter.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%BC%80%E6%94%BE%E8%B5%84%E6%BA%90.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ConversionService.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ServletAPI.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/CommonsMultipartResolver.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/upload.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%8B%A6%E6%88%AA%E5%99%A8%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/HandlerInterceptor.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/mvc-interceptors.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%85%A8%E5%B1%80%E6%8B%A6%E6%88%AA.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%8B%A6%E6%88%AA%E5%99%A8%E6%96%B9%E6%B3%95.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/DispatcherServlet%E6%8F%8F%E8%BF%B0.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Locale.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/LocaleResolver.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/MessageProperties.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/MessageSource.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/MessageSource2.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Bundle.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/MessageSource3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%B8%8D%E5%90%8CLocale.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/MessageSource%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/AACDSI.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E9%85%8D%E7%BD%AE%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Spring-WebMVC%E9%85%8D%E7%BD%AE%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/getServletFilters.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Interceptor.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/multipartResolver.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/localeResolver-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/internalResourceViewResolver-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/validator-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/converter.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/handlerExceptionResolver.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/JdbcTemplate-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/TransactionManager-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/AspectJ-JavaConfig.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/JdbcTemplate.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%88%9B%E5%BB%BAJdbcTemplate.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/JdbcTemplateQuery.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AEAOP%E7%BB%87%E5%85%A5.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%86%99%E6%B3%95.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%80%9A%E7%9F%A5%E7%A7%8D%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%88%87%E9%9D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E5%88%87%E9%9D%A2%E7%BB%84%E4%BB%B6.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AEaspectJ%E7%BB%87%E5%85%A5.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%B3%A8%E8%A7%A3%E9%80%9A%E7%9F%A5%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E5%88%87%E9%9D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96-%E6%B3%A8%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A31.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A32.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/PlatformTransactionManager.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/TransactionStatus.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/spring-tx%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E4%BA%8B%E4%BB%B6%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/Transactional%E6%B3%A8%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%B3%A8%E8%A7%A3%E4%BA%8B%E5%8A%A1%E7%BB%86%E8%8A%82.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E7%B1%BB.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/@Bean.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E6%89%AB%E6%8F%8F%E5%8C%85.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/EnableAspectJAutoProxy.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/EnableTransactionManagement.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/15/Spring/ContextConfiuration.png">
+<meta property="article:published_time" content="2021-04-15T09:31:39.000Z">
+<meta property="article:modified_time" content="2022-07-28T09:03:48.397Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/04/15/Spring/Spring%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/04/15/Spring/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/15/Spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-15 17:31:39" itemprop="dateCreated datePublished" datetime="2021-04-15T17:31:39+08:00">2021-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-28 17:03:48" itemprop="dateModified" datetime="2022-07-28T17:03:48+08:00">2022-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>25 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Spring是JavaSE/JavaEE分层应用的轻量级开源框架。核心以IOC和AOP。<br>提供了展示层SpringMVC和持久层Spring JDBC等以及业务层事务管理等众多企业级应用技术。</p>
+<span id="more"></span>
+
+<h2 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h2><h2 id="Spring优势"><a href="#Spring优势" class="headerlink" title="Spring优势"></a>Spring优势</h2><h3 id="方便解耦，简化开发"><a href="#方便解耦，简化开发" class="headerlink" title="方便解耦，简化开发"></a>方便解耦，简化开发</h3><p>Spring提供IOC容器，对象间的依赖关系交由Spring控制，避免硬编码导致的过度耦合。</p>
+<h3 id="AOP编程支持"><a href="#AOP编程支持" class="headerlink" title="AOP编程支持"></a>AOP编程支持</h3><p>方便进行切面编程。使用不容易用传统OOP的实现可以用AOP来实现。</p>
+<h3 id="声明式事务的支持"><a href="#声明式事务的支持" class="headerlink" title="声明式事务的支持"></a>声明式事务的支持</h3><p>从繁琐的事务管理代码中隔离出来，提高开发效率和质量。</p>
+<h3 id="方便程序测试"><a href="#方便程序测试" class="headerlink" title="方便程序测试"></a>方便程序测试</h3><p>…</p>
+<h3 id="集成了各种优秀框架"><a href="#集成了各种优秀框架" class="headerlink" title="集成了各种优秀框架"></a>集成了各种优秀框架</h3><p>…</p>
+<h3 id="降低JavaEE的API使用难度"><a href="#降低JavaEE的API使用难度" class="headerlink" title="降低JavaEE的API使用难度"></a>降低JavaEE的API使用难度</h3><p>Spring对JavaEE的API再度进行了封装，方便使用API。</p>
+<h3 id="Java源码的学习典范"><a href="#Java源码的学习典范" class="headerlink" title="Java源码的学习典范"></a>Java源码的学习典范</h3><h2 id="Spring的体系结构"><a href="#Spring的体系结构" class="headerlink" title="Spring的体系结构"></a>Spring的体系结构</h2><p><img src="/2021/04/15/Spring/Spring%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png"></p>
+<h2 id="Spring程序开发步骤"><a href="#Spring程序开发步骤" class="headerlink" title="Spring程序开发步骤"></a>Spring程序开发步骤</h2><ol>
+<li>定义好所需要的Bean。</li>
+<li>使用XML配置文件（或注解）配置好。</li>
+<li>Spring读取配置文件，根据配置需求，在IOC容器中管理Bean的实例。</li>
+<li>有需要的时候，从IOC容器中获取。</li>
+</ol>
+<p><img src="/2021/04/15/Spring/Spring%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4.png"></p>
+<h2 id="Spring-Core（核心功能）"><a href="#Spring-Core（核心功能）" class="headerlink" title="Spring Core（核心功能）"></a>Spring Core（核心功能）</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-introduction">https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-introduction</a></p>
+<h3 id="IoC容器"><a href="#IoC容器" class="headerlink" title="IoC容器"></a>IoC容器</h3><p>Inversion of Control (IoC)</p>
+<h4 id="Ioc和Bean"><a href="#Ioc和Bean" class="headerlink" title="Ioc和Bean"></a>Ioc和Bean</h4><p>IoC：<strong>IoC</strong> is also known as dependency injection (DI). It is a process whereby objects define their dependencies (that is, the other objects they work with) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. The container then injects those dependencies when it creates the bean. This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies by using direct construction of classes or a mechanism such as the Service Locator pattern.</p>
+<p>Bean：In Spring, the objects that form the backbone of your application and that are managed by the Spring IoC container are called <strong>beans</strong>. A bean is an object that is instantiated, assembled, and managed by a Spring IoC container. Otherwise, a bean is simply one of many objects in your application. Beans, and the dependencies among them, are reflected in the configuration metadata used by a container.</p>
+<h3 id="容器简介"><a href="#容器简介" class="headerlink" title="容器简介"></a>容器简介</h3><p><strong>org.springframework.context.ApplicationContext</strong>接口代表了IoC容器，通过读取配置源数据（MetaData）获取信息，然后进行Bean的初始化、配置和组装。</p>
+<h4 id="配置元数据"><a href="#配置元数据" class="headerlink" title="配置元数据"></a>配置元数据</h4><p>元数据是你根据开发需求，告诉IoC容器如何在应用中实例化、配置、组装对象。元数据可以使用用XML文件、Java注解或者Java代码进行配置。<br>通常管理多个Bean时，在XML文件中配置顶层的Bean，然后依次在里面配置Bean。而使用Java配置，则在类上使用@Configuration，里面的类使用@Bean来进行。</p>
+<div class="note info">
+            <p>Spring2.5支持Annotation-based configuration<br>Spring3.0支持Java-based configuration<br>现在更多使用Java-based configuration来配置，XML使用少了。</p>
+          </div>
+
+<p>These bean definitions correspond to the actual objects that make up your application. Typically, you define service layer objects, data access objects (DAOs), presentation objects such as Struts Action instances, infrastructure objects such as Hibernate SessionFactories, JMS Queues, and so forth. Typically, one does not configure fine-grained domain objects in the container, because it is usually the responsibility of DAOs and business logic to create and load domain objects. However, you can use Spring’s integration with AspectJ to configure objects that have been created outside the control of an IoC container. See Using AspectJ to dependency-inject domain objects with Spring.（?）</p>
+<p><img src="/2021/04/15/Spring/XML%E9%85%8D%E7%BD%AE.png"></p>
+<h4 id="链接多个XML文件（分模块开发）"><a href="#链接多个XML文件（分模块开发）" class="headerlink" title="链接多个XML文件（分模块开发）"></a>链接多个XML文件（分模块开发）</h4><p><img src="/2021/04/15/Spring/%E5%A4%9A%E4%B8%AAXML%E9%85%8D%E7%BD%AE.png"><br>执行链接<br><img src="/2021/04/15/Spring/%E9%93%BE%E6%8E%A5.png"></p>
+<div class="note info">
+            <p>resource默认省略了初始的 / </p>
+          </div>
+
+<h4 id="实例化元数据"><a href="#实例化元数据" class="headerlink" title="实例化元数据"></a>实例化元数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">&quot;services.xml&quot;</span>, <span class="string">&quot;daos.xml&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用容器"><a href="#使用容器" class="headerlink" title="使用容器"></a>使用容器</h4><p><strong>ApplicationContext</strong>是一个接口，为了实现维护不同Bean注册和依赖的高级工厂功能。通过getBean方法，获取Bean的实例。<br><img src="/2021/04/15/Spring/ApplicationContext.png"><br>如果需要使用Groovy configuration：参考官方文档。</p>
+<div class="note info">
+            <p>在Web应用中，每次从容器中取Bean都要创建ApplicationContext上下文。因此可以使用ServletContextListener监听器，Web启动时，就将ApplicationContext放到servletContext中。从而servlet的各个位置可以共享这个ApplicationContext对象。</p>
+          </div>
+
+<h3 id="Bean简介"><a href="#Bean简介" class="headerlink" title="Bean简介"></a>Bean简介</h3><h4 id="Bean的命名"><a href="#Bean的命名" class="headerlink" title="Bean的命名"></a>Bean的命名</h4><p>任何Bean都有一个或多个标识。XML里面：使用id或name或同时使用来标识。</p>
+<p>You are not required to supply a name or an id for a bean. If you do not supply a name or id explicitly, the container generates a unique name for that bean. However, if you want to refer to that bean by name, through the use of the ref element or a Service Locator style lookup, you must provide a name. Motivations for not supplying a name are related to using inner beans and autowiring collaborators.</p>
+<h4 id="Bean的别名"><a href="#Bean的别名" class="headerlink" title="Bean的别名"></a>Bean的别名</h4><ol>
+<li>在name标签里使用comma (,), semicolon (;), or white space来分离。</li>
+<li>使用alias标签</li>
+</ol>
+<p><img src="/2021/04/15/Spring/alias.png"></p>
+<h4 id="初始化Bean"><a href="#初始化Bean" class="headerlink" title="初始化Bean"></a>初始化Bean</h4><ol>
+<li>使用具体的Class实现来初始化<br><img src="/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%88%9D%E5%A7%8B%E5%8C%96.png"></li>
+<li>使用静态工厂来初始化<br><img src="/2021/04/15/Spring/%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E5%88%9D%E5%A7%8B%E5%8C%96.png"></li>
+<li>使用实例工厂来初始化<br><img src="/2021/04/15/Spring/%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82%E5%88%9D%E5%A7%8B%E5%8C%96.png"><div class="note info">
+            <p>静态工厂和实例工厂的区别？<br>另外factory-method的名字，就是对应创建的方法名。</p>
+          </div></li>
+<li>自己创建FactoryBean来创建实例<br><img src="/2021/04/15/Spring/FactoryBean.png"></li>
+</ol>
+<h4 id="Bean的Collection封装"><a href="#Bean的Collection封装" class="headerlink" title="Bean的Collection封装"></a>Bean的Collection封装</h4><ol>
+<li>在Bean中使用Object[] 来定义成员变量名</li>
+<li>Array、List、Set<br>1）Array使用array标签<br>2）List使用List标签<br>3）Set使用set标签<br>4）标签内部：1⃣️基本数据类型、包装类、字符串；2⃣️POJO（使用ref，或者内部使用bean标签）</li>
+<li>Map<br>1）使用map标签<br>2）标签内部：使用entry标签。1⃣️基本数据类型、包装类、字符串，key=“xxx” value=“xxx”；2⃣️POJO，key=“xxx” value-ref=“xxx”，或者内部bean标签、ref bean标签。</li>
+</ol>
+<p><img src="/2021/04/15/Spring/Bean-Array.png"><br><img src="/2021/04/15/Spring/Bean-ListSet.png"><br><img src="/2021/04/15/Spring/Bean-Map.png"><br><img src="/2021/04/15/Spring/Bean-Property.png"></p>
+<h4 id="确定Bean的运行时类型"><a href="#确定Bean的运行时类型" class="headerlink" title="确定Bean的运行时类型"></a>确定Bean的运行时类型</h4><p>The recommended way to find out about the actual runtime type of a particular bean is a BeanFactory.getType call for the specified bean name. This takes all of the above cases into account and returns the type of object that a BeanFactory.getBean call is going to return for the same bean name.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;T&gt; BeanFactory.getType(String name)</span><br></pre></td></tr></table></figure>
+
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>完整的企业代码肯定不会是单一对象存在，一个对象一定会依赖其他对象。</p>
+<h4 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h4><p>Dependency injection (DI) is a process whereby objects define their dependencies (that is, the other objects with which they work) only through constructor arguments, arguments to a factory method, or properties that are set on the object instance after it is constructed or returned from a factory method. The container then injects those dependencies when it creates the bean. This process is fundamentally the inverse (hence the name, Inversion of Control) of the bean itself controlling the instantiation or location of its dependencies on its own by using direct construction of classes or the Service Locator pattern.</p>
+<p>使用依赖注入（DI），可以使代码更加清晰，当对象提供了他们的依赖时，进一步让代码解耦。对象不再需要查找对应的依赖或依赖路径（因为通过Spring注入进来，或者说从Spring容器里取）。也使得程序更容易测试。</p>
+<p>依赖注入主要通过两种方式：</p>
+<ol>
+<li><p>有参构造器方式注入（Constructor-based Dependency Injection）<br><img src="/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A51.png"><br>构造语法1：<br><img src="/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A52.png"><br>构造语法2:<br><img src="/2021/04/15/Spring/%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A53.png"></p>
+</li>
+<li><p>无参Setter方式注入（Setter-based dependency injection）<br><img src="/2021/04/15/Spring/Setter%E6%B3%A8%E5%85%A5.png"></p>
+</li>
+</ol>
+<div class="note info">
+            <p>Setter还可以使用p-namespace方式。</p>
+          </div>
+
+<h4 id="使用构造器还是Setter？"><a href="#使用构造器还是Setter？" class="headerlink" title="使用构造器还是Setter？"></a>使用构造器还是Setter？</h4><p>一般使用Setter，但是要根据具体情况来具体分析。各有千秋</p>
+<h4 id="依赖解析过程"><a href="#依赖解析过程" class="headerlink" title="依赖解析过程"></a>依赖解析过程</h4><h4 id="依赖和注入的细节"><a href="#依赖和注入的细节" class="headerlink" title="依赖和注入的细节"></a>依赖和注入的细节</h4><ol>
+<li>直接赋值<br><img src="/2021/04/15/Spring/%E7%9B%B4%E6%8E%A5%E8%B5%8B%E5%80%BC.png"></li>
+<li>引用其他Bean<br><img src="/2021/04/15/Spring/%E5%BC%95%E7%94%A8%E5%85%B6%E4%BB%96Bean.png"><br><img src="/2021/04/15/Spring/%E5%BC%95%E7%94%A8%E7%88%B6%E7%B1%BB.png"></li>
+<li>内部Bean<br><img src="/2021/04/15/Spring/%E5%86%85%E9%83%A8Bean.png"></li>
+<li>集合（需要有Set方法）<br>1）基础集合<br><img src="/2021/04/15/Spring/%E5%9F%BA%E7%A1%80%E9%9B%86%E5%90%88.png"><br>2）合并集合<br><img src="/2021/04/15/Spring/%E5%90%88%E5%B9%B6%E9%9B%86%E5%90%88.png"></li>
+</ol>
+<div class="note info">
+            <p>合并集合的限制：不能将不同集合类型合并。</p>
+          </div>
+<p>3）强类型集合<br>5. Null和空String<br><img src="/2021/04/15/Spring/Null.png"><br><img src="/2021/04/15/Spring/%E7%A9%BAString.png"><br>6. Property</p>
+<h3 id="Bean的作用域-Bean-Scopes"><a href="#Bean的作用域-Bean-Scopes" class="headerlink" title="Bean的作用域(Bean Scopes)"></a>Bean的作用域(Bean Scopes)</h3><p><img src="/2021/04/15/Spring/Bean-Scopes.png"></p>
+<h4 id="The-Singleton-Scope"><a href="#The-Singleton-Scope" class="headerlink" title="The Singleton Scope"></a>The Singleton Scope</h4><p>Singleton的生命周期持续围绕着IoC容器，随IoC容器创建而创建，销毁而销毁。</p>
+<h4 id="The-Prototype-Scope"><a href="#The-Prototype-Scope" class="headerlink" title="The Prototype Scope"></a>The Prototype Scope</h4><p>Prototype的只有在getBean时，会创建，长时间不用的时候，则会被Java回收。</p>
+<h4 id="Singleton-Beans-with-Prototype-bean-Dependencies（-）"><a href="#Singleton-Beans-with-Prototype-bean-Dependencies（-）" class="headerlink" title="Singleton Beans with Prototype-bean Dependencies（!）"></a>Singleton Beans with Prototype-bean Dependencies（!）</h4><div class="note info">
+            <p>singleton的Bean在IoC容器生成时，就会创建Bean。而prototype，则在什么时候使用Bean的时候(获取的时候），才会生成。</p>
+          </div>
+
+<h3 id="自定义Bean的性质"><a href="#自定义Bean的性质" class="headerlink" title="自定义Bean的性质"></a>自定义Bean的性质</h3><h4 id="生命周期调用"><a href="#生命周期调用" class="headerlink" title="生命周期调用"></a>生命周期调用</h4><ol>
+<li>初始化调用<br><img src="/2021/04/15/Spring/Init-method.png"></li>
+<li>摧毁调用<br><img src="/2021/04/15/Spring/Destroy-method.png"></li>
+</ol>
+<p><img src="/2021/04/15/Spring/getBean%E4%B9%8B%E5%89%8D%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png"></p>
+<div class="note info">
+            <p>除了自定义的BeanPostProcessor本身，其他的Bean都会经过before和after的加强。</p>
+          </div>
+
+<h4 id="scope和生命周期的关系"><a href="#scope和生命周期的关系" class="headerlink" title="scope和生命周期的关系"></a>scope和生命周期的关系</h4><ol>
+<li>singleton<br>获取到applicationContext时，就实例化Bean。<br><img src="/2021/04/15/Spring/singleton.png"></li>
+<li>protoType<br>使用的时候，才实例化Bean，并且没有destory的过程。<br><img src="/2021/04/15/Spring/prototype.png"></li>
+</ol>
+<h2 id="使用Spring"><a href="#使用Spring" class="headerlink" title="使用Spring"></a>使用Spring</h2><h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><ol>
+<li>pom导包(Spring-Context)</li>
+<li>resources里添加springConfig的xml：命名一般为applicationContext</li>
+<li>在xml里配置Bean标签</li>
+<li>使用ApplicationContext读取applicationContext.xml（注意xml后缀不能忘记）</li>
+<li>获取Bean，并使用Bean的方法</li>
+</ol>
+<div class="note info">
+            <p>ApplicationContext使用ClassPathXmlApplicationContext来读取XML文件，它是通过Class类的配置文件路径来读取文件的。<br>也可以使用File文件路径来读取，但是不建议。</p>
+          </div>
+
+<h3 id="Spring配置文件"><a href="#Spring配置文件" class="headerlink" title="Spring配置文件"></a>Spring配置文件</h3><h4 id="Spring标签"><a href="#Spring标签" class="headerlink" title="Spring标签"></a>Spring标签</h4><p><img src="/2021/04/15/Spring/Spring%E6%A0%87%E7%AD%BE.png"></p>
+<h3 id="SpringAPI"><a href="#SpringAPI" class="headerlink" title="SpringAPI"></a>SpringAPI</h3><h4 id="ApplicationContext的实现类"><a href="#ApplicationContext的实现类" class="headerlink" title="ApplicationContext的实现类"></a>ApplicationContext的实现类</h4><p><img src="/2021/04/15/Spring/ApplicationContext%E7%9A%84API.png"></p>
+<ol>
+<li>ClassPathXmlApplicationContext<br>从类的根目录下读取</li>
+<li>FileSystemXmlApplicationContext<br>从磁盘文件系统中读取</li>
+<li>AnnotationConfigApplicationContext<br>使用注解配置时，Spring需要从此类中读取配置。</li>
+</ol>
+<h4 id="getBean"><a href="#getBean" class="headerlink" title="getBean()"></a>getBean()</h4><ol>
+<li>String name（根据ID）<br>可以配置多个</li>
+<li>Class requiredType（根据类型）<br>只能配置一个</li>
+</ol>
+<h3 id="Spring配置数据库"><a href="#Spring配置数据库" class="headerlink" title="Spring配置数据库"></a>Spring配置数据库</h3><h4 id="数据库连接池（DataSource）"><a href="#数据库连接池（DataSource）" class="headerlink" title="数据库连接池（DataSource）"></a>数据库连接池（DataSource）</h4><p>数据库连接池是为了提高程序访问数据库效率的。<br>事先实例化数据库连接池，初始化部分连接。<br>需要使用时候，从连接池中获取数据源。<br>使用结束时，则归还给连接池，减少反复实例化和销毁所带来的计算和IO消耗。</p>
+<h4 id="DataSource开发步骤"><a href="#DataSource开发步骤" class="headerlink" title="DataSource开发步骤"></a>DataSource开发步骤</h4><ol>
+<li>导入数据库连接池坐标和数据库驱动坐标</li>
+<li>创建数据库连接池对象</li>
+<li>设置数据库连接池基本连接配置</li>
+<li>使用数据库连接池</li>
+</ol>
+<p><img src="/2021/04/15/Spring/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E4%BE%9D%E8%B5%96.png"><br><img src="/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0.png"></p>
+<h4 id="使用配置文件连接DataSource"><a href="#使用配置文件连接DataSource" class="headerlink" title="使用配置文件连接DataSource"></a>使用配置文件连接DataSource</h4><p>[待整理]</p>
+<ol>
+<li>创建配置文件（xxx.properties）</li>
+<li>里面配置好（驱动、url、用户名、密码等）配置</li>
+<li>使用数据库连接池</li>
+</ol>
+<p><img src="/2021/04/15/Spring/properties%E9%85%8D%E7%BD%AE.png"></p>
+<h4 id="将DataSource对象的创建交给Spring来处理"><a href="#将DataSource对象的创建交给Spring来处理" class="headerlink" title="将DataSource对象的创建交给Spring来处理"></a>将DataSource对象的创建交给Spring来处理</h4><ol>
+<li>导入spring-context依赖</li>
+<li>创建applicationContext.xml，并写入配置</li>
+<li>使用Spring来创建</li>
+</ol>
+<h4 id="使用配置文件，并由Spring来管理DataSource"><a href="#使用配置文件，并由Spring来管理DataSource" class="headerlink" title="使用配置文件，并由Spring来管理DataSource"></a>使用配置文件，并由Spring来管理DataSource</h4><ol>
+<li>applicationContext.xml里增加context Schema（详细见官方文档附录）</li>
+<li>配置context的property</li>
+<li>使用SpringContext加载property</li>
+</ol>
+<p><img src="/2021/04/15/Spring/%E6%B7%BB%E5%8A%A0context-schema.png"><br><img src="/2021/04/15/Spring/property-placeholder.png"></p>
+<h3 id="Spring注解开发（重要）"><a href="#Spring注解开发（重要）" class="headerlink" title="Spring注解开发（重要）"></a>Spring注解开发（重要）</h3><h4 id="原始注解"><a href="#原始注解" class="headerlink" title="原始注解"></a>原始注解</h4><p>因为Spring注重的是轻代码，而配置又比较繁琐。因此使用注解开发可以简化配置，提高开发效率。</p>
+<p><img src="/2021/04/15/Spring/Spring%E6%B3%A8%E8%A7%A3.png"></p>
+<ol>
+<li>导Spring-context包</li>
+<li>使用@Component(“aaa”)配置在Bean上</li>
+<li>使用@Component(“bbb”)配置在另个Bean上，内部属性使用@AutoWired, @Qualifier(“aaa”)，把aaa实例依赖注入到bbb上。</li>
+<li>在applicationContext.xml里面配置context扫描组件包名</li>
+<li>使用applicationContext运行，管理各个Bean</li>
+</ol>
+<h4 id="更精细的注解"><a href="#更精细的注解" class="headerlink" title="更精细的注解"></a>更精细的注解</h4><p>@Service<br>@Controller<br>@Repository<br>@Resource：等于Autowired + Qualifier</p>
+<div class="note info">
+            <p>使用注解可以不用给Bean写set方法（XML必须要）（为什么？）。<br>另外Qualifier也可以省略（在一个类型只对应一个Bean的时候，因为是Spring按照类型来匹配注入），一个类型多个Bean的时候，就要注明id。<br>使用@Autowired时候，不用进行组件扫描，因为是spring会自动进行寻找注入。</p>
+          </div>
+
+<div class="note info">
+            <p>@Value的更精细操作：@Value(“${jdbc.driver}”)<br>可以直接从Spring的properties里读取。</p>
+          </div>
+
+<div class="note info">
+            <p>@PostConstruct和@PreDestory替代了先前XML里的init和destory。</p>
+          </div>
+
+<h4 id="新注解"><a href="#新注解" class="headerlink" title="新注解"></a>新注解</h4><p><img src="/2021/04/15/Spring/%E6%96%B0%E6%B3%A8%E8%A7%A3.png"></p>
+<div class="note info">
+            <p>@PropertySource(“classpath:xxx.properties”)：要使用classpath</p>
+          </div>
+
+<p>ApplicationContext的获取也有所不同：<br><img src="/2021/04/15/Spring/AnnotationConfigApplicationContext.png"></p>
+<h3 id="在Spring里Junit集成进行测试（已过时）"><a href="#在Spring里Junit集成进行测试（已过时）" class="headerlink" title="在Spring里Junit集成进行测试（已过时）"></a>在Spring里Junit集成进行测试（已过时）</h3><ol>
+<li>导入Spring-text包（集成了Junit）</li>
+<li>使用@Runwith(SpringJUnit4ClassRunner)代替原来运行</li>
+<li>使用@ContextConfiguration指定配置文件和配置类</li>
+<li>使用@Autowired注入要测试的对象</li>
+<li>创建测试方法进行测试</li>
+</ol>
+<p><img src="/2021/04/15/Spring/Spring-test.png"><br><img src="/2021/04/15/Spring/Spring%E6%B5%8B%E8%AF%95%E7%B1%BB.png"></p>
+<h3 id="在Spring里使用Jupiter"><a href="#在Spring里使用Jupiter" class="headerlink" title="在Spring里使用Jupiter"></a>在Spring里使用Jupiter</h3><ol>
+<li>导入Jupiter</li>
+<li>使用@ExtendWith(SpringExtension.class)</li>
+<li>使用@ContextConfiguration(“classpath:applicationContext.xml”)指定配置文件和配置类</li>
+<li>使用@Autowired注入要测试的对象</li>
+<li>创建测试方法进行测试</li>
+</ol>
+<h3 id="在Spring搭建Web环境（Tomcat）"><a href="#在Spring搭建Web环境（Tomcat）" class="headerlink" title="在Spring搭建Web环境（Tomcat）"></a>在Spring搭建Web环境（Tomcat）</h3><ol>
+<li>导入Servlet包</li>
+<li>配置Tomcat的部署环境（bin位置、端口以及Deployment和Application context）</li>
+<li>运行</li>
+</ol>
+<h4 id="使用监听器（Listener）管理ApplicationContext（了解原理）"><a href="#使用监听器（Listener）管理ApplicationContext（了解原理）" class="headerlink" title="使用监听器（Listener）管理ApplicationContext（了解原理）"></a>使用监听器（Listener）管理ApplicationContext（了解原理）</h4><ol>
+<li>写一个监听器，初始化函数把ApplicationContext放入ServletContext里</li>
+<li>Web.xml里配置监听器</li>
+<li>从ServletContext获取ApplicationContext</li>
+</ol>
+<p><img src="/2021/04/15/Spring/Web%E7%9B%91%E5%90%AC%E5%99%A8.png"><br><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E7%9B%91%E5%90%AC%E5%99%A8.png"></p>
+<h4 id="Web全局初始化参数（了解原理）"><a href="#Web全局初始化参数（了解原理）" class="headerlink" title="Web全局初始化参数（了解原理）"></a>Web全局初始化参数（了解原理）</h4><p>将上述监听器代码再进行解耦优化。<br><img src="/2021/04/15/Spring/context-param.png"><br><img src="/2021/04/15/Spring/%E7%9B%91%E5%90%AC%E5%99%A8%E4%BC%98%E5%8C%96%E4%BB%A3%E7%A0%81.png"><br><img src="/2021/04/15/Spring/%E8%8E%B7%E5%8F%96applicatonContext%E5%B7%A5%E5%85%B7%E7%B1%BB.png"></p>
+<div class="note info">
+            <p>此时代码还有一个问题，就是要使用具体的字符串来指明applicationContext，再进一步优化，可以把获得applicationContext抽成一个方法（或工具类）。【改进为上面第三张图】</p>
+          </div>
+
+<h4 id="Spring提供的监听器（实际应用）"><a href="#Spring提供的监听器（实际应用）" class="headerlink" title="Spring提供的监听器（实际应用）"></a>Spring提供的监听器（实际应用）</h4><p>Spring提供了ContextLoaderListener，就是上述监听器的封装。</p>
+<ol>
+<li>导入Spring-web包（新版为Spring-webmvc）</li>
+<li>Web.xml里配置ContextLoaderListener和context-param</li>
+<li>使用WebApplicationContextUtils获取ApplicationContext</li>
+</ol>
+<div class="note info">
+            <p>实际使用中，在这里配置Spring的xml配置，实现项目分离。<br>使用Spring的监听器，context-param里参数名必须是contextConfigLocation（因为Listener读取的就是指定这个参数名），路径要用classpath: </p>
+          </div>
+
+<div class="note info">
+            <p>建议用spring-mvc管理controller，然后spring管理其他组件。</p>
+          </div>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//application.xml配置排除Controller</span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.example.SSM&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">context:exclude-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//application-mvc.xml配置Controller(方式1)</span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.example.SSM&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">&quot;annotation&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;org.springframework.stereotype.Controller&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">//application-mvc.xml配置Controller(方式2)</span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.example.SSM.controller&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/04/15/Spring/ContextLoaderListener.png"><br><img src="/2021/04/15/Spring/WebApplicationContextUtils.png"></p>
+<h2 id="Spring-WebMVC"><a href="#Spring-WebMVC" class="headerlink" title="Spring-WebMVC"></a>Spring-WebMVC</h2><p>基于Java实现MVC设计模型的轻量级Web框架，已经融合Spring Web Flow中，同时支持RESTful接口。</p>
+<ol>
+<li>导入spring-webmvc包</li>
+<li>配置Servlet（DispatcherServlet）</li>
+<li>编写Controller和视图页面（POJO）</li>
+<li>将Controller配置到String容器中</li>
+<li>写一个springmvc.xml配置组件扫描</li>
+</ol>
+<p><img src="/2021/04/15/Spring/spring-webmvc.png"><br><img src="/2021/04/15/Spring/DispatcherServlet.png"><br><img src="/2021/04/15/Spring/springwebmvc.png"><br><img src="/2021/04/15/Spring/Controller.png"></p>
+<div class="note info">
+            <p>静态页面要和WEB-INF同一级</p>
+          </div>
+<p>流程图解：<br><img src="/2021/04/15/Spring/SpringWebMVC%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3.png"></p>
+<h3 id="Spring-WebMVC组件解析"><a href="#Spring-WebMVC组件解析" class="headerlink" title="Spring-WebMVC组件解析"></a>Spring-WebMVC组件解析</h3><ol>
+<li>发生请求到DispatcherServlet</li>
+<li>DispatcherServlet收到请求，调用HandlerMapping处理器映射器</li>
+<li>HandlerMapping处理器映射器找到对应的处理器，生成处理器对象和处理器拦截器，返回给DispatcherServlet</li>
+<li>DispatcherServlet调用HandlerAdaptor处理器适配器</li>
+<li>HandlerAdaptor处理器适配器调用具体的Controller处理器</li>
+<li>Controller执行完成返回ModelAndView给DispatcherServlet</li>
+<li>DispatcherServlet把ModelAndView传给ViewReslover</li>
+<li>ViewReslover处理后返回View</li>
+<li>DispatcherServlet根据View进行渲染，返回视图响应<br><img src="/2021/04/15/Spring/Spring-WebMVC%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png"></li>
+</ol>
+<h3 id="Spring-WebMVC注解解析"><a href="#Spring-WebMVC注解解析" class="headerlink" title="Spring-WebMVC注解解析"></a>Spring-WebMVC注解解析</h3><h4 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="RequestMapping"></a>RequestMapping</h4><p>在类上配为一级访问地址，在类的方法内再配就是二级访问地址。<br>方法的return 找的是当前对应的路径位置。<br><img src="/2021/04/15/Spring/RequestMapping.png"></p>
+<div class="note info">
+            <ol><li>多个url路径可以映射同一个handler</li><li>可以用星号通配<br>@RequestMapping(value=”hello*”)<br>@RequestMapping(value=”hello/*)”</li><li>窄化url映射<br>类上面使用@RequestMapping，内部方法上再使用@RequestMapping</li></ol>
+          </div>
+
+<h4 id="GetMapping"><a href="#GetMapping" class="headerlink" title="GetMapping"></a>GetMapping</h4><p>@GetMapping = @RequestMapping(method=RequestMethod.GET)</p>
+<h4 id="PostMapping"><a href="#PostMapping" class="headerlink" title="PostMapping"></a>PostMapping</h4><p>@PostMapping = @RequestMapping(method=RequestMethod.POST)</p>
+<h4 id="请求参数限定（了解，因为有专门的检验框架）"><a href="#请求参数限定（了解，因为有专门的检验框架）" class="headerlink" title="请求参数限定（了解，因为有专门的检验框架）"></a>请求参数限定（了解，因为有专门的检验框架）</h4><h5 id="限定参数名"><a href="#限定参数名" class="headerlink" title="限定参数名"></a>限定参数名</h5><p><img src="/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B01.png"><br>多个参数的关系，必须是都缺一不可，否则报错<br><img src="/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B01.png"></p>
+<h5 id="限定参数值"><a href="#限定参数值" class="headerlink" title="限定参数值"></a>限定参数值</h5><p><img src="/2021/04/15/Spring/%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B0%E5%80%BC.png"></p>
+<h5 id="请求头限定"><a href="#请求头限定" class="headerlink" title="请求头限定"></a>请求头限定</h5><ol>
+<li>通用请求头<br><img src="/2021/04/15/Spring/%E9%80%9A%E7%94%A8%E8%AF%B7%E6%B1%82%E5%A4%B4.png"></li>
+<li>produces<br><img src="/2021/04/15/Spring/produces.png"></li>
+<li>consumes<br><img src="/2021/04/15/Spring/consumes.png"></li>
+</ol>
+<div class="note info">
+            <p>在Request中：</p><ol><li>ContentType 用来告诉服务器当前发送的数据是什么格式，consumes 用来限制ContentType。</li><li>Accept 用来告诉服务器，客户端能认识哪些格式,最好返回这些格式中的其中一种，produces 用来限制Accept。</li></ol>
+          </div>
+
+<h3 id="Spring-WebMVC的组件扫描"><a href="#Spring-WebMVC的组件扫描" class="headerlink" title="Spring-WebMVC的组件扫描"></a>Spring-WebMVC的组件扫描</h3><p>开发的时候一般，各司其职。Spring扫描Spring的组件，Spring-webMVC扫描它的组件。</p>
+<ol>
+<li>MVC命名空间</li>
+<li>include和exclud内部标签</li>
+</ol>
+<h3 id="Spring-WebMVC的XML配置"><a href="#Spring-WebMVC的XML配置" class="headerlink" title="Spring-WebMVC的XML配置"></a>Spring-WebMVC的XML配置</h3><p>配置内部解析器（用源码的setPrefix和setSuffix 来做）<br><img src="/2021/04/15/Spring/ViewResolver.png"></p>
+<h3 id="Spring-WebMVC基础总结"><a href="#Spring-WebMVC基础总结" class="headerlink" title="Spring-WebMVC基础总结"></a>Spring-WebMVC基础总结</h3><p><img src="/2021/04/15/Spring/Spring-WebMVC%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.png"></p>
+<h3 id="Spring-WebMVC数据响应"><a href="#Spring-WebMVC数据响应" class="headerlink" title="Spring-WebMVC数据响应"></a>Spring-WebMVC数据响应</h3><ol>
+<li><p>Void<br>利用request和response来做 → 就是在servlet中的用法<br><img src="/2021/04/15/Spring/void.png"></p>
+</li>
+<li><p>ModelAndView<br>1）通过页面直接返回字符串<br>2）返回ModelAndView<br><img src="/2021/04/15/Spring/ModelAndView.png"></p>
+</li>
+</ol>
+<div class="note info">
+            <p>配置好了模型数据，要在视图中使用${key}来获取。<br>ModelAndView也可以作为参数，Spring会从内部注入对象。<br>Model和View可以单独拆开，分别也可以作为参数。<br>Request 也可以作为参数使用，把内容放到RequestContext里。（但是不常用）<br>上述代码的ViewName是配置过Prefix和Suffix</p>
+          </div>
+
+<ol start="3">
+<li>重定向和转发<br><img src="/2021/04/15/Spring/%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91.png"></li>
+</ol>
+<div class="note info">
+            <p>视图名和重定向转发，最前方需要加 /</p>
+          </div>
+
+<ol start="4">
+<li><p>回写数据<br>1）直接返回字符串<br>使用Spring-WebMVC注入Response对象，使用getWriter().print方法返回。<br>使用@ResponseBody返回，不会进行页面跳转，直接进行字符串输出。（主要）<br><img src="/2021/04/15/Spring/ResponseBody.png"><br>返回Json字符串，使用工具类Gson返回<br><img src="/2021/04/15/Spring/ReturnJson.png"><br>2）返回对象或者集合<br>返回对象，使用适配器把对象转化为Json字符串。<br><img src="/2021/04/15/Spring/%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E4%B8%BAJson.png"></p>
+<div class="note info">
+            <p>如果出现报错，查看是否导入fastjson包。<br>如果要返回集合，则把对象包装在集合里即可。</p>
+          </div>
+</li>
+<li><p>使用Spring-WebMVC注解驱动来改进代码<br><img src="/2021/04/15/Spring/Spring-WebMVC%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8.png"><br><img src="/2021/04/15/Spring/mvc-annotation.png"></p>
+</li>
+</ol>
+<h3 id="Spring-WebMVC接收数据"><a href="#Spring-WebMVC接收数据" class="headerlink" title="Spring-WebMVC接收数据"></a>Spring-WebMVC接收数据</h3><h4 id="接收的数据分类"><a href="#接收的数据分类" class="headerlink" title="接收的数据分类"></a>接收的数据分类</h4><ol>
+<li>基本数据类型<br>Controller的业务方法参数和请求参数一致，会自动对应。</li>
+<li>POJO<br>Controller的业务方法参数和POJO的属性名一致，即可直接使用。（写一个Bean，包含setter和getter）</li>
+<li>日期<br><img src="/2021/04/15/Spring/%E6%8E%A5%E6%94%B6%E6%97%A5%E6%9C%9F.png"></li>
+<li>数组数据类型<br>Arrays.asList()</li>
+<li>集合数据类型<br>方法1: 封装到VO中<br>方法2: 如果是ajax提交，可以指定contentType为json，方法参数用@RequestBody来接收集合元素，而不需要POJO。<br><img src="/2021/04/15/Spring/ajax.png"><br><img src="/2021/04/15/Spring/ajax-2.png"></li>
+</ol>
+<h4 id="接收数据参数绑定"><a href="#接收数据参数绑定" class="headerlink" title="接收数据参数绑定"></a>接收数据参数绑定</h4><p>请求参数名和Controller的业务方法参数名不一致时，可以用@RequestParam来绑定参数。<br><img src="/2021/04/15/Spring/RequestParam.png"></p>
+<div class="note info">
+            <p>参数包括：value、required、defaultValue。</p>
+          </div>
+
+<h4 id="Restful风格（架构风格）"><a href="#Restful风格（架构风格）" class="headerlink" title="Restful风格（架构风格）"></a>Restful风格（架构风格）</h4><p>url + 请求方式<br>地址上的请求路径就是参数名。用{xxx}来标识占位，用@pathVariable(value=”xxx”来读取<br><img src="/2021/04/15/Spring/Restful.png"></p>
+<h4 id="接收数据乱码问题"><a href="#接收数据乱码问题" class="headerlink" title="接收数据乱码问题"></a>接收数据乱码问题</h4><p>Spring提供了字符编码过滤器，在Web.xml里配置全局filter。<br><img src="/2021/04/15/Spring/CharacterEncodingFilter.png"></p>
+<h4 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h4><p>因为Spring-WebMVC配了dispatchServlet，所以找一些静态资源的时候，会把静态资源的路径当作RequestMapping的映射，因此会找不到资源，要使用mvc:resources配置来开放资源。<br><img src="/2021/04/15/Spring/%E5%BC%80%E6%94%BE%E8%B5%84%E6%BA%90.png"></p>
+<h4 id="自定义类型转换器（将接收的数据类型转换为其他数据类型）"><a href="#自定义类型转换器（将接收的数据类型转换为其他数据类型）" class="headerlink" title="自定义类型转换器（将接收的数据类型转换为其他数据类型）"></a>自定义类型转换器（将接收的数据类型转换为其他数据类型）</h4><ol>
+<li>定义转换器类实现converter接口</li>
+<li>SpringMVC里配置转换器<br><img src="/2021/04/15/Spring/ConversionService.png"></li>
+</ol>
+<h4 id="获取Servlet相关的API"><a href="#获取Servlet相关的API" class="headerlink" title="获取Servlet相关的API"></a>获取Servlet相关的API</h4><p>Spring-WebMVC支持原生ServletAPI作为控制器方法参数进行注入。<br><img src="/2021/04/15/Spring/ServletAPI.png"></p>
+<h4 id="获取请求头"><a href="#获取请求头" class="headerlink" title="获取请求头"></a>获取请求头</h4><ol>
+<li>@RequestHeader(value=”xxx”, required=true/false)</li>
+<li>@CookieValue(value=”xxx”, required=true/false)</li>
+</ol>
+<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><ol>
+<li>导入commons-fileupload和commons-io包</li>
+<li>配置文件到SpringMVC.xml</li>
+<li>写上传文件处理方法，保存文件。</li>
+</ol>
+<p><img src="/2021/04/15/Spring/CommonsMultipartResolver.png"><br><img src="/2021/04/15/Spring/upload.png"></p>
+<div class="note info">
+            <p>方法MultipartFile的参数名要和上传表单的file参数名一致。<br>多文件上传时，不同file名，就新增MultipartFile参数。<br>大量文件的时候，使用同一个file名，使用MultipartFile[]数组，for each来处理。</p>
+          </div>
+
+<h3 id="Spring-WebMVC拦截器"><a href="#Spring-WebMVC拦截器" class="headerlink" title="Spring-WebMVC拦截器"></a>Spring-WebMVC拦截器</h3><p>类似于Servlet的Filter，对处理器进行预处理和后处理。拦截器按照一定顺序组成一条链，成为拦截器链。拦截器是Spring的AOP思想和核心体现。</p>
+<div class="note info">
+            <p>和过滤器（Filter）的区别：<br><img src="/2021/04/15/Spring/%E6%8B%A6%E6%88%AA%E5%99%A8%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84%E5%8C%BA%E5%88%AB.png"></p>
+          </div>
+<ol>
+<li>写拦截器类实现HandlerInterceptor</li>
+<li>在spring-mvc.xml里配置拦截器</li>
+</ol>
+<p><img src="/2021/04/15/Spring/HandlerInterceptor.png"><br><img src="/2021/04/15/Spring/mvc-interceptors.png"><br>全局拦截则这样配置：<br><img src="/2021/04/15/Spring/%E5%85%A8%E5%B1%80%E6%8B%A6%E6%88%AA.png"></p>
+<div class="note info">
+            <p>多个拦截器是由栈的顺序来执行。先pre的后post</p>
+          </div>
+<p><img src="/2021/04/15/Spring/%E6%8B%A6%E6%88%AA%E5%99%A8%E6%96%B9%E6%B3%95.png"></p>
+<h3 id="Spring-WebMVC异常处理（待完成）"><a href="#Spring-WebMVC异常处理（待完成）" class="headerlink" title="Spring-WebMVC异常处理（待完成）"></a>Spring-WebMVC异常处理（待完成）</h3><ol>
+<li>简单</li>
+<li>自定义</li>
+</ol>
+<h3 id="Spring和Spring-WebMVC的分离"><a href="#Spring和Spring-WebMVC的分离" class="headerlink" title="Spring和Spring-WebMVC的分离"></a>Spring和Spring-WebMVC的分离</h3><p><img src="/2021/04/15/Spring/DispatcherServlet%E6%8F%8F%E8%BF%B0.png"></p>
+<h3 id="Locale"><a href="#Locale" class="headerlink" title="Locale"></a>Locale</h3><p>handler方法的形参中 → 可以放到cookie或session中</p>
+<h4 id="在Handler里直接拿到默认Locale"><a href="#在Handler里直接拿到默认Locale" class="headerlink" title="在Handler里直接拿到默认Locale"></a>在Handler里直接拿到默认Locale</h4><p><img src="/2021/04/15/Spring/Locale.png"></p>
+<h4 id="管理Locale"><a href="#管理Locale" class="headerlink" title="管理Locale"></a>管理Locale</h4><p>Cookie或者Session<br><img src="/2021/04/15/Spring/LocaleResolver.png"></p>
+<div class="note info">
+            <p>如果cookies里的对应值，则默认的Locale会被代替</p>
+          </div>
+
+<h3 id="MessageSource"><a href="#MessageSource" class="headerlink" title="MessageSource"></a>MessageSource</h3><h4 id="单独Message文件"><a href="#单独Message文件" class="headerlink" title="单独Message文件"></a>单独Message文件</h4><ol>
+<li>Message.properties<br><img src="/2021/04/15/Spring/MessageProperties.png"></li>
+<li>配置Bean<br><img src="/2021/04/15/Spring/MessageSource.png"></li>
+<li>使用MessageSource<br><img src="/2021/04/15/Spring/MessageSource2.png"></li>
+</ol>
+<h4 id="Locale和MessageSource搭配"><a href="#Locale和MessageSource搭配" class="headerlink" title="Locale和MessageSource搭配"></a>Locale和MessageSource搭配</h4><ol>
+<li>配置Bundle和组件<br><img src="/2021/04/15/Spring/Bundle.png"></li>
+<li>使用<br><img src="/2021/04/15/Spring/MessageSource3.png"><br><img src="/2021/04/15/Spring/%E4%B8%8D%E5%90%8CLocale.png"></li>
+</ol>
+<div class="note info">
+            <p>关于第二个参数object[]：是从配置文件中取出的值 做占位符的赋值<br><img src="/2021/04/15/Spring/MessageSource%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0.png"></p>
+          </div>
+
+<h4 id="请求参数验证"><a href="#请求参数验证" class="headerlink" title="请求参数验证"></a>请求参数验证</h4><p>Spring-WebMVC完善了MVC的许多操作，但是参数的合法性还是需要自己判断。<br>从而需要一个参数验证的实现，而验证代码繁琐冗余，并且重复劳动。<br>因而随着完善慢慢衍生出一个框架，Hibernate validator。<br>详细见Hibernate validator文章。</p>
+<h3 id="使用JavaConfig来配置Spring-WebMVC"><a href="#使用JavaConfig来配置Spring-WebMVC" class="headerlink" title="使用JavaConfig来配置Spring-WebMVC"></a>使用JavaConfig来配置Spring-WebMVC</h3><p>使用配置类来替代掉各种xml</p>
+<h4 id="AACDSI"><a href="#AACDSI" class="headerlink" title="AACDSI"></a>AACDSI</h4><p>AbstractAnnotationConfigDispatcherServletInitializer -&gt; 替代掉web.xml<br>读取Spring和Spring-WebMVC的配置<br><img src="/2021/04/15/Spring/AACDSI.png"></p>
+<h4 id="Spring配置类"><a href="#Spring配置类" class="headerlink" title="Spring配置类"></a>Spring配置类</h4><p><img src="/2021/04/15/Spring/Spring%E9%85%8D%E7%BD%AE%E7%B1%BB.png"></p>
+<h4 id="Spring-WebMVC配置类"><a href="#Spring-WebMVC配置类" class="headerlink" title="Spring-WebMVC配置类"></a>Spring-WebMVC配置类</h4><p><img src="/2021/04/15/Spring/Spring-WebMVC%E9%85%8D%E7%BD%AE%E7%B1%BB.png"></p>
+<h4 id="其他组件注册（Spring-WebMVC）"><a href="#其他组件注册（Spring-WebMVC）" class="headerlink" title="其他组件注册（Spring-WebMVC）"></a>其他组件注册（Spring-WebMVC）</h4><h5 id="编解码过滤器CharactrerEncodingFilter"><a href="#编解码过滤器CharactrerEncodingFilter" class="headerlink" title="编解码过滤器CharactrerEncodingFilter"></a>编解码过滤器CharactrerEncodingFilter</h5><p><img src="/2021/04/15/Spring/getServletFilters.png"></p>
+<h5 id="静态资源映射"><a href="#静态资源映射" class="headerlink" title="静态资源映射"></a>静态资源映射</h5><p><img src="/2021/04/15/Spring/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84.png"></p>
+<h5 id="拦截器Interceptor"><a href="#拦截器Interceptor" class="headerlink" title="拦截器Interceptor"></a>拦截器Interceptor</h5><p><img src="/2021/04/15/Spring/Interceptor.png"></p>
+<h5 id="文件上传multipartResolver"><a href="#文件上传multipartResolver" class="headerlink" title="文件上传multipartResolver"></a>文件上传multipartResolver</h5><p><img src="/2021/04/15/Spring/multipartResolver.png"></p>
+<h5 id="localeResolver"><a href="#localeResolver" class="headerlink" title="localeResolver"></a>localeResolver</h5><p><img src="/2021/04/15/Spring/localeResolver-JavaConfig.png"></p>
+<h5 id="viewResolver"><a href="#viewResolver" class="headerlink" title="viewResolver"></a>viewResolver</h5><p><img src="/2021/04/15/Spring/internalResourceViewResolver-JavaConfig.png"></p>
+<h5 id="validator"><a href="#validator" class="headerlink" title="validator"></a>validator</h5><p><img src="/2021/04/15/Spring/validator-JavaConfig.png"></p>
+<h5 id="converter"><a href="#converter" class="headerlink" title="converter"></a>converter</h5><p><img src="/2021/04/15/Spring/converter.png"></p>
+<h5 id="handlerExceptionResolver"><a href="#handlerExceptionResolver" class="headerlink" title="handlerExceptionResolver"></a>handlerExceptionResolver</h5><p><img src="/2021/04/15/Spring/handlerExceptionResolver.png"></p>
+<h5 id="messageSource"><a href="#messageSource" class="headerlink" title="messageSource"></a>messageSource</h5><div class="note info">
+            <p>什么时候用@Component，什么时候用@Bean</p>
+          </div>
+
+<h3 id="其他相关组件（Spring）"><a href="#其他相关组件（Spring）" class="headerlink" title="其他相关组件（Spring）"></a>其他相关组件（Spring）</h3><h4 id="JdbcTemplate"><a href="#JdbcTemplate" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h4><p><img src="/2021/04/15/Spring/JdbcTemplate-JavaConfig.png"></p>
+<h4 id="TransactionManager"><a href="#TransactionManager" class="headerlink" title="TransactionManager"></a>TransactionManager</h4><p><img src="/2021/04/15/Spring/TransactionManager-JavaConfig.png"></p>
+<h4 id="AspectJ"><a href="#AspectJ" class="headerlink" title="AspectJ"></a>AspectJ</h4><p>在Spring的Config上使用@EnableAspectJAutoProxy<br><img src="/2021/04/15/Spring/AspectJ-JavaConfig.png"></p>
+<h2 id="JdbcTemplate-1"><a href="#JdbcTemplate-1" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h2><p>Spring对原始繁琐的JDBC API进行了封装。提供了很多模板类</p>
+<h3 id="JdbcTemplate开发"><a href="#JdbcTemplate开发" class="headerlink" title="JdbcTemplate开发"></a>JdbcTemplate开发</h3><ol>
+<li>导入spring-jdbc和spring-tx坐标</li>
+<li>创建数据库表和实体</li>
+<li>创建JDBCTemplate对象</li>
+<li>执行数据库操作<br><img src="/2021/04/15/Spring/JdbcTemplate.png"></li>
+</ol>
+<div class="note info">
+            <p>Bean实体的属性名要和数据库属性名一致</p>
+          </div>
+<h3 id="Spring创建模板对象"><a href="#Spring创建模板对象" class="headerlink" title="Spring创建模板对象"></a>Spring创建模板对象</h3><p><img src="/2021/04/15/Spring/%E5%88%9B%E5%BB%BAJdbcTemplate.png"><br>使用的时候，从applicationContext里面直接getBean(JdbcTemplate)即可。</p>
+<h3 id="JdbcTemplate常用操作"><a href="#JdbcTemplate常用操作" class="headerlink" title="JdbcTemplate常用操作"></a>JdbcTemplate常用操作</h3><h4 id="增删改"><a href="#增删改" class="headerlink" title="增删改"></a>增删改</h4><h4 id="查"><a href="#查" class="headerlink" title="查"></a>查</h4><p>查使用的RowMapper里，实现了从数据库类型往实体转换的方法。<br><img src="/2021/04/15/Spring/JdbcTemplateQuery.png"></p>
+<ol>
+<li>查询所有</li>
+<li>查询一个</li>
+<li>查询函数</li>
+</ol>
+<h2 id="AOP思想"><a href="#AOP思想" class="headerlink" title="AOP思想"></a>AOP思想</h2><h3 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h3><h4 id="Target（目标对象）"><a href="#Target（目标对象）" class="headerlink" title="Target（目标对象）"></a>Target（目标对象）</h4><p>代理的目标对象</p>
+<h4 id="Proxy（代理）"><a href="#Proxy（代理）" class="headerlink" title="Proxy（代理）"></a>Proxy（代理）</h4><p>一个类被AOP植入增强后，产生的一个结果代理类</p>
+<h4 id="JoinPoint（连接点）"><a href="#JoinPoint（连接点）" class="headerlink" title="JoinPoint（连接点）"></a>JoinPoint（连接点）</h4><p>可以被拦截到的点，即指可以被增强的方法（因为Spring只支持方法类型的连接点）</p>
+<h4 id="PointCut（切点）"><a href="#PointCut（切点）" class="headerlink" title="PointCut（切点）"></a>PointCut（切点）</h4><p>就是指要对哪些JointPoint进行拦截</p>
+<h4 id="Advice（通知-增强）"><a href="#Advice（通知-增强）" class="headerlink" title="Advice（通知/增强）"></a>Advice（通知/增强）</h4><p>指对PointCut要做的事情就是通知</p>
+<h4 id="Aspect（切面）"><a href="#Aspect（切面）" class="headerlink" title="Aspect（切面）"></a>Aspect（切面）</h4><p>PointCut+Advice</p>
+<h4 id="Weaving（织入）"><a href="#Weaving（织入）" class="headerlink" title="Weaving（织入）"></a>Weaving（织入）</h4><p>把增强应用到目标对象来创建新的代理对象的过程。<br>Spring采用动态代理织入，AspectJ采用编译期织入和类装载期织入。</p>
+<h3 id="AOP底层实现"><a href="#AOP底层实现" class="headerlink" title="AOP底层实现"></a>AOP底层实现</h3><h4 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h4><p>基于接口的动态代理（见设计模式，代理）</p>
+<h4 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h4><p>基于父类的动态代理技术（见设计模式，代理）</p>
+<h3 id="AOP开发明确的事项"><a href="#AOP开发明确的事项" class="headerlink" title="AOP开发明确的事项"></a>AOP开发明确的事项</h3><h4 id="需要编写的内容"><a href="#需要编写的内容" class="headerlink" title="需要编写的内容"></a>需要编写的内容</h4><ol>
+<li>编写核心业务代码（目标类）</li>
+<li>编写切面类，和切面类的通知（增强方法）</li>
+<li>配置文件中，配置织入关系，通知和哪些连接点结合。</li>
+</ol>
+<h4 id="AOP实现过程"><a href="#AOP实现过程" class="headerlink" title="AOP实现过程"></a>AOP实现过程</h4><p>Spring框架监控切点方法的执行，检测到切点方法被运行，就使用代理机制，动态创造目标对象的代理对象，根据通知类型，在代理对象的对应位置，把通知对应的功能织入。</p>
+<h4 id="AOP底层使用哪种代理"><a href="#AOP底层使用哪种代理" class="headerlink" title="AOP底层使用哪种代理"></a>AOP底层使用哪种代理</h4><p>有接口，使用JDK，没有接口，使用cglib</p>
+<h3 id="查看AOP的"><a href="#查看AOP的" class="headerlink" title="查看AOP的"></a>查看AOP的</h3><h3 id="AOP开发（使用AspectJ）"><a href="#AOP开发（使用AspectJ）" class="headerlink" title="AOP开发（使用AspectJ）"></a>AOP开发（使用AspectJ）</h3><h4 id="基于XML"><a href="#基于XML" class="headerlink" title="基于XML"></a>基于XML</h4><ol>
+<li>导入spring-aop和aspectj包（context包含AOP）</li>
+<li>创建目标接口和目标类</li>
+<li>创建切面类</li>
+<li>将目标类和通知类的对象创建权交给Spring</li>
+<li>applicationContext配置织入关系</li>
+</ol>
+<p><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AEAOP%E7%BB%87%E5%85%A5.png"></p>
+<div class="note info">
+            <p>Spring主张使用aspectJ，因为aspectJ更轻量，所以导入aspectJ</p>
+          </div>
+
+<p><img src="/2021/04/15/Spring/%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%86%99%E6%B3%95.png"></p>
+<h5 id="通知种类"><a href="#通知种类" class="headerlink" title="通知种类"></a>通知种类</h5><p><img src="/2021/04/15/Spring/%E9%80%9A%E7%9F%A5%E7%A7%8D%E7%B1%BB.png"><br>特别注意around，需要使用ProcessingJointCut参数。</p>
+<h5 id="方法抽取"><a href="#方法抽取" class="headerlink" title="方法抽取"></a>方法抽取</h5><p><img src="/2021/04/15/Spring/%E5%88%87%E9%9D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96.png"></p>
+<h4 id="基于注解"><a href="#基于注解" class="headerlink" title="基于注解"></a>基于注解</h4><p>1-5 步骤同xml<br>6. 给目标类和切面类写注解<br>7. 配置文件开启组件扫描和AOP自动代理</p>
+<p><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E5%88%87%E9%9D%A2%E7%BB%84%E4%BB%B6.png"><br><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AEaspectJ%E7%BB%87%E5%85%A5.png"></p>
+<div class="note info">
+            <p>@ENableAspectJAutoProxy，这个用来代替xml中的自动代理</p>
+          </div>
+<h5 id="通知种类-1"><a href="#通知种类-1" class="headerlink" title="通知种类"></a>通知种类</h5><p><img src="/2021/04/15/Spring/%E6%B3%A8%E8%A7%A3%E9%80%9A%E7%9F%A5%E7%B1%BB%E5%9E%8B.png"></p>
+<h5 id="方法抽取-1"><a href="#方法抽取-1" class="headerlink" title="方法抽取"></a>方法抽取</h5><p><img src="/2021/04/15/Spring/%E5%88%87%E9%9D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96-%E6%B3%A8%E8%A7%A3.png"></p>
+<h5 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h5><p>即可以在类或方法上，使用自定义注解来加强功能<br><img src="/2021/04/15/Spring/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3.png"><br>切点使用自定义注解<br><img src="/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A31.png"><br><img src="/2021/04/15/Spring/%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A32.png"></p>
+<h2 id="Spring-Tx（Spring事务）"><a href="#Spring-Tx（Spring事务）" class="headerlink" title="Spring-Tx（Spring事务）"></a>Spring-Tx（Spring事务）</h2><p>事务是一个不可拆分的整体，操作的最小单位。<br>脏读：线程A读了线程B修改的内容（但是未提交），然后B再回撤。<br>不可重复读：必须提交了事务后才能被读取，线程A（执行多次查询）先读了内容，线程B再修改，线程A再读取发现内容变了。<br>幻读：线程A读取内容，只有2条记录，线程B插入内容，线程A再读，发现了4条内容。</p>
+<ol>
+<li>编程式事务<br>自己写代码，使用底层api自己完成事务。</li>
+<li>声明式事务<br>通过配置，让Spring辅助完成事务，可以解耦合，简化开发等。（底层还是编程式）</li>
+</ol>
+<h3 id="编程式事务"><a href="#编程式事务" class="headerlink" title="编程式事务"></a>编程式事务</h3><ol>
+<li>PlatformTransactionManager接口<br>定义实现<br><img src="/2021/04/15/Spring/PlatformTransactionManager.png"></li>
+<li>TransactionDefinition<br>封装事务参数<br>事务隔离级别：<br>1）ISOLATION_DEFAULT<br>2）ISOLATION_READ_UNCOMMITED<br>3）ISOLATION_READ_COMMITED<br>4）ISOLATION_REPEATABLE_READ<br>5）ISOLATION_SERIALIZABLE<br>事务传播行为：<br><img src="/2021/04/15/Spring/%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA.png"></li>
+</ol>
+<div class="note info">
+            <ol><li>Required：如果没有事务，新建一个事务；如果有事务，就加入进来；<br>看为同一个事务 → 一荣俱荣，一损俱损 → 要么一起提交了，要么一起回滚</li><li>Requires_new:如果没有，新建一个事务；如果有，就当做是一个新的事务。<br>methodB调用了methodA，<br>1）methodB发生异常：B回滚，A不回滚<br>2）methodA发生异常：A回滚，B也回滚</li><li>nested：嵌套事务 → 集体和个人关系 → 个人如果不在了，没有影响；集体不在了，人也没了<br>methodB调用methodA<br>1）methodB发生异常：AB都回滚<br>2）methodA发生异常：A回滚，外围B不回滚</li></ol>
+          </div>
+<ol start="3">
+<li>TransactionStatus<br><img src="/2021/04/15/Spring/TransactionStatus.png"></li>
+</ol>
+<h3 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h3><p>采用声明式事务来处理事务。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li>不侵入代码组件，业务逻辑不会意识正在事务之中。因为事务管理属于系统层面的服务。</li>
+<li>不需要事务的时候，只用在配置文件中去掉即可，简便开发。</li>
+</ol>
+<div class="note info">
+            <p>Spring声明式事务底层就是AOP实现</p>
+          </div>
+
+<h5 id="tx-advice-详解"><a href="#tx-advice-详解" class="headerlink" title="tx:advice 详解"></a>tx:advice 详解</h5><p>isolation<br>propagation<br>timeout<br>read-only</p>
+<h4 id="基于XML-1"><a href="#基于XML-1" class="headerlink" title="基于XML"></a>基于XML</h4><ol>
+<li>导入spring-tx已经aspectJ包</li>
+<li>applicationContext中配置事务属性（需要tx的命名空间）</li>
+</ol>
+<p><img src="/2021/04/15/Spring/spring-tx%E9%85%8D%E7%BD%AE.png"></p>
+<h4 id="基于注解-1"><a href="#基于注解-1" class="headerlink" title="基于注解"></a>基于注解</h4><ol>
+<li>导入spring-tx已经aspectJ包</li>
+<li>xml中配置平台管理器TransactionManager，以及配置事件注解驱动。</li>
+<li>配置组件注解</li>
+</ol>
+<p><img src="/2021/04/15/Spring/%E4%BA%8B%E4%BB%B6%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8.png"><br><img src="/2021/04/15/Spring/Transactional%E6%B3%A8%E8%A7%A3.png"></p>
+<h5 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h5><p><img src="/2021/04/15/Spring/%E6%B3%A8%E8%A7%A3%E4%BA%8B%E5%8A%A1%E7%BB%86%E8%8A%82.png"></p>
+<h2 id="JavaConfig"><a href="#JavaConfig" class="headerlink" title="JavaConfig"></a>JavaConfig</h2><p>使用java类来替代Spring类</p>
+<h3 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h3><p><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E7%B1%BB.png"></p>
+<h3 id="注册组件"><a href="#注册组件" class="headerlink" title="注册组件"></a>注册组件</h3><ol>
+<li>@Bean注解<br><img src="/2021/04/15/Spring/@Bean.png"></li>
+<li>扫描包<br><img src="/2021/04/15/Spring/%E6%89%AB%E6%8F%8F%E5%8C%85.png"></li>
+</ol>
+<h3 id="引入Property"><a href="#引入Property" class="headerlink" title="引入Property"></a>引入Property</h3><p><img src="/2021/04/15/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png"></p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="aspectj"><a href="#aspectj" class="headerlink" title="aspectj"></a>aspectj</h4><p><img src="/2021/04/15/Spring/EnableAspectJAutoProxy.png"></p>
+<h4 id="事务驱动"><a href="#事务驱动" class="headerlink" title="事务驱动"></a>事务驱动</h4><p><img src="/2021/04/15/Spring/EnableTransactionManagement.png"></p>
+<h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><p><img src="/2021/04/15/Spring/ContextConfiuration.png"></p>
+<h2 id="Spring项目环境搭建"><a href="#Spring项目环境搭建" class="headerlink" title="Spring项目环境搭建"></a>Spring项目环境搭建</h2>
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/15/Mac-Obs/" rel="prev" title="Mac-Obs">
+      <i class="fa fa-chevron-left"></i> Mac-Obs
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/20/Listener/" rel="next" title="Listener">
+      Listener <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2"><span class="nav-number">2.</span> <span class="nav-text">发展历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E4%BC%98%E5%8A%BF"><span class="nav-number">3.</span> <span class="nav-text">Spring优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E4%BE%BF%E8%A7%A3%E8%80%A6%EF%BC%8C%E7%AE%80%E5%8C%96%E5%BC%80%E5%8F%91"><span class="nav-number">3.1.</span> <span class="nav-text">方便解耦，简化开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E7%BC%96%E7%A8%8B%E6%94%AF%E6%8C%81"><span class="nav-number">3.2.</span> <span class="nav-text">AOP编程支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">3.3.</span> <span class="nav-text">声明式事务的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E4%BE%BF%E7%A8%8B%E5%BA%8F%E6%B5%8B%E8%AF%95"><span class="nav-number">3.4.</span> <span class="nav-text">方便程序测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E4%BA%86%E5%90%84%E7%A7%8D%E4%BC%98%E7%A7%80%E6%A1%86%E6%9E%B6"><span class="nav-number">3.5.</span> <span class="nav-text">集成了各种优秀框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E4%BD%8EJavaEE%E7%9A%84API%E4%BD%BF%E7%94%A8%E9%9A%BE%E5%BA%A6"><span class="nav-number">3.6.</span> <span class="nav-text">降低JavaEE的API使用难度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E6%BA%90%E7%A0%81%E7%9A%84%E5%AD%A6%E4%B9%A0%E5%85%B8%E8%8C%83"><span class="nav-number">3.7.</span> <span class="nav-text">Java源码的学习典范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">Spring的体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.</span> <span class="nav-text">Spring程序开发步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Core%EF%BC%88%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">Spring Core（核心功能）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IoC%E5%AE%B9%E5%99%A8"><span class="nav-number">6.1.</span> <span class="nav-text">IoC容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ioc%E5%92%8CBean"><span class="nav-number">6.1.1.</span> <span class="nav-text">Ioc和Bean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">6.2.</span> <span class="nav-text">容器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">6.2.1.</span> <span class="nav-text">配置元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E5%A4%9A%E4%B8%AAXML%E6%96%87%E4%BB%B6%EF%BC%88%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89"><span class="nav-number">6.2.2.</span> <span class="nav-text">链接多个XML文件（分模块开发）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">6.2.3.</span> <span class="nav-text">实例化元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">6.2.4.</span> <span class="nav-text">使用容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean%E7%AE%80%E4%BB%8B"><span class="nav-number">6.3.</span> <span class="nav-text">Bean简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean%E7%9A%84%E5%91%BD%E5%90%8D"><span class="nav-number">6.3.1.</span> <span class="nav-text">Bean的命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean%E7%9A%84%E5%88%AB%E5%90%8D"><span class="nav-number">6.3.2.</span> <span class="nav-text">Bean的别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96Bean"><span class="nav-number">6.3.3.</span> <span class="nav-text">初始化Bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean%E7%9A%84Collection%E5%B0%81%E8%A3%85"><span class="nav-number">6.3.4.</span> <span class="nav-text">Bean的Collection封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9ABean%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.3.5.</span> <span class="nav-text">确定Bean的运行时类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-number">6.4.</span> <span class="nav-text">依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">6.4.1.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E8%BF%98%E6%98%AFSetter%EF%BC%9F"><span class="nav-number">6.4.2.</span> <span class="nav-text">使用构造器还是Setter？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="nav-number">6.4.3.</span> <span class="nav-text">依赖解析过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%92%8C%E6%B3%A8%E5%85%A5%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">6.4.4.</span> <span class="nav-text">依赖和注入的细节</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F-Bean-Scopes"><span class="nav-number">6.5.</span> <span class="nav-text">Bean的作用域(Bean Scopes)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Singleton-Scope"><span class="nav-number">6.5.1.</span> <span class="nav-text">The Singleton Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-Prototype-Scope"><span class="nav-number">6.5.2.</span> <span class="nav-text">The Prototype Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Singleton-Beans-with-Prototype-bean-Dependencies%EF%BC%88-%EF%BC%89"><span class="nav-number">6.5.3.</span> <span class="nav-text">Singleton Beans with Prototype-bean Dependencies（!）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Bean%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">6.6.</span> <span class="nav-text">自定义Bean的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%B0%83%E7%94%A8"><span class="nav-number">6.6.1.</span> <span class="nav-text">生命周期调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scope%E5%92%8C%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">6.6.2.</span> <span class="nav-text">scope和生命周期的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Spring"><span class="nav-number">7.</span> <span class="nav-text">使用Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="nav-number">7.1.</span> <span class="nav-text">基础使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">Spring配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E6%A0%87%E7%AD%BE"><span class="nav-number">7.2.1.</span> <span class="nav-text">Spring标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringAPI"><span class="nav-number">7.3.</span> <span class="nav-text">SpringAPI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ApplicationContext%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-number">7.3.1.</span> <span class="nav-text">ApplicationContext的实现类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getBean"><span class="nav-number">7.3.2.</span> <span class="nav-text">getBean()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">7.4.</span> <span class="nav-text">Spring配置数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%88DataSource%EF%BC%89"><span class="nav-number">7.4.1.</span> <span class="nav-text">数据库连接池（DataSource）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DataSource%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="nav-number">7.4.2.</span> <span class="nav-text">DataSource开发步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%BF%9E%E6%8E%A5DataSource"><span class="nav-number">7.4.3.</span> <span class="nav-text">使用配置文件连接DataSource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86DataSource%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E4%BA%A4%E7%BB%99Spring%E6%9D%A5%E5%A4%84%E7%90%86"><span class="nav-number">7.4.4.</span> <span class="nav-text">将DataSource对象的创建交给Spring来处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%B9%B6%E7%94%B1Spring%E6%9D%A5%E7%AE%A1%E7%90%86DataSource"><span class="nav-number">7.4.5.</span> <span class="nav-text">使用配置文件，并由Spring来管理DataSource</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-number">7.5.</span> <span class="nav-text">Spring注解开发（重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%A7%8B%E6%B3%A8%E8%A7%A3"><span class="nav-number">7.5.1.</span> <span class="nav-text">原始注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E7%B2%BE%E7%BB%86%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="nav-number">7.5.2.</span> <span class="nav-text">更精细的注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E6%B3%A8%E8%A7%A3"><span class="nav-number">7.5.3.</span> <span class="nav-text">新注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Spring%E9%87%8CJunit%E9%9B%86%E6%88%90%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95%EF%BC%88%E5%B7%B2%E8%BF%87%E6%97%B6%EF%BC%89"><span class="nav-number">7.6.</span> <span class="nav-text">在Spring里Junit集成进行测试（已过时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Spring%E9%87%8C%E4%BD%BF%E7%94%A8Jupiter"><span class="nav-number">7.7.</span> <span class="nav-text">在Spring里使用Jupiter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Spring%E6%90%AD%E5%BB%BAWeb%E7%8E%AF%E5%A2%83%EF%BC%88Tomcat%EF%BC%89"><span class="nav-number">7.8.</span> <span class="nav-text">在Spring搭建Web环境（Tomcat）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9B%91%E5%90%AC%E5%99%A8%EF%BC%88Listener%EF%BC%89%E7%AE%A1%E7%90%86ApplicationContext%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8E%9F%E7%90%86%EF%BC%89"><span class="nav-number">7.8.1.</span> <span class="nav-text">使用监听器（Listener）管理ApplicationContext（了解原理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web%E5%85%A8%E5%B1%80%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%82%E6%95%B0%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8E%9F%E7%90%86%EF%BC%89"><span class="nav-number">7.8.2.</span> <span class="nav-text">Web全局初始化参数（了解原理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E6%8F%90%E4%BE%9B%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8%EF%BC%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%EF%BC%89"><span class="nav-number">7.8.3.</span> <span class="nav-text">Spring提供的监听器（实际应用）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-WebMVC"><span class="nav-number">8.</span> <span class="nav-text">Spring-WebMVC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E7%BB%84%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">8.1.</span> <span class="nav-text">Spring-WebMVC组件解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E6%B3%A8%E8%A7%A3%E8%A7%A3%E6%9E%90"><span class="nav-number">8.2.</span> <span class="nav-text">Spring-WebMVC注解解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestMapping"><span class="nav-number">8.2.1.</span> <span class="nav-text">RequestMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GetMapping"><span class="nav-number">8.2.2.</span> <span class="nav-text">GetMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PostMapping"><span class="nav-number">8.2.3.</span> <span class="nav-text">PostMapping</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%99%90%E5%AE%9A%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%8C%E5%9B%A0%E4%B8%BA%E6%9C%89%E4%B8%93%E9%97%A8%E7%9A%84%E6%A3%80%E9%AA%8C%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="nav-number">8.2.4.</span> <span class="nav-text">请求参数限定（了解，因为有专门的检验框架）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B0%E5%90%8D"><span class="nav-number">8.2.4.1.</span> <span class="nav-text">限定参数名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%90%E5%AE%9A%E5%8F%82%E6%95%B0%E5%80%BC"><span class="nav-number">8.2.4.2.</span> <span class="nav-text">限定参数值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%99%90%E5%AE%9A"><span class="nav-number">8.2.4.3.</span> <span class="nav-text">请求头限定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E7%9A%84%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F"><span class="nav-number">8.3.</span> <span class="nav-text">Spring-WebMVC的组件扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E7%9A%84XML%E9%85%8D%E7%BD%AE"><span class="nav-number">8.4.</span> <span class="nav-text">Spring-WebMVC的XML配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93"><span class="nav-number">8.5.</span> <span class="nav-text">Spring-WebMVC基础总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94"><span class="nav-number">8.6.</span> <span class="nav-text">Spring-WebMVC数据响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">8.7.</span> <span class="nav-text">Spring-WebMVC接收数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB"><span class="nav-number">8.7.1.</span> <span class="nav-text">接收的数据分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A"><span class="nav-number">8.7.2.</span> <span class="nav-text">接收数据参数绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Restful%E9%A3%8E%E6%A0%BC%EF%BC%88%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC%EF%BC%89"><span class="nav-number">8.7.3.</span> <span class="nav-text">Restful风格（架构风格）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">8.7.4.</span> <span class="nav-text">接收数据乱码问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE"><span class="nav-number">8.7.5.</span> <span class="nav-text">静态资源访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%99%A8%EF%BC%88%E5%B0%86%E6%8E%A5%E6%94%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="nav-number">8.7.6.</span> <span class="nav-text">自定义类型转换器（将接收的数据类型转换为其他数据类型）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Servlet%E7%9B%B8%E5%85%B3%E7%9A%84API"><span class="nav-number">8.7.7.</span> <span class="nav-text">获取Servlet相关的API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">8.7.8.</span> <span class="nav-text">获取请求头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">8.7.9.</span> <span class="nav-text">文件上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">8.8.</span> <span class="nav-text">Spring-WebMVC拦截器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-WebMVC%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%88%E5%BE%85%E5%AE%8C%E6%88%90%EF%BC%89"><span class="nav-number">8.9.</span> <span class="nav-text">Spring-WebMVC异常处理（待完成）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%92%8CSpring-WebMVC%E7%9A%84%E5%88%86%E7%A6%BB"><span class="nav-number">8.10.</span> <span class="nav-text">Spring和Spring-WebMVC的分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locale"><span class="nav-number">8.11.</span> <span class="nav-text">Locale</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8Handler%E9%87%8C%E7%9B%B4%E6%8E%A5%E6%8B%BF%E5%88%B0%E9%BB%98%E8%AE%A4Locale"><span class="nav-number">8.11.1.</span> <span class="nav-text">在Handler里直接拿到默认Locale</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86Locale"><span class="nav-number">8.11.2.</span> <span class="nav-text">管理Locale</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MessageSource"><span class="nav-number">8.12.</span> <span class="nav-text">MessageSource</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E7%8B%ACMessage%E6%96%87%E4%BB%B6"><span class="nav-number">8.12.1.</span> <span class="nav-text">单独Message文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Locale%E5%92%8CMessageSource%E6%90%AD%E9%85%8D"><span class="nav-number">8.12.2.</span> <span class="nav-text">Locale和MessageSource搭配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81"><span class="nav-number">8.12.3.</span> <span class="nav-text">请求参数验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JavaConfig%E6%9D%A5%E9%85%8D%E7%BD%AESpring-WebMVC"><span class="nav-number">8.13.</span> <span class="nav-text">使用JavaConfig来配置Spring-WebMVC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AACDSI"><span class="nav-number">8.13.1.</span> <span class="nav-text">AACDSI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">8.13.2.</span> <span class="nav-text">Spring配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-WebMVC%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">8.13.3.</span> <span class="nav-text">Spring-WebMVC配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6%E6%B3%A8%E5%86%8C%EF%BC%88Spring-WebMVC%EF%BC%89"><span class="nav-number">8.13.4.</span> <span class="nav-text">其他组件注册（Spring-WebMVC）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%96%E8%A7%A3%E7%A0%81%E8%BF%87%E6%BB%A4%E5%99%A8CharactrerEncodingFilter"><span class="nav-number">8.13.4.1.</span> <span class="nav-text">编解码过滤器CharactrerEncodingFilter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84"><span class="nav-number">8.13.4.2.</span> <span class="nav-text">静态资源映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8Interceptor"><span class="nav-number">8.13.4.3.</span> <span class="nav-text">拦截器Interceptor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0multipartResolver"><span class="nav-number">8.13.4.4.</span> <span class="nav-text">文件上传multipartResolver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#localeResolver"><span class="nav-number">8.13.4.5.</span> <span class="nav-text">localeResolver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#viewResolver"><span class="nav-number">8.13.4.6.</span> <span class="nav-text">viewResolver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#validator"><span class="nav-number">8.13.4.7.</span> <span class="nav-text">validator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#converter"><span class="nav-number">8.13.4.8.</span> <span class="nav-text">converter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#handlerExceptionResolver"><span class="nav-number">8.13.4.9.</span> <span class="nav-text">handlerExceptionResolver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#messageSource"><span class="nav-number">8.13.4.10.</span> <span class="nav-text">messageSource</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6%EF%BC%88Spring%EF%BC%89"><span class="nav-number">8.14.</span> <span class="nav-text">其他相关组件（Spring）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JdbcTemplate"><span class="nav-number">8.14.1.</span> <span class="nav-text">JdbcTemplate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TransactionManager"><span class="nav-number">8.14.2.</span> <span class="nav-text">TransactionManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspectJ"><span class="nav-number">8.14.3.</span> <span class="nav-text">AspectJ</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JdbcTemplate-1"><span class="nav-number">9.</span> <span class="nav-text">JdbcTemplate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JdbcTemplate%E5%BC%80%E5%8F%91"><span class="nav-number">9.1.</span> <span class="nav-text">JdbcTemplate开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring%E5%88%9B%E5%BB%BA%E6%A8%A1%E6%9D%BF%E5%AF%B9%E8%B1%A1"><span class="nav-number">9.2.</span> <span class="nav-text">Spring创建模板对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JdbcTemplate%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">9.3.</span> <span class="nav-text">JdbcTemplate常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="nav-number">9.3.1.</span> <span class="nav-text">增删改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5"><span class="nav-number">9.3.2.</span> <span class="nav-text">查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP%E6%80%9D%E6%83%B3"><span class="nav-number">10.</span> <span class="nav-text">AOP思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E6%A6%82%E5%BF%B5"><span class="nav-number">10.1.</span> <span class="nav-text">AOP概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Target%EF%BC%88%E7%9B%AE%E6%A0%87%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="nav-number">10.1.1.</span> <span class="nav-text">Target（目标对象）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Proxy%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89"><span class="nav-number">10.1.2.</span> <span class="nav-text">Proxy（代理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JoinPoint%EF%BC%88%E8%BF%9E%E6%8E%A5%E7%82%B9%EF%BC%89"><span class="nav-number">10.1.3.</span> <span class="nav-text">JoinPoint（连接点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PointCut%EF%BC%88%E5%88%87%E7%82%B9%EF%BC%89"><span class="nav-number">10.1.4.</span> <span class="nav-text">PointCut（切点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Advice%EF%BC%88%E9%80%9A%E7%9F%A5-%E5%A2%9E%E5%BC%BA%EF%BC%89"><span class="nav-number">10.1.5.</span> <span class="nav-text">Advice（通知&#x2F;增强）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Aspect%EF%BC%88%E5%88%87%E9%9D%A2%EF%BC%89"><span class="nav-number">10.1.6.</span> <span class="nav-text">Aspect（切面）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weaving%EF%BC%88%E7%BB%87%E5%85%A5%EF%BC%89"><span class="nav-number">10.1.7.</span> <span class="nav-text">Weaving（织入）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-number">10.2.</span> <span class="nav-text">AOP底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">10.2.1.</span> <span class="nav-text">JDK动态代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cglib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">10.2.2.</span> <span class="nav-text">cglib动态代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%BC%80%E5%8F%91%E6%98%8E%E7%A1%AE%E7%9A%84%E4%BA%8B%E9%A1%B9"><span class="nav-number">10.3.</span> <span class="nav-text">AOP开发明确的事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E7%BC%96%E5%86%99%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">10.3.1.</span> <span class="nav-text">需要编写的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOP%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">10.3.2.</span> <span class="nav-text">AOP实现过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOP%E5%BA%95%E5%B1%82%E4%BD%BF%E7%94%A8%E5%93%AA%E7%A7%8D%E4%BB%A3%E7%90%86"><span class="nav-number">10.3.3.</span> <span class="nav-text">AOP底层使用哪种代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BAOP%E7%9A%84"><span class="nav-number">10.4.</span> <span class="nav-text">查看AOP的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP%E5%BC%80%E5%8F%91%EF%BC%88%E4%BD%BF%E7%94%A8AspectJ%EF%BC%89"><span class="nav-number">10.5.</span> <span class="nav-text">AOP开发（使用AspectJ）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EXML"><span class="nav-number">10.5.1.</span> <span class="nav-text">基于XML</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E7%A7%8D%E7%B1%BB"><span class="nav-number">10.5.1.1.</span> <span class="nav-text">通知种类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E6%8A%BD%E5%8F%96"><span class="nav-number">10.5.1.2.</span> <span class="nav-text">方法抽取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3"><span class="nav-number">10.5.2.</span> <span class="nav-text">基于注解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E7%A7%8D%E7%B1%BB-1"><span class="nav-number">10.5.2.1.</span> <span class="nav-text">通知种类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E6%8A%BD%E5%8F%96-1"><span class="nav-number">10.5.2.2.</span> <span class="nav-text">方法抽取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="nav-number">10.5.2.3.</span> <span class="nav-text">自定义注解</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Tx%EF%BC%88Spring%E4%BA%8B%E5%8A%A1%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">Spring-Tx（Spring事务）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.1.</span> <span class="nav-text">编程式事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">11.2.</span> <span class="nav-text">声明式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">11.2.1.</span> <span class="nav-text">优点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tx-advice-%E8%AF%A6%E8%A7%A3"><span class="nav-number">11.2.1.1.</span> <span class="nav-text">tx:advice 详解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EXML-1"><span class="nav-number">11.2.2.</span> <span class="nav-text">基于XML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">11.2.3.</span> <span class="nav-text">基于注解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82"><span class="nav-number">11.2.3.1.</span> <span class="nav-text">一些细节</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaConfig"><span class="nav-number">12.</span> <span class="nav-text">JavaConfig</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">12.1.</span> <span class="nav-text">配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E7%BB%84%E4%BB%B6"><span class="nav-number">12.2.</span> <span class="nav-text">注册组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5Property"><span class="nav-number">12.3.</span> <span class="nav-text">引入Property</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">12.4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#aspectj"><span class="nav-number">12.4.1.</span> <span class="nav-text">aspectj</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%A9%B1%E5%8A%A8"><span class="nav-number">12.4.2.</span> <span class="nav-text">事务驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">12.4.3.</span> <span class="nav-text">单元测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">13.</span> <span class="nav-text">Spring项目环境搭建</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

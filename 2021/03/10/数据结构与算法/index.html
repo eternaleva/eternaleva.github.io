@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="简介算法是程序的计算方法 作用掌握数据结构和算法，对于阅读框架源码，或者理解背后的设计思想，都是极其有用的。一切实际都是以用为目的，对于程序来讲，除了可读性、健壮性等，性能的好坏是个至关重要的标准。 数据结构与算法数据通过一定的组织方式存在，这种结构就叫数据结构。数据结构是服务算法的，而算法是作用在数据结构上的，两者相辅相承。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法">
+<meta property="og:url" content="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="简介算法是程序的计算方法 作用掌握数据结构和算法，对于阅读框架源码，或者理解背后的设计思想，都是极其有用的。一切实际都是以用为目的，对于程序来讲，除了可读性、健壮性等，性能的好坏是个至关重要的标准。 数据结构与算法数据通过一定的组织方式存在，这种结构就叫数据结构。数据结构是服务算法的，而算法是作用在数据结构上的，两者相辅相承。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg">
+<meta property="og:image" content="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg">
+<meta property="article:published_time" content="2021-03-10T15:44:01.000Z">
+<meta property="article:modified_time" content="2022-07-31T07:17:25.586Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据结构与算法 | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构与算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 23:44:01" itemprop="dateCreated datePublished" datetime="2021-03-10T23:44:01+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-31 15:17:25" itemprop="dateModified" datetime="2022-07-31T15:17:25+08:00">2022-07-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>算法是程序的计算方法</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>掌握数据结构和算法，对于阅读框架源码，或者理解背后的设计思想，都是极其有用的。一切实际都是以用为目的，对于程序来讲，除了可读性、健壮性等，<strong>性能的好坏是个至关重要的标准</strong>。</p>
+<h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><p>数据通过一定的组织方式存在，这种结构就叫数据结构。数据结构是服务算法的，而算法是作用在数据结构上的，两者相辅相承。</p>
+<span id="more"></span>
+
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><h3 id="事后统计法"><a href="#事后统计法" class="headerlink" title="事后统计法"></a>事后统计法</h3><h3 id="大O复杂度表示法"><a href="#大O复杂度表示法" class="headerlink" title="大O复杂度表示法"></a>大O复杂度表示法</h3><p>所有代码的执行时间 T(n) 与每行代码的执行次数 f(n) 成正比。</p>
+<h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p>表示算法的执行时间与数据规模之间的增长关系。</p>
+<ol>
+<li>只关注循环执行次数最多的一段代码</li>
+<li>加法法则：总复杂度等于量级最大的那段代码的复杂度</li>
+<li>乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</li>
+</ol>
+<h3 id="几种常见的时间复杂度"><a href="#几种常见的时间复杂度" class="headerlink" title="几种常见的时间复杂度"></a>几种常见的时间复杂度</h3><h4 id="O-1"><a href="#O-1" class="headerlink" title="O(1)"></a>O(1)</h4><h4 id="O-logn"><a href="#O-logn" class="headerlink" title="O(logn)"></a>O(logn)</h4><h4 id="O-nlogn"><a href="#O-nlogn" class="headerlink" title="O(nlogn)"></a>O(nlogn)</h4><h4 id="O-n"><a href="#O-n" class="headerlink" title="O(n)"></a>O(n)</h4><h4 id="O-m-n"><a href="#O-m-n" class="headerlink" title="O(m+n)"></a>O(m+n)</h4><h4 id="O-m-n-1"><a href="#O-m-n-1" class="headerlink" title="O(m*n)"></a>O(m*n)</h4><h3 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h3><p>表示算法的存储空间与数据规模之间的增长关系。</p>
+<h3 id="最好时间复杂度"><a href="#最好时间复杂度" class="headerlink" title="最好时间复杂度"></a>最好时间复杂度</h3><p>最好情况时间复杂度就是，在最理想的情况下，执行这段代码的时间复杂度。</p>
+<h3 id="最坏时间复杂度"><a href="#最坏时间复杂度" class="headerlink" title="最坏时间复杂度"></a>最坏时间复杂度</h3><p>最坏情况时间复杂度就是，在最糟糕的情况下，执行这段代码的时间复杂度。</p>
+<h3 id="平均时间复杂度"><a href="#平均时间复杂度" class="headerlink" title="平均时间复杂度"></a>平均时间复杂度</h3><p>最坏情况时间复杂度就是，在平均情况下，执行这段代码的时间复杂度。</p>
+<div class="note info">
+            <p>很多时候，我们使用最基础的大O分析复杂度就可以满足需求了。只有同一块代码在不同的情况下，时间复杂度有量级的差距，我们才会使用这三种复杂度表示法来区分。</p>
+          </div>
+
+<h3 id="均摊时间复杂度（amortized-time-complexity）"><a href="#均摊时间复杂度（amortized-time-complexity）" class="headerlink" title="均摊时间复杂度（amortized time complexity）"></a>均摊时间复杂度（amortized time complexity）</h3><p>平均复杂度只在某些特殊情况下才会用到，而均摊时间复杂度应用的场景比它更加特殊、更加有限。</p>
+<div class="note info">
+            <p>把一次数量大的操作，均摊到各个操作上之后，会显著降低时间复杂度的情况。（基本不会碰到）</p>
+          </div>
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><ol>
+<li>是个线性表</li>
+<li>连续的内存空间和相同的数据类型</li>
+</ol>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><h3 id="随机访问（核心优点）"><a href="#随机访问（核心优点）" class="headerlink" title="随机访问（核心优点）"></a>随机访问（核心优点）</h3><p>数组可以做到对任何内部数据访问时间为O(1)。</p>
+<div class="note info">
+            <p>不能说数组更适合查找，链表更适合插入和删除。如果是个有序数组，查找最快也要logn。因此数组的优点是访问数据时间为O(1)。</p>
+          </div>
+<h3 id="“低效”的插入和删除"><a href="#“低效”的插入和删除" class="headerlink" title="“低效”的插入和删除"></a>“低效”的插入和删除</h3><div class="note info">
+            <p>在JVM中，数组的删除，不是真正的删除，而是先标记为删除，如果数组满了，才进行一次真正的删除。</p>
+          </div>
+<h3 id="主要优点"><a href="#主要优点" class="headerlink" title="主要优点"></a>主要优点</h3><ol>
+<li>简单易用</li>
+<li>可以借用缓存：因为数组是连续的空间，因此可以借助缓存技术，使得访问效率更高。而链表则不行。</li>
+</ol>
+<h3 id="主要缺点"><a href="#主要缺点" class="headerlink" title="主要缺点"></a>主要缺点</h3><ol>
+<li>大小固定，扩容开销大</li>
+</ol>
+<h3 id="警惕数组越界"><a href="#警惕数组越界" class="headerlink" title="警惕数组越界"></a>警惕数组越界</h3><h3 id="容器和数组"><a href="#容器和数组" class="headerlink" title="容器和数组"></a>容器和数组</h3><p>比如ArrayList容器把很多数组操作细节进行了封装，并且支持动态扩容。（但是扩容的开销很大，所以最好初始确定容器大小。）<br>但是ArrayList无法存储基本数据类型，需要使用包装类，开箱会有性能消耗；数组则可以。<br>已知数组大小，用数组可能更方便。</p>
+<div class="note info">
+            <p>为什么数组是以0为下标？因为早期最代码性能的要求比较高。 a[k]_address = base_address + k * type_size ，这样可以少一次减法运算。</p>
+          </div>
+
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>它并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用。<br>链表可分为：</p>
+<ol>
+<li>单链表</li>
+<li>双链表</li>
+<li>循环链表</li>
+</ol>
+<p>对链表进行频繁插入和删除，会造成大量内存碎片，Java会导致频繁GC，损耗性能。</p>
+<div class="note info">
+            <p>如何实现LRU缓存淘汰算法：</p><ol><li>单链表，规定链的长度</li><li>Hash表定位链表内容</li><li>新访问的放置在链头，超出长度，则删除链尾</li></ol>
+          </div>
+
+<p>单链表回文如何判断？<br>「看了大家的评论学习到了快慢指针法，看语言描述没太懂，自己用代码写了下才明白。<br>大致思路如下<br>由于回文串最重要的就是对称，那么最重要的问题就是找到那个中心，用快指针每步两格走，当他到达链表末端的时候，慢指针刚好到达中心，慢指针在过来的这趟路上还做了一件事，他把走过的节点反向了，在中心点再开辟一个新的指针用于往回走，而慢指针继续向前，当慢指针扫完整个链表，就可以判断这是回文串，否则就提前退出，总的来说时间复杂度按慢指针遍历一遍来算是O(n),空间复杂度因为只开辟了3个额外的辅助，所以是o(1)」</p>
+<h3 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h3><p>故名思义，单链表就是单向的一个链表，每个结点包含了 {当前值元素，下一个结点的地址}<br>结尾指向null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class node &#123;</span><br><span class="line">  data value;</span><br><span class="line">  node next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点：实现简单、在明确位置的结点处插入和删除方便。<br>缺点：访问需要遍历整条链，消耗性能。<br><img src="/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg"></p>
+<h3 id="双链表"><a href="#双链表" class="headerlink" title="双链表"></a>双链表</h3><p>双向链表，即有向前和向后指的两个指针的链表，结尾也是指向null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class node &#123;</span><br><span class="line">  node prev;</span><br><span class="line">  data value;</span><br><span class="line">  node next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg"></p>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表，即特殊的单链表，头结点指向了尾结点，而尾结点指向了头结点。</p>
+<h3 id="理念：用时间换空间"><a href="#理念：用时间换空间" class="headerlink" title="理念：用时间换空间"></a>理念：用时间换空间</h3><p>双向链表比单向链表更费空间，但是使用效率上缺高出很多。比如Java中的LinkedHashMap，所使用的就是双向链表。</p>
+<h3 id="如何基于链表实现LRU"><a href="#如何基于链表实现LRU" class="headerlink" title="如何基于链表实现LRU"></a>如何基于链表实现LRU</h3><ol>
+<li>采用限定长度的单链表</li>
+<li>每次需要使用数据时，遍历该链表（或者使用Hash做映射，看链表是否有该数据）。</li>
+<li>将该数据在缓存中，将该结点从位置删除，并移动至链表头部</li>
+<li>如果不在缓存中<br>1）缓存未满，直接在头部插入该数据<br>2）缓存已满，删除尾部数据，并在头部插入该数据</li>
+</ol>
+<h3 id="如何轻松写出正确的链表代码"><a href="#如何轻松写出正确的链表代码" class="headerlink" title="如何轻松写出正确的链表代码"></a>如何轻松写出正确的链表代码</h3><h4 id="理解指针（引用）的含义"><a href="#理解指针（引用）的含义" class="headerlink" title="理解指针（引用）的含义"></a>理解指针（引用）的含义</h4><h4 id="警惕指针丢失和内存泄漏"><a href="#警惕指针丢失和内存泄漏" class="headerlink" title="警惕指针丢失和内存泄漏"></a>警惕指针丢失和内存泄漏</h4><h4 id="利用哨兵简化难度"><a href="#利用哨兵简化难度" class="headerlink" title="利用哨兵简化难度"></a>利用哨兵简化难度</h4><h4 id="留意边界条件处理"><a href="#留意边界条件处理" class="headerlink" title="留意边界条件处理"></a>留意边界条件处理</h4><h4 id="举例画图辅助思考"><a href="#举例画图辅助思考" class="headerlink" title="举例画图辅助思考"></a>举例画图辅助思考</h4><h4 id="多写多练"><a href="#多写多练" class="headerlink" title="多写多练"></a>多写多练</h4><ol>
+<li>单链表反转</li>
+<li>链表中环的检测</li>
+<li>两个有序的链表合并</li>
+<li>删除链表倒数第 n 个结点</li>
+<li>求链表的中间结点</li>
+</ol>
+<h3 id="删除排序数组中的重复项"><a href="#删除排序数组中的重复项" class="headerlink" title="删除排序数组中的重复项"></a>删除排序数组中的重复项</h3><p>LeetCode26题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  public </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三元组为0算法"><a href="#三元组为0算法" class="headerlink" title="三元组为0算法"></a>三元组为0算法</h3>
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="Java面试题">
+      <i class="fa fa-chevron-left"></i> Java面试题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
+      设计模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">数据结构与算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">复杂度分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E%E7%BB%9F%E8%AE%A1%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">事后统计法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7O%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">大O复杂度表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">2.3.</span> <span class="nav-text">时间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">几种常见的时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#O-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">O(1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-logn"><span class="nav-number">2.4.2.</span> <span class="nav-text">O(logn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-nlogn"><span class="nav-number">2.4.3.</span> <span class="nav-text">O(nlogn)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-n"><span class="nav-number">2.4.4.</span> <span class="nav-text">O(n)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-m-n"><span class="nav-number">2.4.5.</span> <span class="nav-text">O(m+n)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#O-m-n-1"><span class="nav-number">2.4.6.</span> <span class="nav-text">O(m*n)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">空间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A5%BD%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.6.</span> <span class="nav-text">最好时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%9D%8F%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.7.</span> <span class="nav-text">最坏时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.8.</span> <span class="nav-text">平均时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%87%E6%91%8A%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88amortized-time-complexity%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">均摊时间复杂度（amortized time complexity）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE%EF%BC%88%E6%A0%B8%E5%BF%83%E4%BC%98%E7%82%B9%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">随机访问（核心优点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9C%E4%BD%8E%E6%95%88%E2%80%9D%E7%9A%84%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4"><span class="nav-number">4.2.</span> <span class="nav-text">“低效”的插入和删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9"><span class="nav-number">4.3.</span> <span class="nav-text">主要优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%BC%BA%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">主要缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AD%A6%E6%83%95%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C"><span class="nav-number">4.5.</span> <span class="nav-text">警惕数组越界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">4.6.</span> <span class="nav-text">容器和数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8"><span class="nav-number">5.1.</span> <span class="nav-text">单链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E9%93%BE%E8%A1%A8"><span class="nav-number">5.2.</span> <span class="nav-text">双链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">5.3.</span> <span class="nav-text">循环链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E5%BF%B5%EF%BC%9A%E7%94%A8%E6%97%B6%E9%97%B4%E6%8D%A2%E7%A9%BA%E9%97%B4"><span class="nav-number">5.4.</span> <span class="nav-text">理念：用时间换空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%93%BE%E8%A1%A8%E5%AE%9E%E7%8E%B0LRU"><span class="nav-number">5.5.</span> <span class="nav-text">如何基于链表实现LRU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BD%BB%E6%9D%BE%E5%86%99%E5%87%BA%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%93%BE%E8%A1%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">5.6.</span> <span class="nav-text">如何轻松写出正确的链表代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%EF%BC%88%E5%BC%95%E7%94%A8%EF%BC%89%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">5.6.1.</span> <span class="nav-text">理解指针（引用）的含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AD%A6%E6%83%95%E6%8C%87%E9%92%88%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">5.6.2.</span> <span class="nav-text">警惕指针丢失和内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%93%A8%E5%85%B5%E7%AE%80%E5%8C%96%E9%9A%BE%E5%BA%A6"><span class="nav-number">5.6.3.</span> <span class="nav-text">利用哨兵简化难度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%95%99%E6%84%8F%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">5.6.4.</span> <span class="nav-text">留意边界条件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%E7%94%BB%E5%9B%BE%E8%BE%85%E5%8A%A9%E6%80%9D%E8%80%83"><span class="nav-number">5.6.5.</span> <span class="nav-text">举例画图辅助思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%86%99%E5%A4%9A%E7%BB%83"><span class="nav-number">5.6.6.</span> <span class="nav-text">多写多练</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9"><span class="nav-number">5.7.</span> <span class="nav-text">删除排序数组中的重复项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E4%B8%BA0%E7%AE%97%E6%B3%95"><span class="nav-number">5.8.</span> <span class="nav-text">三元组为0算法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

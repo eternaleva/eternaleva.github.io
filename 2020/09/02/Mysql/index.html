@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="配置环境配置开启远程连接配置文件&#x2F;etc&#x2F;mysql&#x2F;my.cnf ，增加 bind-address &#x3D; 0.0.0.0并在mysql的数据库中，增加用户的连接权限 数据库基础数据库、数据库管理系统、数据库系统关系型数据库和非关系型数据库关系型数据库不仅存储数据本身，还存储数据之间的关系。具有天然的表格性。 非关系型数据库也称NoSQL。NoSQL并不是为了否定关系型数据库，而是作为关系型数据库的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql">
+<meta property="og:url" content="http://yoursite.com/2020/09/02/Mysql/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="配置环境配置开启远程连接配置文件&#x2F;etc&#x2F;mysql&#x2F;my.cnf ，增加 bind-address &#x3D; 0.0.0.0并在mysql的数据库中，增加用户的连接权限 数据库基础数据库、数据库管理系统、数据库系统关系型数据库和非关系型数据库关系型数据库不仅存储数据本身，还存储数据之间的关系。具有天然的表格性。 非关系型数据库也称NoSQL。NoSQL并不是为了否定关系型数据库，而是作为关系型数据库的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-02T06:07:17.000Z">
+<meta property="article:modified_time" content="2022-07-28T07:59:12.956Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/02/Mysql/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mysql | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/Mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-02 14:07:17" itemprop="dateCreated datePublished" datetime="2020-09-02T14:07:17+08:00">2020-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-28 15:59:12" itemprop="dateModified" datetime="2022-07-28T15:59:12+08:00">2022-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><h3 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h3><p>配置文件/etc/mysql/my.cnf ，增加 bind-address = 0.0.0.0<br>并在mysql的数据库中，增加用户的连接权限</p>
+<h2 id="数据库基础"><a href="#数据库基础" class="headerlink" title="数据库基础"></a>数据库基础</h2><h3 id="数据库、数据库管理系统、数据库系统"><a href="#数据库、数据库管理系统、数据库系统" class="headerlink" title="数据库、数据库管理系统、数据库系统"></a>数据库、数据库管理系统、数据库系统</h3><h3 id="关系型数据库和非关系型数据库"><a href="#关系型数据库和非关系型数据库" class="headerlink" title="关系型数据库和非关系型数据库"></a>关系型数据库和非关系型数据库</h3><h4 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h4><p>不仅存储数据本身，还存储数据之间的关系。具有天然的表格性。</p>
+<h4 id="非关系型数据库"><a href="#非关系型数据库" class="headerlink" title="非关系型数据库"></a>非关系型数据库</h4><p>也称NoSQL。NoSQL并不是为了否定关系型数据库，而是作为关系型数据库的一种补充。数据是大块组合在一起。</p>
+<h3 id="数据在表的形式（Mysql）"><a href="#数据在表的形式（Mysql）" class="headerlink" title="数据在表的形式（Mysql）"></a>数据在表的形式（Mysql）</h3><p>表的一行称为记录。一条记录对应一个Java对象。</p>
+<h2 id="SQL简介"><a href="#SQL简介" class="headerlink" title="SQL简介"></a>SQL简介</h2><h3 id="结构化的查询语言"><a href="#结构化的查询语言" class="headerlink" title="结构化的查询语言"></a>结构化的查询语言</h3><p>SQL是结构化查询语言（Structured Query Language）的缩写。专门用作关系型数据库的语言。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>SQL是一种通用语言。<br>简单易学，并且强有力，可以很灵活的对数据库进行操作。<br>语言寿命很长。<br>不区分大小写。</p>
+<div class="note info">
+            <p>建议关键字都使用大写，从而进行区分</p>
+          </div>
+
+<h2 id="数据导入和导出"><a href="#数据导入和导出" class="headerlink" title="数据导入和导出"></a>数据导入和导出</h2><h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h4><p>mysql -u $user -p db_name &lt; file.sql</p>
+<h4 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h4><p>source file.sql</p>
+<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><h4 id="CMD-1"><a href="#CMD-1" class="headerlink" title="CMD"></a>CMD</h4><p>mysqldump -u $user -p db_name &gt; file.sql</p>
+<h4 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h4><p>软件内导出</p>
+<h2 id="数据定义语言（DDL）"><a href="#数据定义语言（DDL）" class="headerlink" title="数据定义语言（DDL）"></a>数据定义语言（DDL）</h2><h3 id="CREATE"><a href="#CREATE" class="headerlink" title="CREATE"></a>CREATE</h3><h4 id="创数据库"><a href="#创数据库" class="headerlink" title="创数据库"></a>创数据库</h4><p>CREATE DATEBASE [if note exists] db_name [specifications]</p>
+<h4 id="创表"><a href="#创表" class="headerlink" title="创表"></a>创表</h4><p>CREATE TABLE tb_name (col_name1 dtype1, …) [specifications]</p>
+<h3 id="SHOW"><a href="#SHOW" class="headerlink" title="SHOW"></a>SHOW</h3><h4 id="查数据库"><a href="#查数据库" class="headerlink" title="查数据库"></a>查数据库</h4><p>SHOW DATABASES;<br>SHOW CREATE DATABASE db_name;</p>
+<h4 id="查表"><a href="#查表" class="headerlink" title="查表"></a>查表</h4><p>SHOW TABLES;<br>SHOW TABLES IN db_name;<br>DESCRIBE tb_name/DESC tb_name;<br>SHOW CREATE TABLE tb_name;</p>
+<h3 id="ALTER"><a href="#ALTER" class="headerlink" title="ALTER"></a>ALTER</h3><h4 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h4><p>ALTER DATABASE db_name [specifications]</p>
+<h4 id="修改表和表中元素"><a href="#修改表和表中元素" class="headerlink" title="修改表和表中元素"></a>修改表和表中元素</h4><ol>
+<li>ADD（添加列）<br>ALTER TABLE tb_name ADD COLUMU new_col_name dtype;<br>ALTER TABLE tb_name ADD COLUMU new_col_name dtype AFTER col_name;<br>ALTER TABLE tb_name ADD COLUMU new_col_name dtype FIRST;</li>
+<li>CHANGE（修给列名）<br>ALTER TABLE tb_name CHANGE COLUMU col_name new_col_name;</li>
+<li>MODIFY（修改列属性）<br>ALTER TABLE tb_name MODIFY COLUMU col_name dtype;</li>
+<li>DROP（删除列）<br>ALTER TABLE tb_name DROP COLUMU col_name;</li>
+<li>修改表的字符集和校对规则<br>ALTER TABLE tb_name [specifications]</li>
+</ol>
+<h3 id="DROP"><a href="#DROP" class="headerlink" title="DROP"></a>DROP</h3><h4 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h4><p>DROP DATABASE db_name;</p>
+<h4 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h4><p>DROP TABLE tb_name;</p>
+<h3 id="RENAME（可以用作迁移表）"><a href="#RENAME（可以用作迁移表）" class="headerlink" title="RENAME（可以用作迁移表）"></a>RENAME（可以用作迁移表）</h3><p>RENAME TABLE db1.tb_name to db2.tb_name;</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><h4 id="TINYINT"><a href="#TINYINT" class="headerlink" title="TINYINT"></a>TINYINT</h4><p>1字节，256</p>
+<h4 id="SMALLINT"><a href="#SMALLINT" class="headerlink" title="SMALLINT"></a>SMALLINT</h4><p>2字节，65535</p>
+<h4 id="MEDIUMINT"><a href="#MEDIUMINT" class="headerlink" title="MEDIUMINT"></a>MEDIUMINT</h4><p>3字节，…</p>
+<h4 id="INT"><a href="#INT" class="headerlink" title="INT"></a>INT</h4><p>4字节，43亿</p>
+<h4 id="BIGINT"><a href="#BIGINT" class="headerlink" title="BIGINT"></a>BIGINT</h4><p>8字节，…</p>
+<h3 id="小数"><a href="#小数" class="headerlink" title="小数"></a>小数</h3><h4 id="FLOAT-M-D"><a href="#FLOAT-M-D" class="headerlink" title="FLOAT(M,D)"></a>FLOAT(M,D)</h4><h4 id="DOUBLE-M-D"><a href="#DOUBLE-M-D" class="headerlink" title="DOUBLE(M,D)"></a>DOUBLE(M,D)</h4><h4 id="DECIMAL-M-D"><a href="#DECIMAL-M-D" class="headerlink" title="DECIMAL(M,D)"></a>DECIMAL(M,D)</h4><p>定点数</p>
+<h3 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h3><h4 id="DATETIME"><a href="#DATETIME" class="headerlink" title="DATETIME"></a>DATETIME</h4><p>DATETIME默认为null，存储与时区无关。</p>
+<h4 id="TIMESTAMP"><a href="#TIMESTAMP" class="headerlink" title="TIMESTAMP"></a>TIMESTAMP</h4><p>TIMESTAMP默认为NOW( )，存储与时区有关。存储基于基准时间经历的秒数。<br>SET time_zone = ‘+8:00’ //修改时区</p>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><h4 id="CHAR-M"><a href="#CHAR-M" class="headerlink" title="CHAR(M)"></a>CHAR(M)</h4><p>固定长度，最多255个字符，即最大255个字节。</p>
+<h4 id="VARCHAR-M"><a href="#VARCHAR-M" class="headerlink" title="VARCHAR(M)"></a>VARCHAR(M)</h4><p>变长，version5之前长度按照字节，version5后按照字符。version5之前最大255，version5之后最大65532个。<br>L+1（用1个字节表示长度）</p>
+<h4 id="TINYTEXT"><a href="#TINYTEXT" class="headerlink" title="TINYTEXT"></a>TINYTEXT</h4><p>L+1</p>
+<h4 id="MEDIUMTEXT"><a href="#MEDIUMTEXT" class="headerlink" title="MEDIUMTEXT"></a>MEDIUMTEXT</h4><p>L+2</p>
+<h4 id="LONGTEXT"><a href="#LONGTEXT" class="headerlink" title="LONGTEXT"></a>LONGTEXT</h4><p>L+3</p>
+<h4 id="ENUM"><a href="#ENUM" class="headerlink" title="ENUM"></a>ENUM</h4><p>枚举类型，枚举只能保存其中的一个元素。<br>如果设置为not null，插入时如果没有赋值，则会自动插入默认值。</p>
+<h4 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h4><p>集合类型，集合可以保存其中的多个元素，并且根据定义的顺序排列好。</p>
+<h3 id="二进制类型（很少使用）"><a href="#二进制类型（很少使用）" class="headerlink" title="二进制类型（很少使用）"></a>二进制类型（很少使用）</h3><h2 id="数据操作语言（DML）"><a href="#数据操作语言（DML）" class="headerlink" title="数据操作语言（DML）"></a>数据操作语言（DML）</h2><h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><div class="note info">
+            <ol><li>插入的数据应与字段数据类型相同。</li><li>数据的大小应在列的规定范围内。</li><li>在values中列出的数据</li><li>字符串和日期数据应包好在单引号中</li><li>插入空值 INSERT INTO table_name VALUE(NULL) 必须写上null</li></ol>
+          </div>
+<h4 id="INTO"><a href="#INTO" class="headerlink" title="INTO"></a>INTO</h4><p>NSERT INTO tb_name col_name VALUES (value…..)</p>
+<h3 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h3><h4 id="SET-1"><a href="#SET-1" class="headerlink" title="SET"></a>SET</h4><p>UPDATE tb_name SET col_name = value [WHERE where]</p>
+<div class="note info">
+            <p>一定要注意WHERE，如果不想全局修改，就一定要用WHERE</p>
+          </div>
+
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><h4 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h4><p>DELETE FROM table_name [WHERE where]</p>
+<div class="note info">
+            <ol><li>不使用WHERE将删除表中所有记录。</li><li>DELETE删除的单位是行。</li><li>删除表要用DROP。</li></ol>
+          </div>
+
+<h2 id="数据查询语言（DQL）"><a href="#数据查询语言（DQL）" class="headerlink" title="数据查询语言（DQL）"></a>数据查询语言（DQL）</h2><h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><h3 id="简单查询"><a href="#简单查询" class="headerlink" title="简单查询"></a>简单查询</h3><h4 id="计算表达式和值"><a href="#计算表达式和值" class="headerlink" title="计算表达式和值"></a>计算表达式和值</h4><h4 id="查询表中字段"><a href="#查询表中字段" class="headerlink" title="查询表中字段"></a>查询表中字段</h4><h4 id="使用WHERE过滤"><a href="#使用WHERE过滤" class="headerlink" title="使用WHERE过滤"></a>使用WHERE过滤</h4><p>WHERE role = value<br>WHERE role BETWEEN value1 AND value2<br>WHERE role IN value<br>WHERE role LIKE ‘x%’</p>
+<ol>
+<li>知道首字符的模糊查询 田%</li>
+<li>包含某个字符的模糊查询 %田%</li>
+<li>去掉首字符的模糊查询 _%田%</li>
+</ol>
+<div class="note info">
+            <p>%匹配任意数量字符。<br>_只能匹配一个字符。</p>
+          </div>
+
+<h4 id="给字段起别名"><a href="#给字段起别名" class="headerlink" title="给字段起别名"></a>给字段起别名</h4><p>SELECT role AS another_name</p>
+<h4 id="去除重复行"><a href="#去除重复行" class="headerlink" title="去除重复行"></a>去除重复行</h4><p>SELECT DISTINCT …</p>
+<div class="note info">
+            <p>DISTINCT是对所有字段去重，所以必须多个字段对应都相同时，才会进行去重。且DISTINCT必须放在查询字段的最前面。</p>
+          </div>
+
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>ORDER BY role //默认生序<br>ORDER BY role DESC //降序</p>
+<div class="note info">
+            <p>排序可以对非查询字段进行，只不过非查询字段的排序不会显示在结果中。<br>排序还可以对计算字段进行排序，如果计算结果不是查询字段，结果也不显示。</p>
+          </div>
+
+<h4 id="限制结果集的数量"><a href="#限制结果集的数量" class="headerlink" title="限制结果集的数量"></a>限制结果集的数量</h4><p>LIMIT x OFFSET y</p>
+<div class="note info">
+            <p>使用LIMIT可以很方便进行分页查询</p>
+          </div>
+
+<h4 id="计算字段"><a href="#计算字段" class="headerlink" title="计算字段"></a>计算字段</h4><p>使用时会给计算字段加别名</p>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><ol>
+<li>COUNT()：COUNT(*)统计记录，COUNT()统计字段非NULL的个数。</li>
+<li>SUM()</li>
+<li>AVG()</li>
+<li>MAX()</li>
+<li>MIN()</li>
+</ol>
+<div class="note info">
+            <p>要计算字段不同值的统计：可以对字段的先用DISTINCT去重，再用聚合函数统计。</p>
+          </div>
+
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>使用GROUP BY role来进行分组。</p>
+<ol>
+<li>搭配聚合函数来用</li>
+<li>使用GROUP_CONCAT()：可以讲包含的内容一起输出在结果。</li>
+<li>多字段分组：就是多个字段同时相等的时候才为一组。</li>
+<li>HAVING过滤分组</li>
+</ol>
+<div class="note info">
+            <p>WHERE是过滤记录的，而HAVING是来过滤分组的</p>
+          </div>
+<div class="note info">
+            <p>一般DBMS在进行分组的时候，都会进行排序，如果没有明确的ORDER BY子句，就应该假定是有序的</p>
+          </div>
+
+<h4 id="SELECT-顺序"><a href="#SELECT-顺序" class="headerlink" title="SELECT 顺序"></a>SELECT 顺序</h4><ol>
+<li>语法顺序：SELECT -&gt; FROM -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; ORDER BY -&gt; LIMIT</li>
+<li>执行顺序：FROM -&gt; WHERE -&gt; GROUP BY -&gt; HAVING -&gt; SELECT -&gt; DISTINCT -&gt; ORDER BY -&gt; LIMIT</li>
+</ol>
+<p>详细的执行流程：</p>
+<ol>
+<li>首先是从 FROM 开始执行的。在这个阶段，如果是多表连接查询，还会经历以下几个步骤：</li>
+</ol>
+<ul>
+<li>通过 CROSS JOIN 求得笛卡尔乘积，得到虚拟表 vt1-1;</li>
+<li>通过 ON 进行连接，在 vt1-1 的基础上进行筛选，得到虚拟表 vt1-2;</li>
+<li>如果是外连接，还会在 vt1-2 的基础上添加外部行，得到虚拟表 vt1-3;</li>
+</ul>
+<ol start="2">
+<li>如果连接的表不止两张，还会重复上面步骤，直到所有表都处理完成。这个过程完成之后，我们就得到了虚拟表 vt-1，也就是我们的原始数据。</li>
+<li>WHERE 会在 vt-1 的基础上进行筛选，得到虚拟表 vt-2。 3. GROUP BY 会在 vt-2 的基础上行分组，得到虚拟表 vt-3。 </li>
+<li>HAVING 会在 vt-3 的基础上对分组进行筛选，得到虚拟表 vt-4。 </li>
+<li>SELECT 会在 vt-4 的基础上提取想要的字段，得到虚拟表 vt-5。</li>
+<li>DISTINCT 会在 vt-5 的基础上，去掉重复行，得到虚拟表 vt-6。</li>
+<li>ORDER BY 会按照指定的字段对 vt-6 进行排序，得到虚拟表 vt-7。</li>
+<li>LIMIT 会在 vt-7 的基础上提取指定的记录，得到虚拟表 vt-8。</li>
+</ol>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AND（&amp;&amp;）</span><br><span class="line">OR（||）</span><br><span class="line">NOT （!）</span><br></pre></td></tr></table></figure>
+
+<h4 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;、｜、^、~、&lt;&lt;、&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="逆序输出"><a href="#逆序输出" class="headerlink" title="逆序输出"></a>逆序输出</h2><p>select * from tablename order by filename1 desc;</p>
+<h2 id="限制条数"><a href="#限制条数" class="headerlink" title="限制条数"></a>限制条数</h2><p>select * from tablename order by filename1 desc LIMIT 20;<br>注意LIMIT要在ORDER BY的后面</p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/31/SpringBoot/" rel="prev" title="SpringBoot">
+      <i class="fa fa-chevron-left"></i> SpringBoot
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/04/Git/" rel="next" title="Git">
+      Git <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">开启远程连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">数据库、数据库管理系统、数据库系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">关系型数据库和非关系型数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.2.1.</span> <span class="nav-text">关系型数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.2.2.</span> <span class="nav-text">非关系型数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9C%A8%E8%A1%A8%E7%9A%84%E5%BD%A2%E5%BC%8F%EF%BC%88Mysql%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">数据在表的形式（Mysql）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">SQL简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">3.1.</span> <span class="nav-text">结构化的查询语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">3.2.</span> <span class="nav-text">优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E5%92%8C%E5%AF%BC%E5%87%BA"><span class="nav-number">4.</span> <span class="nav-text">数据导入和导出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5"><span class="nav-number">4.1.</span> <span class="nav-text">导入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">4.1.1.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL"><span class="nav-number">4.1.2.</span> <span class="nav-text">MySQL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA"><span class="nav-number">4.2.</span> <span class="nav-text">导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">MySQL</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80%EF%BC%88DDL%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">数据定义语言（DDL）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CREATE"><span class="nav-number">5.1.</span> <span class="nav-text">CREATE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.1.1.</span> <span class="nav-text">创数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E8%A1%A8"><span class="nav-number">5.1.2.</span> <span class="nav-text">创表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHOW"><span class="nav-number">5.2.</span> <span class="nav-text">SHOW</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.2.1.</span> <span class="nav-text">查数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%A1%A8"><span class="nav-number">5.2.2.</span> <span class="nav-text">查表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER"><span class="nav-number">5.3.</span> <span class="nav-text">ALTER</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.3.1.</span> <span class="nav-text">修改数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%92%8C%E8%A1%A8%E4%B8%AD%E5%85%83%E7%B4%A0"><span class="nav-number">5.3.2.</span> <span class="nav-text">修改表和表中元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DROP"><span class="nav-number">5.4.</span> <span class="nav-text">DROP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.4.1.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="nav-number">5.4.2.</span> <span class="nav-text">删除表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RENAME%EF%BC%88%E5%8F%AF%E4%BB%A5%E7%94%A8%E4%BD%9C%E8%BF%81%E7%A7%BB%E8%A1%A8%EF%BC%89"><span class="nav-number">5.5.</span> <span class="nav-text">RENAME（可以用作迁移表）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">整数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TINYINT"><span class="nav-number">6.1.1.</span> <span class="nav-text">TINYINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SMALLINT"><span class="nav-number">6.1.2.</span> <span class="nav-text">SMALLINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MEDIUMINT"><span class="nav-number">6.1.3.</span> <span class="nav-text">MEDIUMINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INT"><span class="nav-number">6.1.4.</span> <span class="nav-text">INT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BIGINT"><span class="nav-number">6.1.5.</span> <span class="nav-text">BIGINT</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">小数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FLOAT-M-D"><span class="nav-number">6.2.1.</span> <span class="nav-text">FLOAT(M,D)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOUBLE-M-D"><span class="nav-number">6.2.2.</span> <span class="nav-text">DOUBLE(M,D)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DECIMAL-M-D"><span class="nav-number">6.2.3.</span> <span class="nav-text">DECIMAL(M,D)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.3.</span> <span class="nav-text">日期和时间类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DATETIME"><span class="nav-number">6.3.1.</span> <span class="nav-text">DATETIME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TIMESTAMP"><span class="nav-number">6.3.2.</span> <span class="nav-text">TIMESTAMP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.4.</span> <span class="nav-text">字符串类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CHAR-M"><span class="nav-number">6.4.1.</span> <span class="nav-text">CHAR(M)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VARCHAR-M"><span class="nav-number">6.4.2.</span> <span class="nav-text">VARCHAR(M)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TINYTEXT"><span class="nav-number">6.4.3.</span> <span class="nav-text">TINYTEXT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MEDIUMTEXT"><span class="nav-number">6.4.4.</span> <span class="nav-text">MEDIUMTEXT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LONGTEXT"><span class="nav-number">6.4.5.</span> <span class="nav-text">LONGTEXT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENUM"><span class="nav-number">6.4.6.</span> <span class="nav-text">ENUM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SET"><span class="nav-number">6.4.7.</span> <span class="nav-text">SET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%B1%BB%E5%9E%8B%EF%BC%88%E5%BE%88%E5%B0%91%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">6.5.</span> <span class="nav-text">二进制类型（很少使用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E8%AF%AD%E8%A8%80%EF%BC%88DML%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">数据操作语言（DML）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT"><span class="nav-number">7.1.</span> <span class="nav-text">INSERT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INTO"><span class="nav-number">7.1.1.</span> <span class="nav-text">INTO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE"><span class="nav-number">7.2.</span> <span class="nav-text">UPDATE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SET-1"><span class="nav-number">7.2.1.</span> <span class="nav-text">SET</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE"><span class="nav-number">7.3.</span> <span class="nav-text">DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FROM"><span class="nav-number">7.3.1.</span> <span class="nav-text">FROM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80%EF%BC%88DQL%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">数据查询语言（DQL）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT"><span class="nav-number">8.1.</span> <span class="nav-text">SELECT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="nav-number">8.2.</span> <span class="nav-text">简单查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E5%80%BC"><span class="nav-number">8.2.1.</span> <span class="nav-text">计算表达式和值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E4%B8%AD%E5%AD%97%E6%AE%B5"><span class="nav-number">8.2.2.</span> <span class="nav-text">查询表中字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8WHERE%E8%BF%87%E6%BB%A4"><span class="nav-number">8.2.3.</span> <span class="nav-text">使用WHERE过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%99%E5%AD%97%E6%AE%B5%E8%B5%B7%E5%88%AB%E5%90%8D"><span class="nav-number">8.2.4.</span> <span class="nav-text">给字段起别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C"><span class="nav-number">8.2.5.</span> <span class="nav-text">去除重复行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F"><span class="nav-number">8.2.6.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E7%BB%93%E6%9E%9C%E9%9B%86%E7%9A%84%E6%95%B0%E9%87%8F"><span class="nav-number">8.2.7.</span> <span class="nav-text">限制结果集的数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5"><span class="nav-number">8.2.8.</span> <span class="nav-text">计算字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">8.2.9.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%BB%84"><span class="nav-number">8.2.10.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT-%E9%A1%BA%E5%BA%8F"><span class="nav-number">8.2.11.</span> <span class="nav-text">SELECT 顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.2.12.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.2.13.</span> <span class="nav-text">位运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA"><span class="nav-number">9.</span> <span class="nav-text">逆序输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E6%9D%A1%E6%95%B0"><span class="nav-number">10.</span> <span class="nav-text">限制条数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

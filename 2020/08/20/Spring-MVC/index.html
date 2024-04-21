@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="SpringMVC是Spring框架里的一员，负责web表示层的解决方案 SpringMVC的优点 Spring MVC中提供一个DispatcherServlet, 无需额外开发。(即运行一个Servlet就行) springMVC中使用基于xml的配置文件，可以编辑，无需重新编译应用程序。 SpringMVC可以实例化控制器（Controller），并根据用户的输入来构造bean。 Sprin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring-MVC">
+<meta property="og:url" content="http://yoursite.com/2020/08/20/Spring-MVC/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="SpringMVC是Spring框架里的一员，负责web表示层的解决方案 SpringMVC的优点 Spring MVC中提供一个DispatcherServlet, 无需额外开发。(即运行一个Servlet就行) springMVC中使用基于xml的配置文件，可以编辑，无需重新编译应用程序。 SpringMVC可以实例化控制器（Controller），并根据用户的输入来构造bean。 Sprin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-20T12:44:09.000Z">
+<meta property="article:modified_time" content="2024-04-21T14:50:28.585Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringFramework">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/20/Spring-MVC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring-MVC | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/20/Spring-MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring-MVC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-20 20:44:09" itemprop="dateCreated datePublished" datetime="2020-08-20T20:44:09+08:00">2020-08-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:50:28" itemprop="dateModified" datetime="2024-04-21T22:50:28+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>25k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>42 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>SpringMVC是Spring框架里的一员，负责web表示层的解决方案</p>
+<h1 id="SpringMVC的优点"><a href="#SpringMVC的优点" class="headerlink" title="SpringMVC的优点"></a>SpringMVC的优点</h1><ol>
+<li>Spring MVC中提供一个DispatcherServlet, 无需额外开发。(即运行一个Servlet就行)</li>
+<li>springMVC中使用基于xml的配置文件，可以编辑，无需重新编译应用程序。</li>
+<li>SpringMVC可以实例化控制器（Controller），并根据用户的输入来构造bean。</li>
+<li>SpringMVC可以自动绑定用户输入，并正确的转换数据类型。</li>
+<li>SpringMVC内置了校验器，可以检验用户输入，不通过则重定向输入表单。</li>
+<li>SpringMVC支持多种试图技术</li>
+<li>…等<span id="more"></span></li>
+</ol>
+<h2 id="说人话，Controller是一个类，Handler是类中的处理方法"><a href="#说人话，Controller是一个类，Handler是类中的处理方法" class="headerlink" title="说人话，Controller是一个类，Handler是类中的处理方法"></a><strong><em>说人话，Controller是一个类，Handler是类中的处理方法</em></strong></h2><h1 id="SpringMVC结构"><a href="#SpringMVC结构" class="headerlink" title="SpringMVC结构"></a>SpringMVC结构</h1><ol>
+<li>DispatcherServlet</li>
+<li>Controller: 负责注册Handler</li>
+<li>HandlerMapping</li>
+<li>HandlerAdapter</li>
+<li>ViewResolver</li>
+<li>Validator</li>
+<li>Command</li>
+<li>FormObject</li>
+<li>自己实现的Handler</li>
+</ol>
+<hr>
+<h1 id="Spring框架流程"><a href="#Spring框架流程" class="headerlink" title="Spring框架流程"></a>Spring框架流程</h1><p>待添加</p>
+<hr>
+<h1 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h1><h2 id="step1-导包-pom-xml"><a href="#step1-导包-pom-xml" class="headerlink" title="step1. 导包(pom.xml)"></a>step1. 导包(pom.xml)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-webmvc&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.8.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&#x2F;&#x2F;该依赖负责Servlet</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.0.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="step2-配置DispatcherServlet-web-xml-tip-该方法不常用，常用SpringConfig"><a href="#step2-配置DispatcherServlet-web-xml-tip-该方法不常用，常用SpringConfig" class="headerlink" title="step2. 配置DispatcherServlet(web.xml) [tip:该方法不常用，常用SpringConfig]"></a>step2. 配置DispatcherServlet(web.xml) [tip:该方法不常用，常用SpringConfig]</h2><p>先配置Servlet；<br>再配置子标签init-param，把Spring配置文件引入进来，使得Servlet可以应用Spring；<br>最后添加Servlet-Mapping配置映射范围。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">    &lt;servlet-name&gt;dispatcher&lt;&#x2F;servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;&#x2F;servlet-class&gt;</span><br><span class="line">    &lt;init-param&gt;</span><br><span class="line">        &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;</span><br><span class="line">        &lt;param-value&gt;classpath:application.xml&lt;&#x2F;param-value&gt;</span><br><span class="line">    &lt;&#x2F;init-param&gt;</span><br><span class="line">&lt;&#x2F;servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;dispatcher&lt;&#x2F;servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="step3-Spring的application-xml中配置HandlerMapping和HandlerAdapter"><a href="#step3-Spring的application-xml中配置HandlerMapping和HandlerAdapter" class="headerlink" title="step3. Spring的application.xml中配置HandlerMapping和HandlerAdapter"></a>step3. Spring的application.xml中配置HandlerMapping和HandlerAdapter</h2><p>在resources下创建application.xml，并添加对应的SpringMVC组件<br>HandlerMapping: BeanNameUrlHandlerMapping, 组件和url建立映射关系<br>HanderAdapter: SimpleControllerHandlerAdapter, 简单控制器的适配器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--扫包--&gt;</span><br><span class="line">&lt;context:component-scan base-package&#x3D;&quot;practice&quot;&#x2F;&gt;</span><br><span class="line">&lt;!--组件id和Url建立映射--&gt;</span><br><span class="line">&lt;bean class&#x3D;&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;&#x2F;&gt;</span><br><span class="line">&lt;!--简单控制器的适配器--&gt;</span><br><span class="line">&lt;bean class&#x3D;&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="step4-handler注册"><a href="#step4-handler注册" class="headerlink" title="step4. handler注册"></a>step4. handler注册</h2><p>写一个Handler类，实现Controller接口(注意要和IOC的Controller做区分，IOC的Controller是用作注解的），并且注册为Spring组件；<br>重写handleRequest方法（实际上是依靠Request和Response来实现）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注册组件，组件id作为url</span><br><span class="line">@Component(&quot;&#x2F;first&quot;)</span><br><span class="line">public class FirstHandler implements Controller</span><br><span class="line">&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;创建一个ModelAndView实例</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		&#x2F;&#x2F;设置View组件</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		&#x2F;&#x2F;传递Model,attributeName是jsp对应的参数名，attributeValue是值</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;, &quot;EternalEva&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="运行并在浏览器访问对应url即可"><a href="#运行并在浏览器访问对应url即可" class="headerlink" title="运行并在浏览器访问对应url即可"></a>运行并在浏览器访问对应url即可</h2><h2 id="案例1分析"><a href="#案例1分析" class="headerlink" title="案例1分析"></a>案例1分析</h2><p>手写Handler类，然后继承Controller<br>并且在web.xml中每一个url配置映射一个handler组件（handler以组件方式存在），跟每一个url写一个servlet没有区别</p>
+<hr>
+<h1 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a>案例2</h1><h2 id="step1-导包"><a href="#step1-导包" class="headerlink" title="step1. 导包"></a>step1. 导包</h2><p>同上，略… <br><br></p>
+<h2 id="step2-web-xml配置"><a href="#step2-web-xml配置" class="headerlink" title="step2. web.xml配置"></a>step2. web.xml配置</h2><p>同上，略…<br><br></p>
+<h2 id="step3-Spring的application-xml配置"><a href="#step3-Spring的application-xml配置" class="headerlink" title="step3. Spring的application.xml配置"></a>step3. Spring的application.xml配置</h2><p>添加MVC的xml配置，以及mvc注解驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlns:mvc&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&quot;</span><br><span class="line">http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&#x2F;spring-mvc.xsd</span><br><span class="line"></span><br><span class="line">&lt;!--组件扫包--&gt;</span><br><span class="line">&lt;context:component-scan base-package&#x3D;&quot;practice&quot;&#x2F;&gt;</span><br><span class="line">&lt;!--mvc注解驱动--&gt;</span><br><span class="line">&lt;mvc:annotation-driven&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="step4-注册Controller组件"><a href="#step4-注册Controller组件" class="headerlink" title="step4. 注册Controller组件"></a>step4. 注册Controller组件</h2><p>写一个自定义Controller类，使用Controller注册该类，然后在方法中使用@RequestMapping注解注册Handler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注册为Controller</span><br><span class="line">@Controller</span><br><span class="line">public class SecondController</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;RequestMapping的id作为url</span><br><span class="line">	@RequestMapping(&quot;&#x2F;second&quot;)</span><br><span class="line">	public ModelAndView hi()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;, &quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="step5-运行Servlet"><a href="#step5-运行Servlet" class="headerlink" title="step5. 运行Servlet"></a>step5. 运行Servlet</h2><h2 id="案例2分析"><a href="#案例2分析" class="headerlink" title="案例2分析"></a>案例2分析</h2><hr>
+<h1 id="Handler进阶使用"><a href="#Handler进阶使用" class="headerlink" title="Handler进阶使用"></a>Handler进阶使用</h1><h2 id="注解-RequestMapping"><a href="#注解-RequestMapping" class="headerlink" title="注解@RequestMapping"></a>注解@RequestMapping</h2><h3 id="URL路径映射"><a href="#URL路径映射" class="headerlink" title="URL路径映射"></a>URL路径映射</h3><p>使用@RequestMapping注解的value属性(数组数据类型)，将请求url和handler建立映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;只写一个String，默认就为value属性</span><br><span class="line">@RequestMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">public ModelAndView hello()&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="多个URL路径映射到同一个Handler上"><a href="#多个URL路径映射到同一个Handler上" class="headerlink" title="多个URL路径映射到同一个Handler上"></a>多个URL路径映射到同一个Handler上</h3><p>因为value是个数组数据类型，因此可以传递多个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value &#x3D; &#123;&quot;one&quot;, &quot;two&quot;, &quot;three&quot;&#125;)</span><br><span class="line">public ModelAndView hello()&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="url可以使用-来通配"><a href="#url可以使用-来通配" class="headerlink" title="url可以使用*来通配"></a>url可以使用*来通配</h3><p>可以使用*做通配，如hello*通配hello字符串开头的任何字符串,如hello1, hello2, hello1234</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&#123;&quot;hello*&quot;&#125;)</span><br><span class="line">public ModelAndView hello()&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>通配hello\xxxx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&#123;&quot;hello\*&quot;&#125;)</span><br><span class="line">public ModelAndView hello()&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="窄化请求url"><a href="#窄化请求url" class="headerlink" title="窄化请求url"></a>窄化请求url</h3><p>welcome/first    handler方法上 → “first”<br>welcome/second   handler方法上 → “second”<br>welcome/third    handler方法上 → “third”<br>即将具有相同路径部分的内容提取出来<br>先用@RequestMapping把user放在Controller组件上，然后@RequestMapping到对应方法上添加url映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;&#x2F;welcome&quot;)</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">	@RequestMapping(&quot;&#x2F;hunter&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>tip: 不要把url添加到@Controller上！</strong><br><br></p>
+<h3 id="请求方法限定"><a href="#请求方法限定" class="headerlink" title="请求方法限定"></a>请求方法限定</h3><p>在@RequestMapping上添加method = “请求方式”，来限定请求方式<br>可以限定GET、POST、PUT等请求类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class MethodLimited</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;限定GET方式（注意要写value）</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;methodlimited&quot;, method &#x3D; RequestMethod.GET)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是多个请求方式限定，逻辑是OR（满足一个即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;多个方式限定，逻辑关系是OR</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;methodslimited&quot;, method &#x3D; &#123;RequestMethod.GET, RequestMethod.POST&#125;)</span><br><span class="line">public ModelAndView hi()</span><br><span class="line">&#123;</span><br><span class="line">	ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">	modelAndView.setViewName(&quot;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">	modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter, May you found your worth in the waking world.&quot;);</span><br><span class="line">	return modelAndView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="引申注解"><a href="#引申注解" class="headerlink" title="引申注解"></a>引申注解</h3><p>上面的请求方式限定可以直接使用引申注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;methodlimited&quot;) &#x3D; @RequestMapping(value &#x3D; &quot;&#x2F;methodlimited&quot;,</span><br><span class="line">								method &#x3D; RequestMethod.GET)</span><br><span class="line">@PostMapping(&quot;&#x2F;methodlimited&quot;) &#x3D; @RequestMapping(value &#x3D; &quot;&#x2F;methodlimited&quot;, </span><br><span class="line">								 method &#x3D; RequestMethod.POST)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class MethodLimited</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;限定GET方式（注意要写value）</span><br><span class="line">	@GetMapping(&quot;methodlimited&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="请求参数限定"><a href="#请求参数限定" class="headerlink" title="请求参数限定"></a>请求参数限定</h3><p>在@RequestMapping添加 param = “指定参数名”，来限定参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;限定参数名必须是hunter</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;hunter&quot;, param &#x3D; &quot;hunter&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是多个请求参数限定，param添加参数数组，多个参数的逻辑关系是AND（即要多个参数要同时存在）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;多个参数逻辑关系是AND</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;hunter&quot;, param &#x3D; &#123;&quot;good&quot;, &quot;hunter&quot;&#125;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="请求参数值的简单逻辑判定"><a href="#请求参数值的简单逻辑判定" class="headerlink" title="请求参数值的简单逻辑判定"></a>请求参数值的简单逻辑判定</h3><p>在@RequestMapping的param值中，可以使用 != 某个值 来对值进行判断(参数值不等于该值)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;hunter的值不能是german</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;hunter&quot;, param &#x3D; &#123;&quot;good&quot;, &quot;hunter !&#x3D; german&quot;&#125;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="请求头限定"><a href="#请求头限定" class="headerlink" title="请求头限定"></a>请求头限定</h3><p>在@RequestMapping中添加headers属性，限定了请求头的key值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;headers</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;hunter&quot;, headers &#x3D; &quot;hunter&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>多个请求头之间的值，逻辑是AND，即多个请求头都要发送</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;headers</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;&#x2F;hunter&quot;, headers &#x3D; &#123;&quot;good&quot;, &quot;hunter&quot;&#125;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="特定的请求头限定（针对Accpect和Content—Type）"><a href="#特定的请求头限定（针对Accpect和Content—Type）" class="headerlink" title="特定的请求头限定（针对Accpect和Content—Type）"></a>特定的请求头限定（针对Accpect和Content—Type）</h3><p>produces属性限定accept请求头（accept一般属于GET请求头）<br>在@RequestMapping中添加produces属性，指定特定值类型（注：MIME标准中，格式必须为application/xxx）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;指定请求头的值为application&#x2F;json，用作accept</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;accept&quot;, produces &#x3D; &quot;application&#x2F;json&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>consumes属性限定content-type请求头（content-type属于POST的请求头，指明post实体体的格式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;指定实体体的值为application&#x2F;json，用作content-type</span><br><span class="line">	@RequestMapping(value &#x3D; &quot;accept&quot;, cousumes &#x3D; &quot;application&#x2F;json&quot;)</span><br><span class="line">	public ModelAndView hello()</span><br><span class="line">	&#123;</span><br><span class="line">		ModelAndView modelAndView &#x3D; new ModelAndView();</span><br><span class="line">		modelAndView.setViewName(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;);</span><br><span class="line">		modelAndView.addObject(&quot;world&quot;,&quot;Good Hunter&quot;);</span><br><span class="line">		return modelAndView;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="Handler的返回值"><a href="#Handler的返回值" class="headerlink" title="Handler的返回值"></a>Handler的返回值</h2><h3 id="需要View试图的情况"><a href="#需要View试图的情况" class="headerlink" title="需要View试图的情况"></a>需要View试图的情况</h3><h3 id="返回void"><a href="#返回void" class="headerlink" title="返回void"></a>返回void</h3><p>handler返回void值，处理方式即采用servlet的request和response，并由视图转发出去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    @RequestMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">	public void do(HttpServletRequest request, HttpServletResponse response) throws ServletException</span><br><span class="line">    &#123;</span><br><span class="line">        request.setAttribute(&quot;content&quot;, &quot;void&quot;);</span><br><span class="line">        request.getRequestDispather(&quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;).forward(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="返回ModelAndView"><a href="#返回ModelAndView" class="headerlink" title="返回ModelAndView"></a>返回ModelAndView</h3><p>先setViewName, 再addObject，见@RequestMapping注解<br><br></p>
+<h3 id="返回视图名String"><a href="#返回视图名String" class="headerlink" title="返回视图名String"></a>返回视图名String</h3><p>String返回视图名(viewName)</p>
+<ul>
+<li><p>物理视图<br>直接返回字符串作为视图名，形参为Model，Spring会自动帮我们封装，所以直接使用即可。<br>使用model.addAttribute传递model值，然后直接返回String</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class RequestMappingTest</span><br><span class="line">&#123;</span><br><span class="line">    @RequestMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">	public String doString(Model model)</span><br><span class="line">    &#123;</span><br><span class="line">        model.addAttribute(&quot;content&quot;, &quot;Good Hunter&quot;);</span><br><span class="line">        &#x2F;&#x2F;返回String作为视图名</span><br><span class="line">        return &quot;&#x2F;WEB-INF&#x2F;first.jsp&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑视图<br>viewName = prefix + 返回值 + suffix<br>在Spring的application.xml中配置InternalResourceViewResolver<br>配置了之后，返回值为字符串和返回值为ModelAndView的setViewName都会受到影响</p>
+<br>
+
+</li>
+</ul>
+<h3 id="返回String，进行转发和重定向"><a href="#返回String，进行转发和重定向" class="headerlink" title="返回String，进行转发和重定向"></a>返回String，进行转发和重定向</h3><p>这个并不是jsp的视图的处理,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class ForwardAndRedirectController</span><br><span class="line">&#123;</span><br><span class="line">    @RequestMapping(&quot;forward&quot;)</span><br><span class="line">    public String forward()</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;转发到receive</span><br><span class="line">        return &quot;forward:&#x2F;receive&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;redirect&quot;)</span><br><span class="line">    public String redirect()</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;重定向到receive</span><br><span class="line">        return &quot;redirect:&#x2F;receive&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;receive，返回值为String视图名</span><br><span class="line">    @RequestMapping(&quot;receive&quot;)</span><br><span class="line">    public String receive()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;WEB-INF&#x2F;first.jsp&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>forward转发不会改变url，redirect重定向会改变url</p>
+<p>提示：视图名、转发、重定向，一定要加/<br>因为不加/是作为相对路径，相对路径的处理方式为：去掉url的最后一级的值，并添加上新值<br><br></p>
+<h3 id="直接返回Json（目前主流：2020年）"><a href="#直接返回Json（目前主流：2020年）" class="headerlink" title="直接返回Json（目前主流：2020年）"></a>直接返回Json（目前主流：2020年）</h3><p>返回值为Json类型，可以直接写成javaBean、数据、List等</p>
+<ol>
+<li><p>pom.xml添加依赖jackson-databind</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.fasterxml.jackson.core&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jackson-databind&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.11.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>web.xml常规配置（DispatcherServlet和Spring配置文件)</p>
+</li>
+<li><p>Spring的application.xml的常规配置（组件扫包和MVC注解驱动）</p>
+</li>
+<li><p>写一个JavaBean</p>
+</li>
+<li><p>在Handler的方法体上添加注解@ResponseBody，可以直接在response中返回Json对象</p>
+</li>
+</ol>
+<p><em>tip: @ResponseBody可以用在类上，表示该类所有方法的response都用json封装</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class JsonHandler</span><br><span class="line">&#123;</span><br><span class="line">	@RequestMapping(&quot;json&quot;)</span><br><span class="line">	&#x2F;&#x2F;添加ResponseBody注解后，返回的即为json对象</span><br><span class="line">	@ResponseBody</span><br><span class="line">	public My myJson()</span><br><span class="line">	&#123;</span><br><span class="line">		My my &#x3D; new My();</span><br><span class="line">		my.setMyName(&quot;Eternal&quot;);</span><br><span class="line">		my.setMyKey(&quot;Eva&quot;);</span><br><span class="line">		return my;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>tip:</em></p>
+<ul>
+<li><em>可以在@ResponseBody注解的方法中，直接返回String值，返回的就是字符串，而不是Json对象（但是不能使用中文字符串）</em></li>
+<li><em>可以返回<code>List&lt;bean&gt;</code>，得到Json数组</em></li>
+<li><em>可以返回其他类型数据</em><br>
+
+</li>
+</ul>
+<h2 id="Handler方法的主要形参"><a href="#Handler方法的主要形参" class="headerlink" title="Handler方法的主要形参"></a>Handler方法的主要形参</h2><h3 id="请求参数接收"><a href="#请求参数接收" class="headerlink" title="请求参数接收"></a>请求参数接收</h3><p>参数接收前提：使用form表单的input标签来构造请求参数名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&#x2F;welcome&quot;&gt;</span><br><span class="line">    用户名:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;username&quot;&gt;</span><br><span class="line">    密码:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;password&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h3 id="接收并封装非Json数据"><a href="#接收并封装非Json数据" class="headerlink" title="接收并封装非Json数据"></a>接收并封装非Json数据</h3><h4 id="使用request获取（不建议使用）"><a href="#使用request获取（不建议使用）" class="headerlink" title="使用request获取（不建议使用）"></a>使用request获取（不建议使用）</h4><p>网页url附带参数 a=xxx&amp;b=xxx<br>使用request.getParameter(“a”) …拿到参数<br><br></p>
+<h4 id="使用Handler直接获取并封装"><a href="#使用Handler直接获取并封装" class="headerlink" title="使用Handler直接获取并封装"></a>使用Handler直接获取并封装</h4><ul>
+<li><p>常规接收<br>方法使用@ResponseBody注解，直接在方法形参上写 <em>包装类数据类型 参数名</em> 即可，SpringMVC会自动封装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(String username, String password)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(username, password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接收并封装日期格式数据<br>SpringMVC没有提供直接转换Date格式的转换器，需要在参数中使用注解 <em>@DateTimeFormat(pattern=”yyyy-mm-dd”)</em> 来制定指定格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;param&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(@DateTimeFormat(pattern&#x3D;&quot;yyyy-mm-dd&quot;) Date birthDay)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok(birthday);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接收文件<br>文件上传需要使用组件CommonMultipartResolver</p>
+<ul>
+<li><p>step1. 导包(commons-fileupload)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;commons-fileupload&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;commons-fileupload&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.4&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>step2. Spring注册CommonMultipartResolver<br>id必须为multipartResolver，因为Spring定义好了multipartResolver，按照该id来获取组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;multipartResolver&quot; class&#x3D;&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</span><br><span class="line">    &#x2F;&#x2F;设置最大上传文件大小</span><br><span class="line">    &lt;property name&#x3D;&quot;maxUploadSize&quot; value&#x3D;&quot;51200&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>step3. 接收方法的形参为MultipartFile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;获取上传文件的原名字</span><br><span class="line">    String fileName &#x3D; uploadFile.getOriginalFileName()</span><br><span class="line">    File file &#x3D; new File(“~&#x2F;Documents&quot;, fileName);</span><br><span class="line">    &#x2F;&#x2F;把接收的文件保存起来</span><br><span class="line">    try</span><br><span class="line">    &#123;</span><br><span class="line">        uploadFile.transferTo(file);</span><br><span class="line">    &#125;</span><br><span class="line">    catch(IOException e)</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;ValueBean的使用见Encapsulation</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tip：多文件上传，form表单input使用multiple，接收使用数组MultipartFile[]来接收</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;...&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;file&quot; multiple name&#x3D;&quot;...&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@RequestMappinh(&quot;upload&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public ValueBean myParam(MultipartFile[] uploadFile)</span><br><span class="line">&#123;</span><br><span class="line">    for(File file : uploadFile)</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;处理上传文件</span><br><span class="line">    &#125;</span><br><span class="line">	return ValueBean.ok();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>converter组件：用来转换接收类型；Converter接口，将泛型S转换为T</p>
+<ul>
+<li>step1. 创建一个自定义类，实现Converter接口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>step2. 配置Spring的xml配置<br> 添加FormattingConversionServiceFactoryBean<br> 添加属性 converters（set集合）<br> 属性添加子标签引用 ref bean=“自定义类”<br> mvc注解驱动添加 conversion-service=“配置的Formatting…id”<br> 另外：SpringMVC提供了很多conversionService<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><em>什么时候会使用到Converter转换器：Handler接收的参数名和Post请求的参数名一致，并且数据类型不为String。</em><br>(此处要用图片)</p>
+</li>
+<li><p>接收数组<br>如果请求参数名一致，可以使用数组来接收</p>
+ <br>
+
+</li>
+</ul>
+<h4 id="使用JavaBean来接收"><a href="#使用JavaBean来接收" class="headerlink" title="使用JavaBean来接收"></a>使用JavaBean来接收</h4><p>把Handler接收的形参 <strong><em>定义为JavaBean的成员变量和对应的set方法</em></strong>，其实就是把Handler的形参用Bean封装了一下。<br>请求参数名和JavaBean成员变量名一致，如果类型不一致，会调用Spring的Converter</p>
+<p> <strong><em>特殊JavaBean：</em></strong></p>
+<ul>
+<li><p><strong><em>嵌套JavaBean</em></strong><br>在Post请求参数名 = 嵌套的JavaBean.参数名，Spring的@ResponseBody会负责封装</p>
+</li>
+<li><p><strong><em>JavaBean包含List<T></T></em></strong><br>在Post请求参数名 = List名[对应下标].参数名，封装进List中。下标用作分组</p>
+</li>
+</ul>
+<h4 id="Post请求中文乱码问题"><a href="#Post请求中文乱码问题" class="headerlink" title="Post请求中文乱码问题"></a>Post请求中文乱码问题</h4><p>使用filter来解决，因为URL编码格式导致<br> <strong><em>在web.xml里配置CharacterEncodingFilter</em></strong><br>CharacterEncodingFilter里定义了方法: </p>
+<ul>
+<li><em>forceEncoding</em>可以强制对request和response使用Encoding编码</li>
+<li><em>encoding</em>参数定义使用utf-8编码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">    &lt;filter-name&gt;characterEncoding&lt;&#x2F;filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;&#x2F;filter-class&gt;</span><br><span class="line">    &lt;init-param&gt;</span><br><span class="line">        &lt;param-name&gt;forceEncoding&lt;&#x2F;param-name&gt;</span><br><span class="line">        &lt;param-value&gt;true&lt;&#x2F;param-value&gt;</span><br><span class="line">    &lt;&#x2F;init-param&gt;</span><br><span class="line">    &lt;init-param&gt;</span><br><span class="line">        &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;</span><br><span class="line">        &lt;param-value&gt;utf-8&lt;&#x2F;param-value&gt;</span><br><span class="line">    &lt;&#x2F;init-param&gt;</span><br><span class="line">&lt;&#x2F;filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;characterEncoding&lt;&#x2F;filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;&#x2F;*&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+tip：要判断参数接收到中文是否乱码，可以在代码中打印查看（因为各种控制台输出显示可能不是utf-8）<br>
+
+</li>
+</ul>
+<h3 id="接收并封装Json数据"><a href="#接收并封装Json数据" class="headerlink" title="接收并封装Json数据"></a>接收并封装Json数据</h3><p>如何利用postman构建发送json数据：</p>
+<ul>
+<li>Post方法</li>
+<li>Headers有Content-Type: application/json</li>
+<li>Body选择raw为json<br>（判断json内元素是否是数值，看是否带双引号）</li>
+</ul>
+<p>如何接收：<br> <strong><em>定义一个json的JavaBean</em></strong><br> <strong><em>pom.xml要导入javkson-bind依赖</em></strong><br> <strong><em>接收时候要对形参使用注解：@RequestBody</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public ValueBean json(@RequestBody User user)</span><br><span class="line">&#123;</span><br><span class="line">	return ValueBean.ok(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果Json内嵌套了一个Json对象：把里面的Json对象封装成一个对象来接收<br><br></p>
+<h3 id="接收Map"><a href="#接收Map" class="headerlink" title="接收Map"></a>接收Map</h3><p>对形参使用注解：@RequestBody，也可以接收Map类型<br>使用map.get中按照key来接收</p>
+<h2 id="Handler的其他参数"><a href="#Handler的其他参数" class="headerlink" title="Handler的其他参数"></a>Handler的其他参数</h2><h3 id="直接放入request和response"><a href="#直接放入request和response" class="headerlink" title="直接放入request和response"></a>直接放入request和response</h3><p>见返回void</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>返回值为String，使用Model作为形参</p>
+<h3 id="cookie和session"><a href="#cookie和session" class="headerlink" title="cookie和session"></a>cookie和session</h3><p>利用postman构建cookie</p>
+<ul>
+<li>headers里添加cookie<br>cookie在Handler中通过request获得<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>session在Handler中也是通过request获得<br>可以对session进行set和get<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>session也可以直接在形参中使用HttpSession获取<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="locale"><a href="#locale" class="headerlink" title="locale"></a>locale</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Restful风格请求"><a href="#Restful风格请求" class="headerlink" title="Restful风格请求"></a>Restful风格请求</h2><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2">Restful参考</a><br>响应使用Json数据，使用@RestController注解（其实就是@Controller加@ResponseBody）</p>
+<ul>
+<li><p>@PathVariable<br>使用请求url的一部分提供请求参数：param1/hello/param2/world…<br>如何获取请求参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;&#123;param1&#125;&#x2F;hello&#x2F;&#123;param2&#125;&#x2F;world&quot;)</span><br><span class="line">public ValueBean get(@PathVariable(&quot;param1) String param1,</span><br><span class="line">					 @PathVariable(&quot;param2&quot;) String param2)</span><br><span class="line">&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>要求请求参数名和@PathVariable里的参数名一直</p>
+</li>
+<li><p>@RequestParam</p>
+</li>
+<li><p>@RequestHeader<br>通过该注解可以获得Header的key值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@RequestHeader(&quot;Accept&quot;) String accept</span><br><span class="line">@RequestHeader(&quot;Host&quot;) String host</span><br><span class="line">&#x2F;&#x2F;也可以用数组形式接收，accept值以 , 分隔</span><br><span class="line">@RequestHeader(&quot;Accept&quot;) String[] accept</span><br></pre></td></tr></table></figure></li>
+<li><p>@CookieValue<br>通过该注解可以取出cookie的某个key的cookieValue值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@SessionAttribute<br>通过该注解可以取出session的某个key的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
+
+</li>
+</ul>
+<h1 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h1><h2 id="默认的Servlet"><a href="#默认的Servlet" class="headerlink" title="默认的Servlet"></a>默认的Servlet</h2><p>在web.xml配置默认的Servlet</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;default&lt;&#x2F;servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;*.html&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;servlet-mapping&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;default&lt;&#x2F;servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;*.png&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="默认Servlet的Handler"><a href="#默认Servlet的Handler" class="headerlink" title="默认Servlet的Handler"></a>默认Servlet的Handler</h2><p>通过DispatcherServlet分发到对应Handler，handler处理：<br>如果查询到有对应静态资源，就返回静态资源；没有就交给调用绑定的Servlet来处理<br> <strong><em>在Spring的xml配置中添加 <code>&lt;mvc:default-servlet-handler&gt;</code>配置</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package&#x3D;&quot;HomeWork&quot;&#x2F;&gt;</span><br><span class="line">&lt;!--mvc注解驱动--&gt;</span><br><span class="line">&lt;mvc:annotation-driven&#x2F;&gt;</span><br><span class="line">&lt;mvc:default-servlet-handler&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="静态资源映射（推荐）"><a href="#静态资源映射（推荐）" class="headerlink" title="静态资源映射（推荐）"></a>静态资源映射（推荐）</h2><p>将请求url和文件建立联系<br> <strong><em>在Spring的xml配置中添加 <code>&lt;mvc:resources mapping=&quot;/123/**&quot; location=&quot;...&quot;&gt;</code></em></strong><br> 其中两个，表示通配该级和之后的多级目录</p>
+<ul>
+<li>mapping：请求url，mapping的值相对于location的值，mapping的<code>/</code>表示相对路径</li>
+<li>location：对应的静态资源路径</li>
+<li>classpath路径</li>
+<li>web根路径</li>
+<li>文件路径（重要）</li>
+</ul>
+<h1 id="SpringMVC异常处理"><a href="#SpringMVC异常处理" class="headerlink" title="SpringMVC异常处理"></a>SpringMVC异常处理</h1><h2 id="自己创建HandlerExceptionResolver来处理"><a href="#自己创建HandlerExceptionResolver来处理" class="headerlink" title="自己创建HandlerExceptionResolver来处理"></a>自己创建HandlerExceptionResolver来处理</h2><p>处理结果 <strong><em>返回ModelAndView</em></strong>，所以有Handler、service、dao的异常都会被捕获<br> <strong><em>一个处理类，继承HandlerExceptionResolver，并重写方法</em></strong><br> <strong><em>可以自己写不同的异常类，注册到组件中做个性化处理</em></strong><br> <strong><em>直接注册到组件即可使用</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="自己创建ExceptionHandler来处理"><a href="#自己创建ExceptionHandler来处理" class="headerlink" title="自己创建ExceptionHandler来处理"></a>自己创建ExceptionHandler来处理</h2><p>该方式处理比较灵活，可以返回ModelAndView，也可以返回Json（要使用注解@ResponseBody）<br>按照异常映射到handler方法上处理<br> <strong><em>自己创建处理类使用注解@ControllerAdvice</em></strong><br> <strong><em>方法上使用注解@ExceptionHandler({异常.class,…})</em></strong></p>
+<p>@RestControllerAdvice</p>
+<h1 id="HandlerInterception"><a href="#HandlerInterception" class="headerlink" title="HandlerInterception"></a>HandlerInterception</h1><p>handler拦截器<br>（待补齐）</p>
+<h2 id="preHandle"><a href="#preHandle" class="headerlink" title="preHandle"></a>preHandle</h2><h2 id="postHandle"><a href="#postHandle" class="headerlink" title="postHandle"></a>postHandle</h2><h2 id="afterCompletion"><a href="#afterCompletion" class="headerlink" title="afterCompletion"></a>afterCompletion</h2><p>如果preHandler为true，必定执行到这步</p>
+<h2 id="HandlerInterception的作用范围"><a href="#HandlerInterception的作用范围" class="headerlink" title="HandlerInterception的作用范围"></a>HandlerInterception的作用范围</h2><ul>
+<li>全局</li>
+<li>部分<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:interceptors&gt;</span><br><span class="line">	&lt;!-- 部分--&gt;</span><br><span class="line">	&lt;mvc:interceptor&gt;</span><br><span class="line">		&lt;mvc:mapping path&#x3D;&quot;拦截url“&#x2F;&gt;</span><br><span class="line">		&lt;ref bean&#x3D;&quot;自己实现HandlerInterception的类&quot;&#x2F;&gt;</span><br><span class="line">	&lt;&#x2F;mvc:interceptor&gt;</span><br><span class="line">&lt;&#x2F;mvc:interceptors&gt;	</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="多个HandlerInterception的执行顺序"><a href="#多个HandlerInterception的执行顺序" class="headerlink" title="多个HandlerInterception的执行顺序"></a>多个HandlerInterception的执行顺序</h2><p>按照<code>&lt;mvc:interceptos&gt;</code>的配置顺序执行<br>但是因为程序迭代逻辑是栈<br>prehandle先进后出<br>post、after后进先出</p>
+<ul>
+<li>所有prehandler均为true，按照该逻辑依次执行</li>
+<li>prehandler有false</li>
+<li>1为false，执行到prehandle1，跳出</li>
+<li>2为false，执行到prehandler2，跳出，无法继续执行到posthandler1，但是必定执行afterHandler1</li>
+<li>3为false，执行到prehandler3，跳出，…，必定执行到afterHandler1、afterHandler2</li>
+</ul>
+<h2 id="案例1-1"><a href="#案例1-1" class="headerlink" title="案例1"></a>案例1</h2><ol>
+<li><p>写实现HandlerInterception的类<br>重写pre、post、after方法</p>
+</li>
+<li><p>注册组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:interceptors&gt;</span><br><span class="line">	&lt;!-- 全局作用范围:进入到Dispatcher处理，即可进入到该interceptor--&gt;</span><br><span class="line">	&lt;ref bean&#x3D;“（1）中写的类”&#x2F;&gt;</span><br><span class="line">	&lt;!-- 或者 bean class&#x3D;“（1）中写的类“&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;mvc:interceptors&gt;	</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>案例分析</p>
+</li>
+</ol>
+<ul>
+<li>如果preHandle返回false</li>
+<li>postHandle可以做后处理</li>
+<li>如果Handle的返回值为true</li>
+<li>如果handle的返回值为false</li>
+</ul>
+<h1 id="locale-1"><a href="#locale-1" class="headerlink" title="locale"></a>locale</h1><p>SpringMVC管理locale，放到handler的形参中，再放入cookie或者session中</p>
+<h2 id="localeResolver"><a href="#localeResolver" class="headerlink" title="localeResolver"></a>localeResolver</h2><ul>
+<li>CookieLocaleResolver</li>
+<li>SessionLocaleResolver<br>
+
+</li>
+</ul>
+<h2 id="获取本地locale"><a href="#获取本地locale" class="headerlink" title="获取本地locale"></a>获取本地locale</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="管理locale"><a href="#管理locale" class="headerlink" title="管理locale"></a>管理locale</h2><p> <strong><em>注册localeResolver：id名固定为localResolver</em></strong></p>
+<ul>
+<li><strong><em>name的值：header的可以决定locale的字段</em></strong></li>
+<li><strong><em>默认locale：没有配置locale的默认编码</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;localResovler&quot; class&#x3D;&quot;org.springframework.web.servlet.i18n.CookieLocaleResolver&quot;&gt;</span><br><span class="line">	&lt;!-- header字段langue-123的值决定了locale信息--&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;cookieName&quot; value&#x3D;&quot;langue-123&quot;&#x2F;&gt;</span><br><span class="line">	&lt;!-- 默认locale值--&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;defaultLocale&quot; value&#x3D;&quot;en_US&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="MessgaeSource"><a href="#MessgaeSource" class="headerlink" title="MessgaeSource"></a>MessgaeSource</h1><p>获取配置文件的值</p>
+<ol>
+<li>注册MessageSource组件 <strong><em>ReloadableResourceBundleMessageSource</em></strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id&#x3D;&quot;messageSource&quot; class&#x3D;&quot;org.springframework.context.support.ReloadableResourceBundleMessageSource&quot;&gt;</span><br><span class="line">    &lt;!-- 加载配置的文件名, value中要加classpath--&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;basename&quot; value&#x3D;&quot;classpath:message&quot;&#x2F;&gt;</span><br><span class="line">    &lt;!-- 配置文件的编码格式--&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;defaultEncoding&quot; value&#x3D;&quot;utf-8&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.取出MessageSource的信息<br>MessageSource类的注册不只一个，因此要按照id来取出</p>
+<ul>
+<li>参数:</li>
+</ul>
+<ol>
+<li>MessageSource的key值</li>
+<li>数组：为信息做占位符，参考国际化案例2</li>
+<li>Locale的编码格式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Message</span><br><span class="line">&#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	@Qualifier(&quot;messageSource&quot;)</span><br><span class="line">	MessageSource messageSource;</span><br><span class="line"></span><br><span class="line">	@RequestMapping(&quot;&#123;key&#125;&quot;)</span><br><span class="line">	public String getMessageSource(@PathVariable(&quot;key&quot;) String key)</span><br><span class="line">	&#123;</span><br><span class="line">		return messageSource.getMessage(key, null, Locale.getDefault());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
+
+<h1 id="MessageSource-Locale实现国际化"><a href="#MessageSource-Locale实现国际化" class="headerlink" title="MessageSource + Locale实现国际化"></a>MessageSource + Locale实现国际化</h1><h2 id="配置信息组"><a href="#配置信息组" class="headerlink" title="配置信息组"></a>配置信息组</h2><p>同一个key在不同的locale下，value值不同，然后前缀相同时：这几个配置文件的basename都是相同的前缀名：<br> <em>如果没有自动创建，可以手动进行捆绑</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">message_language1.properties</span><br><span class="line">message_language2.properties</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>message的配置文件的选择会根据locale来决定</p>
+<h2 id="注册MessageSource和localeResolver组件"><a href="#注册MessageSource和localeResolver组件" class="headerlink" title="注册MessageSource和localeResolver组件"></a>注册MessageSource和localeResolver组件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--注册messageSource--&gt;</span><br><span class="line">&lt;bean id&#x3D;&quot;messageSource&quot; class&#x3D;&quot;org.springframework.context.support.ReloadableResourceBundleMessageSource&quot;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;basename&quot; value&#x3D;&quot;classpath:message&quot;&#x2F;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;defaultEncoding&quot; value&#x3D;&quot;utf-8&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br><span class="line">&lt;!--注册localeResolver--&gt;</span><br><span class="line">&lt;bean id&#x3D;&quot;localeResolver&quot; class&#x3D;&quot;org.springframework.web.servlet.i18n.CookieLocaleResolver&quot;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;cookieName&quot; value&#x3D;&quot;locale&quot;&#x2F;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;defaultLocale&quot; value&#x3D;&quot;en_us&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用参数"><a href="#使用参数" class="headerlink" title="使用参数"></a>使用参数</h2><p><strong><em>MessageSource参数</em></strong></p>
+<ul>
+<li>key</li>
+<li>Object[]</li>
+<li>locale</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;i18n&#x2F;&#123;key&#125;)</span><br><span class="line">public View i18n(@PathVariable(&quot;key&quot;) String key, Locale locale)</span><br><span class="line">&#123;</span><br><span class="line">	String message &#x3D; messageSource.getMessage(key, null, locale);</span><br><span class="line">	return View.ok(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用Object[]参数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="validator（hibernate-validator"><a href="#validator（hibernate-validator" class="headerlink" title="validator（hibernate validator)"></a>validator（hibernate validator)</h1><p>负责做请求参数校验</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ol>
+<li>导包</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.hibernate&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;hibernate-validator&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;6.0.17.Final&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Spring的xml配置<br>在mvc注解驱动上添加validator，然后注册localValidatorFactoryBean</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:annotation-driven validator&#x3D;&quot;localValidatorFactoryBean&quot;&#x2F;&gt;</span><br><span class="line">    &lt;bean name&#x3D;&quot;localValidatorFactoryBean&quot; class&#x3D;&quot;org.springframework.validation.beanvalidation.LocalValidatorFactoryBean&quot;&gt;</span><br><span class="line">    &lt;property name&#x3D;&quot;providerClass&quot; value&#x3D;&quot;org.hibernate.validator.HibernateValidator&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>注解配置<br>现在就可以在类的方法上使用注解</li>
+<li>对Bean的 <strong><em>成员变量</em></strong> 使用的注解：<br>常见的注解 （Bean Validation 中内置的 constraint）     </li>
+</ol>
+<ul>
+<li>@Null   被注释的元素必须为 null     </li>
+<li>@NotNull    被注释的元素必须不为 null     </li>
+<li>@Size(max=, min=)   被注释的元素的大小必须在指定的范围内     </li>
+<li>@AssertTrue     被注释的元素必须为 true     </li>
+<li>@AssertFalse    被注释的元素必须为 false     </li>
+<li>@Min(value)     被注释的元素必须是一个数字，其值必须大于等于指定的最小值     </li>
+<li>@Max(value)     被注释的元素必须是一个数字，其值必须小于等于指定的最大值     </li>
+<li>@DecimalMin(value)  被注释的元素必须是一个数字，其值必须大于等于指定的最小值     </li>
+<li>@DecimalMax(value)  被注释的元素必须是一个数字，其值必须小于等于指定的最大值     </li>
+<li>@Digits (integer, fraction)     被注释的元素必须是一个数字，其值必须在可接受的范围内     </li>
+<li>@Past   被注释的元素必须是一个过去的日期 Date    </li>
+<li>@Future     被注释的元素必须是一个将来的日期     </li>
+<li>@Pattern(regex=,flag=)  被注释的元素必须符合指定的正则表达式<br>Hibernate Validator 附加的 constraint     </li>
+<li>@NotBlank(message =)   验证字符串非null，且长度必须大于0     </li>
+<li>@Email  被注释的元素必须是电子邮箱地址     </li>
+<li>@Length(min=,max=)  被注释的字符串的大小必须在指定的范围内     </li>
+<li>@NotEmpty   被注释的字符串的必须非空     </li>
+<li>@Range(min=,max=,message=)  被注释的元素必须在合适的范围内</li>
+</ul>
+<ol start="2">
+<li>对handler <strong><em>参数</em></strong> 使用的注解</li>
+</ol>
+<ul>
+<li>@Valid</li>
+<li>@Validated</li>
+</ul>
+<ol start="4">
+<li><p>Handler的BindingResult参数<br>用作参数校验</p>
+</li>
+<li><p>@size注解的messgae参数</p>
+</li>
+</ol>
+<h2 id="validator和messageSource搭配"><a href="#validator和messageSource搭配" class="headerlink" title="validator和messageSource搭配"></a>validator和messageSource搭配</h2><br>
+
+
+<h1 id="Spring和SpringMVC的整合"><a href="#Spring和SpringMVC的整合" class="headerlink" title="Spring和SpringMVC的整合"></a>Spring和SpringMVC的整合</h1><h2 id="Spring容器和SpringMVC容器的分家"><a href="#Spring容器和SpringMVC容器的分家" class="headerlink" title="Spring容器和SpringMVC容器的分家"></a>Spring容器和SpringMVC容器的分家</h2><p>ContextLoaderListener：在DispatcherServlet初始化之前</p>
+<h2 id="SpringMVC-javaConfig"><a href="#SpringMVC-javaConfig" class="headerlink" title="SpringMVC javaConfig"></a>SpringMVC javaConfig</h2><h2 id="其他组件配置"><a href="#其他组件配置" class="headerlink" title="其他组件配置"></a>其他组件配置</h2><ol>
+<li><p>charactrerEncodingFilter<br>在AACDSI中配置，重写getServletFilters方法</p>
+</li>
+<li><p>静态资源映射<br>WebMvc中配置，重写addResourceLocations方法</p>
+</li>
+<li><p>interceptors<br>先写实现了handlerInterceptor的类<br>再到 WebMvc中配置，重写addInterceptors方法</p>
+</li>
+</ol>
+<ul>
+<li><p>全局</p>
+</li>
+<li><p>部分</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>multipartResolver<br>先导包<br>再到WebMvc中配置，@Bean一个multipartResolver </p>
+</li>
+<li><p>localeResolver<br>WebMvc中配置，@Bean一个localeResolver</p>
+</li>
+<li><p>viewResolver<br>WebMvc中配置，@Bean一个internalResourceViewResovler</p>
+</li>
+<li><p>validator<br>WebMvc中配置，@Bean一个localValidatorFactoryBean<br>然后通知MVC使用validator</p>
+</li>
+<li><p>converter</p>
+</li>
+<li><p>handlerExceptionResolver</p>
+</li>
+<li><p>messageResource<br>没有用到mvc配置，所以只用一个@Bean就行</p>
+</li>
+</ol>
+<br>
+
+<h2 id="Spring组件配置"><a href="#Spring组件配置" class="headerlink" title="Spring组件配置"></a>Spring组件配置</h2><ol>
+<li><p>JDBCtemplate<br>先导包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<p>再@Bean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TransactionManager<br>@Bean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>aspectJ<br>导包</p>
+</li>
+</ol>
+<p>再类中增加注解@EnableAspectJAutoProxy</p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+              <a href="/tags/SpringFramework/" rel="tag"><i class="fa fa-tag"></i> SpringFramework</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/20/Spring-AOP/" rel="prev" title="Spring-AOP">
+      <i class="fa fa-chevron-left"></i> Spring-AOP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/21/Math/" rel="next" title="Math">
+      Math <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC的优点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%BA%BA%E8%AF%9D%EF%BC%8CController%E6%98%AF%E4%B8%80%E4%B8%AA%E7%B1%BB%EF%BC%8CHandler%E6%98%AF%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">说人话，Controller是一个类，Handler是类中的处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">SpringMVC结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring%E6%A1%86%E6%9E%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Spring框架流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1"><span class="nav-number">4.</span> <span class="nav-text">案例1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#step1-%E5%AF%BC%E5%8C%85-pom-xml"><span class="nav-number">4.1.</span> <span class="nav-text">step1. 导包(pom.xml)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step2-%E9%85%8D%E7%BD%AEDispatcherServlet-web-xml-tip-%E8%AF%A5%E6%96%B9%E6%B3%95%E4%B8%8D%E5%B8%B8%E7%94%A8%EF%BC%8C%E5%B8%B8%E7%94%A8SpringConfig"><span class="nav-number">4.2.</span> <span class="nav-text">step2. 配置DispatcherServlet(web.xml) [tip:该方法不常用，常用SpringConfig]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-Spring%E7%9A%84application-xml%E4%B8%AD%E9%85%8D%E7%BD%AEHandlerMapping%E5%92%8CHandlerAdapter"><span class="nav-number">4.3.</span> <span class="nav-text">step3. Spring的application.xml中配置HandlerMapping和HandlerAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step4-handler%E6%B3%A8%E5%86%8C"><span class="nav-number">4.4.</span> <span class="nav-text">step4. handler注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%B9%B6%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E5%AF%B9%E5%BA%94url%E5%8D%B3%E5%8F%AF"><span class="nav-number">4.5.</span> <span class="nav-text">运行并在浏览器访问对应url即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1%E5%88%86%E6%9E%90"><span class="nav-number">4.6.</span> <span class="nav-text">案例1分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B2"><span class="nav-number">5.</span> <span class="nav-text">案例2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#step1-%E5%AF%BC%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">step1. 导包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step2-web-xml%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">step2. web.xml配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-Spring%E7%9A%84application-xml%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">step3. Spring的application.xml配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step4-%E6%B3%A8%E5%86%8CController%E7%BB%84%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">step4. 注册Controller组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step5-%E8%BF%90%E8%A1%8CServlet"><span class="nav-number">5.5.</span> <span class="nav-text">step5. 运行Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B2%E5%88%86%E6%9E%90"><span class="nav-number">5.6.</span> <span class="nav-text">案例2分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Handler%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">Handler进阶使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3-RequestMapping"><span class="nav-number">6.1.</span> <span class="nav-text">注解@RequestMapping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84"><span class="nav-number">6.1.1.</span> <span class="nav-text">URL路径映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AAURL%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AAHandler%E4%B8%8A"><span class="nav-number">6.1.2.</span> <span class="nav-text">多个URL路径映射到同一个Handler上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-%E6%9D%A5%E9%80%9A%E9%85%8D"><span class="nav-number">6.1.3.</span> <span class="nav-text">url可以使用*来通配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%84%E5%8C%96%E8%AF%B7%E6%B1%82url"><span class="nav-number">6.1.4.</span> <span class="nav-text">窄化请求url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E9%99%90%E5%AE%9A"><span class="nav-number">6.1.5.</span> <span class="nav-text">请求方法限定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%B3%E6%B3%A8%E8%A7%A3"><span class="nav-number">6.1.6.</span> <span class="nav-text">引申注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E9%99%90%E5%AE%9A"><span class="nav-number">6.1.7.</span> <span class="nav-text">请求参数限定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%80%BC%E7%9A%84%E7%AE%80%E5%8D%95%E9%80%BB%E8%BE%91%E5%88%A4%E5%AE%9A"><span class="nav-number">6.1.8.</span> <span class="nav-text">请求参数值的简单逻辑判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%99%90%E5%AE%9A"><span class="nav-number">6.1.9.</span> <span class="nav-text">请求头限定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%99%90%E5%AE%9A%EF%BC%88%E9%92%88%E5%AF%B9Accpect%E5%92%8CContent%E2%80%94Type%EF%BC%89"><span class="nav-number">6.1.10.</span> <span class="nav-text">特定的请求头限定（针对Accpect和Content—Type）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">6.2.</span> <span class="nav-text">Handler的返回值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81View%E8%AF%95%E5%9B%BE%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">6.2.1.</span> <span class="nav-text">需要View试图的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9Evoid"><span class="nav-number">6.2.2.</span> <span class="nav-text">返回void</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EModelAndView"><span class="nav-number">6.2.3.</span> <span class="nav-text">返回ModelAndView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E8%A7%86%E5%9B%BE%E5%90%8DString"><span class="nav-number">6.2.4.</span> <span class="nav-text">返回视图名String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EString%EF%BC%8C%E8%BF%9B%E8%A1%8C%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">6.2.5.</span> <span class="nav-text">返回String，进行转发和重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%BF%94%E5%9B%9EJson%EF%BC%88%E7%9B%AE%E5%89%8D%E4%B8%BB%E6%B5%81%EF%BC%9A2020%E5%B9%B4%EF%BC%89"><span class="nav-number">6.2.6.</span> <span class="nav-text">直接返回Json（目前主流：2020年）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%BB%E8%A6%81%E5%BD%A2%E5%8F%82"><span class="nav-number">6.3.</span> <span class="nav-text">Handler方法的主要形参</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E6%8E%A5%E6%94%B6"><span class="nav-number">6.3.1.</span> <span class="nav-text">请求参数接收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%B9%B6%E5%B0%81%E8%A3%85%E9%9D%9EJson%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.2.</span> <span class="nav-text">接收并封装非Json数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8request%E8%8E%B7%E5%8F%96%EF%BC%88%E4%B8%8D%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">使用request获取（不建议使用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Handler%E7%9B%B4%E6%8E%A5%E8%8E%B7%E5%8F%96%E5%B9%B6%E5%B0%81%E8%A3%85"><span class="nav-number">6.3.2.2.</span> <span class="nav-text">使用Handler直接获取并封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JavaBean%E6%9D%A5%E6%8E%A5%E6%94%B6"><span class="nav-number">6.3.2.3.</span> <span class="nav-text">使用JavaBean来接收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Post%E8%AF%B7%E6%B1%82%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">6.3.2.4.</span> <span class="nav-text">Post请求中文乱码问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%B9%B6%E5%B0%81%E8%A3%85Json%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.3.</span> <span class="nav-text">接收并封装Json数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6Map"><span class="nav-number">6.3.4.</span> <span class="nav-text">接收Map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler%E7%9A%84%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0"><span class="nav-number">6.4.</span> <span class="nav-text">Handler的其他参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%94%BE%E5%85%A5request%E5%92%8Cresponse"><span class="nav-number">6.4.1.</span> <span class="nav-text">直接放入request和response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">6.4.2.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie%E5%92%8Csession"><span class="nav-number">6.4.3.</span> <span class="nav-text">cookie和session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#locale"><span class="nav-number">6.4.4.</span> <span class="nav-text">locale</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful%E9%A3%8E%E6%A0%BC%E8%AF%B7%E6%B1%82"><span class="nav-number">6.5.</span> <span class="nav-text">Restful风格请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE"><span class="nav-number">7.</span> <span class="nav-text">静态资源访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E7%9A%84Servlet"><span class="nav-number">7.1.</span> <span class="nav-text">默认的Servlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4Servlet%E7%9A%84Handler"><span class="nav-number">7.2.</span> <span class="nav-text">默认Servlet的Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">7.3.</span> <span class="nav-text">静态资源映射（推荐）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">SpringMVC异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BAHandlerExceptionResolver%E6%9D%A5%E5%A4%84%E7%90%86"><span class="nav-number">8.1.</span> <span class="nav-text">自己创建HandlerExceptionResolver来处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BAExceptionHandler%E6%9D%A5%E5%A4%84%E7%90%86"><span class="nav-number">8.2.</span> <span class="nav-text">自己创建ExceptionHandler来处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HandlerInterception"><span class="nav-number">9.</span> <span class="nav-text">HandlerInterception</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preHandle"><span class="nav-number">9.1.</span> <span class="nav-text">preHandle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#postHandle"><span class="nav-number">9.2.</span> <span class="nav-text">postHandle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afterCompletion"><span class="nav-number">9.3.</span> <span class="nav-text">afterCompletion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerInterception%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="nav-number">9.4.</span> <span class="nav-text">HandlerInterception的作用范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AAHandlerInterception%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">9.5.</span> <span class="nav-text">多个HandlerInterception的执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1-1"><span class="nav-number">9.6.</span> <span class="nav-text">案例1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#locale-1"><span class="nav-number">10.</span> <span class="nav-text">locale</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#localeResolver"><span class="nav-number">10.1.</span> <span class="nav-text">localeResolver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%9C%B0locale"><span class="nav-number">10.2.</span> <span class="nav-text">获取本地locale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86locale"><span class="nav-number">10.3.</span> <span class="nav-text">管理locale</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MessgaeSource"><span class="nav-number">11.</span> <span class="nav-text">MessgaeSource</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MessageSource-Locale%E5%AE%9E%E7%8E%B0%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">MessageSource + Locale实现国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E7%BB%84"><span class="nav-number">12.1.</span> <span class="nav-text">配置信息组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CMessageSource%E5%92%8ClocaleResolver%E7%BB%84%E4%BB%B6"><span class="nav-number">12.2.</span> <span class="nav-text">注册MessageSource和localeResolver组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-number">12.3.</span> <span class="nav-text">使用参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#validator%EF%BC%88hibernate-validator"><span class="nav-number">13.</span> <span class="nav-text">validator（hibernate validator)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">13.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#validator%E5%92%8CmessageSource%E6%90%AD%E9%85%8D"><span class="nav-number">13.2.</span> <span class="nav-text">validator和messageSource搭配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring%E5%92%8CSpringMVC%E7%9A%84%E6%95%B4%E5%90%88"><span class="nav-number">14.</span> <span class="nav-text">Spring和SpringMVC的整合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E5%AE%B9%E5%99%A8%E5%92%8CSpringMVC%E5%AE%B9%E5%99%A8%E7%9A%84%E5%88%86%E5%AE%B6"><span class="nav-number">14.1.</span> <span class="nav-text">Spring容器和SpringMVC容器的分家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringMVC-javaConfig"><span class="nav-number">14.2.</span> <span class="nav-text">SpringMVC javaConfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">14.3.</span> <span class="nav-text">其他组件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E7%BB%84%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">14.4.</span> <span class="nav-text">Spring组件配置</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

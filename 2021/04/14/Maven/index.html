@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="简介Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源 项目。Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。官网：https:&#x2F;&#x2F;maven.apache.org&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven">
+<meta property="og:url" content="http://yoursite.com/2021/04/14/Maven/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="简介Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源 项目。Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。官网：https:&#x2F;&#x2F;maven.apache.org&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/04/14/Maven/Scope.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/14/Maven/%E4%BE%9D%E8%B5%96%E4%BC%A0%E9%80%92.png">
+<meta property="og:image" content="http://yoursite.com/2021/04/14/Maven/%E6%8F%92%E4%BB%B6.png">
+<meta property="article:published_time" content="2021-04-14T13:55:04.000Z">
+<meta property="article:modified_time" content="2024-04-21T14:44:57.639Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="依赖管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/04/14/Maven/Scope.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/04/14/Maven/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Maven | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/14/Maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maven
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-14 21:55:04" itemprop="dateCreated datePublished" datetime="2021-04-14T21:55:04+08:00">2021-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:44:57" itemprop="dateModified" datetime="2024-04-21T22:44:57+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源 项目。Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。<br>官网：<a target="_blank" rel="noopener" href="https://maven.apache.org/">https://maven.apache.org/</a></p>
+<span id="more"></span>
+
+<h1 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h1><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>mvn compile</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>mvn test</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>mvn package</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h1 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h1><p>将各类依赖的Jar包放在仓库中，需要用的时候，直接从仓库中拿，不用给每一个项目部署一个开发依赖环境，节约空间和提高效率。</p>
+<ol>
+<li>减轻项目大小</li>
+<li>减少冲突（Jar包可能自己也有需要依赖的包，maven会自动一起导入）</li>
+</ol>
+<h2 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h2><p>GroupID<br>ArtifactID<br>Version</p>
+<h2 id="Scope-依赖范围"><a href="#Scope-依赖范围" class="headerlink" title="Scope 依赖范围"></a>Scope 依赖范围</h2><p><img src="/2021/04/14/Maven/Scope.png"></p>
+<h2 id="依赖传递"><a href="#依赖传递" class="headerlink" title="依赖传递"></a>依赖传递</h2><p>如果一个依赖还要依赖另一个依赖，则会自动导入。</p>
+<div class="note info">
+            <p>不是所有的依赖都可以传递。第二依赖的Scope为Test和Provided时，无法传递。此时如果有需要，手动导入依赖即可。</p>
+          </div>
+<p><img src="/2021/04/14/Maven/%E4%BE%9D%E8%B5%96%E4%BC%A0%E9%80%92.png"></p>
+<h2 id="依赖冲突"><a href="#依赖冲突" class="headerlink" title="依赖冲突"></a>依赖冲突</h2><p>项目两个依赖A、B</p>
+<ol>
+<li>A：依赖C 1.1version</li>
+<li>B：依赖C 1.2version</li>
+</ol>
+<p>此时产生了冲突。Maven有对应的依赖冲突的解决原则。</p>
+<h3 id="第一声明者优先原则"><a href="#第一声明者优先原则" class="headerlink" title="第一声明者优先原则"></a>第一声明者优先原则</h3><p>此时依赖如果先声明A的话，则依赖为C 1.1；反之，则为C 1.2。</p>
+<h3 id="短路径优先原则"><a href="#短路径优先原则" class="headerlink" title="短路径优先原则"></a>短路径优先原则</h3><p>比如A声明依赖C 1.1，但是可以直接声明C为1.2，此时从A-C-1.1路径比C-1.2路径长。优先选择1.2版本。</p>
+<h3 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h3><p>使用exclusion标签把依赖排除出去。</p>
+<h3 id="依赖常量（推荐使用，易于版本控制）"><a href="#依赖常量（推荐使用，易于版本控制）" class="headerlink" title="依赖常量（推荐使用，易于版本控制）"></a>依赖常量（推荐使用，易于版本控制）</h3><p>使用properties标签把依赖的版本设定为常量。</p>
+<h1 id="Maven安装"><a href="#Maven安装" class="headerlink" title="Maven安装"></a>Maven安装</h1><p>压缩包直接解压到盘符根目录就行，然后设置环境变量MAVEN_HOME的path。 </p>
+<div class="note info">
+            <p>目录不要太深，目录不要有中文字符。<br>另外IDEA继承了MAVEN，所以很多时候不需要自己安装。</p>
+          </div>
+
+<h1 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h1><h2 id="本地仓库"><a href="#本地仓库" class="headerlink" title="本地仓库"></a>本地仓库</h2><p>conf/setting.xml里</p>
+<div class="note info">
+            <p>项目会优先在默认仓库里找Jar包，如果没有，则回去网络中央仓库中下载对应Jar包</p>
+          </div>
+
+<h2 id="配置国内镜像"><a href="#配置国内镜像" class="headerlink" title="配置国内镜像"></a>配置国内镜像</h2><p><a target="_blank" rel="noopener" href="https://maven.aliyun.com/mvn/guide">https://maven.aliyun.com/mvn/guide</a></p>
+<h2 id="IDEA修改Maven配置"><a href="#IDEA修改Maven配置" class="headerlink" title="IDEA修改Maven配置"></a>IDEA修改Maven配置</h2><h1 id="使用Maven"><a href="#使用Maven" class="headerlink" title="使用Maven"></a>使用Maven</h1><h2 id="Pom-xml"><a href="#Pom-xml" class="headerlink" title="Pom.xml"></a>Pom.xml</h2><p>全称是Project Object Model。</p>
+<h3 id="各标签含义"><a href="#各标签含义" class="headerlink" title="各标签含义"></a>各标签含义</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/maven/maven-pom.html">https://www.runoob.com/maven/maven-pom.html</a></p>
+<h2 id="约定大于配置"><a href="#约定大于配置" class="headerlink" title="约定大于配置"></a>约定大于配置</h2><p>Java文件必须在src/main/java/<br>配置文件必须在src/main/resources/<br>测试文件必须在src/test/java/<br>测试配置文件必须在src/test/resources/</p>
+<div class="note info">
+            <p>如果没有对应的目录，则不会构建对应的内容</p>
+          </div>
+
+<h2 id="构建配置文件"><a href="#构建配置文件" class="headerlink" title="构建配置文件"></a>构建配置文件</h2><h3 id="项目级（pom-xml）"><a href="#项目级（pom-xml）" class="headerlink" title="项目级（pom.xml）"></a>项目级（pom.xml）</h3><h3 id="用户级（定义在Maven的设置xml文件中-USER-HOME-m2-settings-xml-）"><a href="#用户级（定义在Maven的设置xml文件中-USER-HOME-m2-settings-xml-）" class="headerlink" title="用户级（定义在Maven的设置xml文件中 (%USER_HOME%/.m2/settings.xml)）"></a>用户级（定义在Maven的设置xml文件中 (%USER_HOME%/.m2/settings.xml)）</h3><p>其中 %USER_HOME% 代表用户主目录</p>
+<h3 id="全局（定义在-Maven-全局的设置-xml-文件中-M2-HOME-conf-settings-xml-）"><a href="#全局（定义在-Maven-全局的设置-xml-文件中-M2-HOME-conf-settings-xml-）" class="headerlink" title="全局（定义在 Maven 全局的设置 xml 文件中 (%M2_HOME%/conf/settings.xml)）"></a>全局（定义在 Maven 全局的设置 xml 文件中 (%M2_HOME%/conf/settings.xml)）</h3><p>其中 %M2_HOME% 代表 Maven 的安装目录</p>
+<h2 id="Maven生命周期函数"><a href="#Maven生命周期函数" class="headerlink" title="Maven生命周期函数"></a>Maven生命周期函数</h2><h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><p>build包含以下阶段</p>
+<ol>
+<li>validate（验证）</li>
+<li>compile（编译）</li>
+<li>test （测试）</li>
+<li>package （打包）</li>
+<li>verity（检查）</li>
+<li>install（安装）</li>
+<li>deploy（部署）</li>
+</ol>
+<h3 id="site"><a href="#site" class="headerlink" title="site"></a>site</h3><h3 id="Maven的各个生命周期函数都是依赖于插件来做的"><a href="#Maven的各个生命周期函数都是依赖于插件来做的" class="headerlink" title="Maven的各个生命周期函数都是依赖于插件来做的"></a>Maven的各个生命周期函数都是依赖于插件来做的</h3><p><img src="/2021/04/14/Maven/%E6%8F%92%E4%BB%B6.png"></p>
+<h2 id="使用IDEA集成Maven创建JavaEE项目"><a href="#使用IDEA集成Maven创建JavaEE项目" class="headerlink" title="使用IDEA集成Maven创建JavaEE项目"></a>使用IDEA集成Maven创建JavaEE项目</h2><p>最新版IDEA已经可以集成Maven创建。后续使用Spring可以更为方便的配置。</p>
+<h2 id="dependencyManagement和dependecy的区别"><a href="#dependencyManagement和dependecy的区别" class="headerlink" title="dependencyManagement和dependecy的区别"></a>dependencyManagement和dependecy的区别</h2><h2 id="packaging的区别"><a href="#packaging的区别" class="headerlink" title="packaging的区别"></a>packaging的区别</h2><p>1.pom工程：用在父级工程或聚合工程中。用来做jar包的版本控制。</p>
+<p>2.war工程：将会打包成war，发布在服务器上的工程。如网站或服务。</p>
+<p>3.jar工程：将会打包成jar用作jar包使用。</p>
+<h2 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h2><p>scope各种取值详解</p>
+<p>scope取值    有效范围（compile, runtime, test）    依赖传递    例子<br>compile    all    是    spring-core<br>provided    compile, test    否    servlet-api<br>runtime    runtime, test    是    JDBC驱动<br>test    test    否    JUnit<br>system    compile, test    是<br>正如上表所示，</p>
+<p>compile ：为默认的依赖有效范围。如果在定义依赖关系的时候，没有明确指定依赖有效范围的话，则默认采用该依赖有效范围。此种依赖，在编译、运行、测试时均有效。</p>
+<p>provided ：在编译、测试时有效，但是在运行时无效。例如：servlet-api，运行项目时，容器已经提供，就不需要Maven重复地引入一遍了。</p>
+<p>runtime ：在运行、测试时有效，但是在编译代码时无效。例如：JDBC驱动实现，项目代码编译只需要JDK提供的JDBC接口，只有在测试或运行项目时才需要实现上述接口的具体JDBC驱动。</p>
+<p>test ：只在测试时有效，例如：JUnit。</p>
+<p>system ：在编译、测试时有效，但是在运行时无效。和provided的区别是，使用system范围的依赖时必须通过systemPath元素显式地指定依赖文件的路径。由于此类依赖不是通过Maven仓库解析的，而且往往与本机系统绑定，可能造成构建的不可移植，因此应该谨慎使用。systemPath元素可以引用环境变量。</p>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 依赖管理</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/14/LeetCode_Java/" rel="prev" title="LeetCode">
+      <i class="fa fa-chevron-left"></i> LeetCode
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/15/Mac-Obs/" rel="next" title="Mac-Obs">
+      Mac-Obs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">项目构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-number">2.4.</span> <span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%90%E6%A0%87"><span class="nav-number">3.1.</span> <span class="nav-text">坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scope-%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4"><span class="nav-number">3.2.</span> <span class="nav-text">Scope 依赖范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E4%BC%A0%E9%80%92"><span class="nav-number">3.3.</span> <span class="nav-text">依赖传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%86%B2%E7%AA%81"><span class="nav-number">3.4.</span> <span class="nav-text">依赖冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%A3%B0%E6%98%8E%E8%80%85%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99"><span class="nav-number">3.4.1.</span> <span class="nav-text">第一声明者优先原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%AD%E8%B7%AF%E5%BE%84%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99"><span class="nav-number">3.4.2.</span> <span class="nav-text">短路径优先原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%99%A4%E4%BE%9D%E8%B5%96"><span class="nav-number">3.4.3.</span> <span class="nav-text">排除依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%B8%B8%E9%87%8F%EF%BC%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%98%93%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%89"><span class="nav-number">3.4.4.</span> <span class="nav-text">依赖常量（推荐使用，易于版本控制）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">Maven安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">Maven配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F"><span class="nav-number">5.2.</span> <span class="nav-text">配置国内镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA%E4%BF%AE%E6%94%B9Maven%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">IDEA修改Maven配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Maven"><span class="nav-number">6.</span> <span class="nav-text">使用Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pom-xml"><span class="nav-number">6.1.</span> <span class="nav-text">Pom.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E6%A0%87%E7%AD%BE%E5%90%AB%E4%B9%89"><span class="nav-number">6.1.1.</span> <span class="nav-text">各标签含义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E5%AE%9A%E5%A4%A7%E4%BA%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">6.2.</span> <span class="nav-text">约定大于配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.3.</span> <span class="nav-text">构建配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BA%A7%EF%BC%88pom-xml%EF%BC%89"><span class="nav-number">6.3.1.</span> <span class="nav-text">项目级（pom.xml）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%BA%A7%EF%BC%88%E5%AE%9A%E4%B9%89%E5%9C%A8Maven%E7%9A%84%E8%AE%BE%E7%BD%AExml%E6%96%87%E4%BB%B6%E4%B8%AD-USER-HOME-m2-settings-xml-%EF%BC%89"><span class="nav-number">6.3.2.</span> <span class="nav-text">用户级（定义在Maven的设置xml文件中 (%USER_HOME%&#x2F;.m2&#x2F;settings.xml)）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%EF%BC%88%E5%AE%9A%E4%B9%89%E5%9C%A8-Maven-%E5%85%A8%E5%B1%80%E7%9A%84%E8%AE%BE%E7%BD%AE-xml-%E6%96%87%E4%BB%B6%E4%B8%AD-M2-HOME-conf-settings-xml-%EF%BC%89"><span class="nav-number">6.3.3.</span> <span class="nav-text">全局（定义在 Maven 全局的设置 xml 文件中 (%M2_HOME%&#x2F;conf&#x2F;settings.xml)）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">6.4.</span> <span class="nav-text">Maven生命周期函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#clean"><span class="nav-number">6.4.1.</span> <span class="nav-text">clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build"><span class="nav-number">6.4.2.</span> <span class="nav-text">build</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#site"><span class="nav-number">6.4.3.</span> <span class="nav-text">site</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven%E7%9A%84%E5%90%84%E4%B8%AA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E9%83%BD%E6%98%AF%E4%BE%9D%E8%B5%96%E4%BA%8E%E6%8F%92%E4%BB%B6%E6%9D%A5%E5%81%9A%E7%9A%84"><span class="nav-number">6.4.4.</span> <span class="nav-text">Maven的各个生命周期函数都是依赖于插件来做的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8IDEA%E9%9B%86%E6%88%90Maven%E5%88%9B%E5%BB%BAJavaEE%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.5.</span> <span class="nav-text">使用IDEA集成Maven创建JavaEE项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dependencyManagement%E5%92%8Cdependecy%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.6.</span> <span class="nav-text">dependencyManagement和dependecy的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#packaging%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.7.</span> <span class="nav-text">packaging的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scope"><span class="nav-number">6.8.</span> <span class="nav-text">scope</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

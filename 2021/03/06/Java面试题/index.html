@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Java面试题">
+<meta property="og:url" content="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/1.jpg">
+<meta property="article:published_time" content="2021-03-06T09:54:08.000Z">
+<meta property="article:modified_time" content="2024-04-21T14:28:08.941Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/1.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java面试题 | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java面试题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-06 17:54:08" itemprop="dateCreated datePublished" datetime="2021-03-06T17:54:08+08:00">2021-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:28:08" itemprop="dateModified" datetime="2024-04-21T22:28:08+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/1.jpg" alt="xxx"></p>
+<span id="more"></span>
+<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="JDK、JVM、JRE分别是什么，有什么区别"><a href="#JDK、JVM、JRE分别是什么，有什么区别" class="headerlink" title="JDK、JVM、JRE分别是什么，有什么区别"></a>JDK、JVM、JRE分别是什么，有什么区别</h2><h2 id="什么是面向对象的思想"><a href="#什么是面向对象的思想" class="headerlink" title="什么是面向对象的思想"></a>什么是面向对象的思想</h2><h2 id="和equals的区别"><a href="#和equals的区别" class="headerlink" title="==和equals的区别"></a>==和equals的区别</h2><h2 id="final的理解"><a href="#final的理解" class="headerlink" title="final的理解"></a>final的理解</h2><h2 id="String、StringBuffer、StringBuilder的区别"><a href="#String、StringBuffer、StringBuilder的区别" class="headerlink" title="String、StringBuffer、StringBuilder的区别"></a>String、StringBuffer、StringBuilder的区别</h2><h2 id="接口和抽象类"><a href="#接口和抽象类" class="headerlink" title="接口和抽象类(*)"></a>接口和抽象类(*)</h2><h2 id="递归简单算法题-N递归、不死神兔"><a href="#递归简单算法题-N递归、不死神兔" class="headerlink" title="递归简单算法题(N递归、不死神兔)"></a>递归简单算法题(N递归、不死神兔)</h2><h2 id="Integer和int"><a href="#Integer和int" class="headerlink" title="Integer和int"></a>Integer和int</h2><p>自动拆箱和自动装箱问题</p>
+<h2 id="final，finally和finalize的区别"><a href="#final，finally和finalize的区别" class="headerlink" title="final，finally和finalize的区别"></a>final，finally和finalize的区别</h2><p>&emps;&emps;&emps;&emps;final是修饰符，可以修饰类、变量和方法。</p>
+<ol>
+<li>修饰类：类不可被继承</li>
+<li>修饰变量，即为常量，不可被修改</li>
+<li></li>
+</ol>
+<h2 id="如果catch里面有return语句，请问finally的代码还会执行吗-如果会，请问是在return前还是return后？"><a href="#如果catch里面有return语句，请问finally的代码还会执行吗-如果会，请问是在return前还是return后？" class="headerlink" title="如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问是在return前还是return后？"></a>如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问是在return前还是return后？</h2><h2 id="常量池相关"><a href="#常量池相关" class="headerlink" title="常量池相关"></a>常量池相关</h2><p>&emps;&emps;&emps;&emps;静态常量池和运行常量池。<br>&emps;&emps;&emps;&emps;常量池主要用于存放两大类常量： 字面量和符号引用量。<br>&emps;&emps;&emps;&emps;字面量相当于Java语言层面常量的概念，如文本字符串，声明为final的常量值(成员变量)等。<br>&emps;&emps;&emps;&emps;符号引用则属于编译原理方面的概念，包括了如下三种类型的常量：</p>
+<ol>
+<li>类和接口的全限定名</li>
+<li>字段名称和描述符</li>
+<li>方法名称和描述符</li>
+</ol>
+<h2 id="float-3-4-是否正确？"><a href="#float-3-4-是否正确？" class="headerlink" title="float = 3.4 是否正确？"></a>float = 3.4 是否正确？</h2><p>&emps;&emps;&emps;&emps;不正确，Java默认没加F，为双精度数。</p>
+<h2 id="short-s1-1；s1-s1-1；short-s1-1-s1-1"><a href="#short-s1-1；s1-s1-1；short-s1-1-s1-1" class="headerlink" title="short s1 = 1；s1 = s1 + 1；short s1 = 1; s1 += 1;"></a>short s1 = 1；s1 = s1 + 1；short s1 = 1; s1 += 1;</h2><p>&emps;&emps;&emps;&emps;大坑，IntegerCache，JVM会初始化一个[-128,127]的缓存。</p>
+<h2 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h2><p>&emps;&emps;&emps;&emps;</p>
+<h1 id="Java框架"><a href="#Java框架" class="headerlink" title="Java框架"></a>Java框架</h1><h2 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h2><ol>
+<li>线程安全</li>
+<li>底层数据结构</li>
+<li>插入和删除</li>
+<li>随机访问</li>
+<li>内存占用</li>
+</ol>
+<h2 id="RandomAccess接口"><a href="#RandomAccess接口" class="headerlink" title="RandomAccess接口"></a>RandomAccess接口</h2><h2 id="ArrayLsit和Vector区别"><a href="#ArrayLsit和Vector区别" class="headerlink" title="ArrayLsit和Vector区别"></a>ArrayLsit和Vector区别</h2><p>&emps;&emps;&emps;&emps;Vector是同步的，可以由多个线程一起安全地访问一个Vector对象，但是在同步上需要花费大量时间。</p>
+<h2 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h2><ol>
+<li>线程安全</li>
+<li>底层数据结构</li>
+<li>效率</li>
+<li>null key和null value</li>
+<li>初始容量大小和每次扩容大小的不同</li>
+</ol>
+<h2 id="为什么HashMap长度是2的n次幂"><a href="#为什么HashMap长度是2的n次幂" class="headerlink" title="为什么HashMap长度是2的n次幂"></a>为什么HashMap长度是2的n次幂</h2><h2 id="HashMap多线程导致的死循环"><a href="#HashMap多线程导致的死循环" class="headerlink" title="HashMap多线程导致的死循环"></a>HashMap多线程导致的死循环</h2><p>&emps;&emps;&emps;&emps;HashMap的扩容resize()</p>
+<div class="note info">
+            <p>jdk1.8已经解决了死循环的问题。</p>
+          </div>
+
+<h2 id="HashSet和HashMap的区别"><a href="#HashSet和HashMap的区别" class="headerlink" title="HashSet和HashMap的区别"></a>HashSet和HashMap的区别</h2><h2 id="ConcurrentHashMap-和-Hashtable-的区别"><a href="#ConcurrentHashMap-和-Hashtable-的区别" class="headerlink" title="ConcurrentHashMap 和 Hashtable 的区别"></a>ConcurrentHashMap 和 Hashtable 的区别</h2><p>&emps;&emps;&emps;&emps;底层数据结构<br>&emps;&emps;&emps;&emps;实现线程安全的方式</p>
+<h2 id="什么时候用lambda表达式，什么时候用方法引用"><a href="#什么时候用lambda表达式，什么时候用方法引用" class="headerlink" title="什么时候用lambda表达式，什么时候用方法引用"></a>什么时候用lambda表达式，什么时候用方法引用</h2><h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><h2 id="git-rebase和merge的区别"><a href="#git-rebase和merge的区别" class="headerlink" title="git rebase和merge的区别"></a>git rebase和merge的区别</h2><h2 id="Thread-sleep-和Object-wait"><a href="#Thread-sleep-和Object-wait" class="headerlink" title="Thread.sleep()和Object.wait()"></a>Thread.sleep()和Object.wait()</h2><ol>
+<li>sleep是Thread的静态方法，wait是Object的成员方法。</li>
+<li>sleep在休眠时间到了后，就会唤醒，wait是其他线程，在同一个对象中，调用notify()或notifyAll()。</li>
+<li>sleep使用没有任何前提，wait要求必须当前线程在持有的锁对象上调用。</li>
+<li>sleep在阻塞时不会放弃锁的持有，而wait会在阻塞时，放弃锁对象。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/04/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/" rel="prev" title="Java核心技术">
+      <i class="fa fa-chevron-left"></i> Java核心技术
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="next" title="数据结构与算法">
+      数据结构与算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E3%80%81JVM%E3%80%81JRE%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">JDK、JVM、JRE分别是什么，有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%80%9D%E6%83%B3"><span class="nav-number">1.2.</span> <span class="nav-text">什么是面向对象的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text">&#x3D;&#x3D;和equals的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.4.</span> <span class="nav-text">final的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.5.</span> <span class="nav-text">String、StringBuffer、StringBuilder的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">1.6.</span> <span class="nav-text">接口和抽象类(*)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%AE%80%E5%8D%95%E7%AE%97%E6%B3%95%E9%A2%98-N%E9%80%92%E5%BD%92%E3%80%81%E4%B8%8D%E6%AD%BB%E7%A5%9E%E5%85%94"><span class="nav-number">1.7.</span> <span class="nav-text">递归简单算法题(N递归、不死神兔)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Integer%E5%92%8Cint"><span class="nav-number">1.8.</span> <span class="nav-text">Integer和int</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final%EF%BC%8Cfinally%E5%92%8Cfinalize%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.9.</span> <span class="nav-text">final，finally和finalize的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9Ccatch%E9%87%8C%E9%9D%A2%E6%9C%89return%E8%AF%AD%E5%8F%A5%EF%BC%8C%E8%AF%B7%E9%97%AEfinally%E7%9A%84%E4%BB%A3%E7%A0%81%E8%BF%98%E4%BC%9A%E6%89%A7%E8%A1%8C%E5%90%97-%E5%A6%82%E6%9E%9C%E4%BC%9A%EF%BC%8C%E8%AF%B7%E9%97%AE%E6%98%AF%E5%9C%A8return%E5%89%8D%E8%BF%98%E6%98%AFreturn%E5%90%8E%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问是在return前还是return后？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0%E7%9B%B8%E5%85%B3"><span class="nav-number">1.11.</span> <span class="nav-text">常量池相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float-3-4-%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">float &#x3D; 3.4 是否正确？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#short-s1-1%EF%BC%9Bs1-s1-1%EF%BC%9Bshort-s1-1-s1-1"><span class="nav-number">1.13.</span> <span class="nav-text">short s1 &#x3D; 1；s1 &#x3D; s1 + 1；short s1 &#x3D; 1; s1 +&#x3D; 1;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.14.</span> <span class="nav-text">接口和抽象类的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E6%A1%86%E6%9E%B6"><span class="nav-number">2.</span> <span class="nav-text">Java框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList%E5%92%8CLinkedList%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">ArrayList和LinkedList的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RandomAccess%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.2.</span> <span class="nav-text">RandomAccess接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayLsit%E5%92%8CVector%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.</span> <span class="nav-text">ArrayLsit和Vector区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E5%92%8CHashTable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和HashTable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88HashMap%E9%95%BF%E5%BA%A6%E6%98%AF2%E7%9A%84n%E6%AC%A1%E5%B9%82"><span class="nav-number">2.5.</span> <span class="nav-text">为什么HashMap长度是2的n次幂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AF%BC%E8%87%B4%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.6.</span> <span class="nav-text">HashMap多线程导致的死循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet%E5%92%8CHashMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.7.</span> <span class="nav-text">HashSet和HashMap的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap-%E5%92%8C-Hashtable-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.8.</span> <span class="nav-text">ConcurrentHashMap 和 Hashtable 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8"><span class="nav-number">2.9.</span> <span class="nav-text">什么时候用lambda表达式，什么时候用方法引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">2.10.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase%E5%92%8Cmerge%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.11.</span> <span class="nav-text">git rebase和merge的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-sleep-%E5%92%8CObject-wait"><span class="nav-number">2.12.</span> <span class="nav-text">Thread.sleep()和Object.wait()</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

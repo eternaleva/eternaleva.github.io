@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="JWT是什么Json Web Token，JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT">
+<meta property="og:url" content="http://yoursite.com/2021/06/15/JWT/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="JWT是什么Json Web Token，JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/06/15/JWT/%E5%9F%BA%E4%BA%8EJWT.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/15/JWT/%E5%88%9B%E5%BB%BAJWT.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/15/JWT/%E9%AA%8C%E8%AF%81JWT.png">
+<meta property="og:image" content="http://yoursite.com/2021/06/15/JWT/%E5%BC%82%E5%B8%B8.png">
+<meta property="article:published_time" content="2021-06-15T13:02:05.000Z">
+<meta property="article:modified_time" content="2024-04-21T15:12:15.593Z">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="安全校验">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/06/15/JWT/%E5%9F%BA%E4%BA%8EJWT.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/06/15/JWT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JWT | Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/15/JWT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JWT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-15 21:02:05" itemprop="dateCreated datePublished" datetime="2021-06-15T21:02:05+08:00">2021-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 23:12:15" itemprop="dateModified" datetime="2024-04-21T23:12:15+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%8F%E8%AE%AE%E6%A0%87%E5%87%86/" itemprop="url" rel="index"><span itemprop="name">协议标准</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JWT是什么"><a href="#JWT是什么" class="headerlink" title="JWT是什么"></a>JWT是什么</h1><p>Json Web Token，JSON Web Tokens are an open, industry standard <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc7519">RFC 7519</a> method for representing claims securely between two parties.</p>
+<span id="more"></span>
+
+<h1 id="JWT能做什么"><a href="#JWT能做什么" class="headerlink" title="JWT能做什么"></a>JWT能做什么</h1><h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><p>一旦用户登陆，之后每个信息都包含JWT，允许该JWT的用户访问其对应的资源。</p>
+<div class="note info">
+            <p>点单登陆是当前JWT最广泛应用的领域。</p>
+          </div>
+
+<h2 id="信息交换"><a href="#信息交换" class="headerlink" title="信息交换"></a>信息交换</h2><p>在各方安全之间安全地传输信息的好方法。使用JWT签名，可以确保发件人信息是否正确，内容是否被篡改（签名使用标头和有效负载）。</p>
+<h1 id="为什么要使用JWT"><a href="#为什么要使用JWT" class="headerlink" title="为什么要使用JWT"></a>为什么要使用JWT</h1><h2 id="基于传统Session的认证问题"><a href="#基于传统Session的认证问题" class="headerlink" title="基于传统Session的认证问题"></a>基于传统Session的认证问题</h2><p>服务器保存用户的seesion，并以cookies返回sessionId保存在用户端。</p>
+<ol>
+<li>随着用户增多，服务器压力增加</li>
+<li>用户认证之后，服务端做记录，session保存在内存里，即下次必须还访问这台机器。在分布式的环境下，相应限制了负载能力。</li>
+<li>还要基于cookies，如果cookies被拦截，容易受伪造跨站攻击。</li>
+<li>前后端分离，增加了部署复杂性，用户一次请求要分发多次，session每次携带sessionId到服务器，还要查询用户信息，服务器压力很大；同时如果后端多节点部署，需要实现session共享机制，不方便集群。（？）</li>
+</ol>
+<h2 id="基于JWT"><a href="#基于JWT" class="headerlink" title="基于JWT"></a>基于JWT</h2><p><img src="/2021/06/15/JWT/%E5%9F%BA%E4%BA%8EJWT.png"></p>
+<h3 id="认证流程"><a href="#认证流程" class="headerlink" title="认证流程"></a>认证流程</h3><ol>
+<li>前端通过Web表单，把用户名和密码发送给后端接口。（建议用SSL加密）</li>
+<li>后端核对用户名和密码，把用户ID和其他信息作为JWT Payload，将其和头部进行Base64编码拼接后签名，形成一个JWT（Token），格式形入xxx.yyy.zzz（header.payload.signature)</li>
+<li>后端把JWT返回给前端浏览器，前端浏览器把JWT保存在localStorage或sessionStorage上，退出登录时，浏览器把JWT删除。</li>
+<li>前端每次请求就把JWT放在Http Header的Authorization中。（可以解决XSS和XSRF问题）</li>
+<li>后端检查JWT是否有效。（签名是否过期，Token是否有效，Token接收方是否是自己）</li>
+<li>后端使用JWT包含的用户信息，进行相应操作，获得信息。</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>简洁（compact）：通过url、post或者在Header中，数据量小，传输速度快。<br>字包含（self-contained）：负载中包含了用户所有需要的信息，避免多次查询数据库。<br>跨语言：因为Token是以JSON加密形式保存在客户端，所以原则上任何形式的Web都可以支持。<br>适合分布式微服务：不需要服务器保存会话信息。</p>
+<h1 id="JWT结构"><a href="#JWT结构" class="headerlink" title="JWT结构"></a>JWT结构</h1><p>Header.Payload.Signature</p>
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><p>头部信息，两部分组成</p>
+<ol>
+<li>令牌类型。默认是JWT</li>
+<li>签名算法。例如HMAC、SHA256或RSA等</li>
+</ol>
+<p>然后再使用BASE64编码组成Header。（Base64是编码格式）</p>
+<h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>有效负载，包含声明。声明是有关实体和其他数据的声明。<br>也是BASE64的编码<br>iss: jwt签发者<br>sub: jwt所⾯向的⽤户<br>aud: 接收jwt的⼀⽅<br>exp: jwt的过期时间，这个过期时间必须要⼤于签发时间<br>nbf: 定义在什么时间之前，该jwt都是不可⽤的<br>iat: jwt的签发时间<br>jti: jwt的唯⼀身份标识，主要⽤来作为⼀次性token,从⽽回避重放攻击<br>claim：jwt存放信息的地⽅</p>
+<div class="note warning">
+            <p>不要再payload上放用户的敏感信息，因为没有加密，被拦截然后使用BASE64解码就会被泄漏。</p>
+          </div>
+<h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><p>Signature需要编码后的header和payload以及提供的密钥，然后使用指定的签名算法（HS256）进行签名，签名的作用是确保JWT没有被篡改过。<br>比如：HMACSHA265（base64urlEncode（header) + “.” + base64urlEncode(payload), key）</p>
+<h3 id="验签"><a href="#验签" class="headerlink" title="验签"></a>验签</h3><p>先用签名3验证1.2。</p>
+<h1 id="使用JWT"><a href="#使用JWT" class="headerlink" title="使用JWT"></a>使用JWT</h1><h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><h2 id="生成JWT"><a href="#生成JWT" class="headerlink" title="生成JWT"></a>生成JWT</h2><p><img src="/2021/06/15/JWT/%E5%88%9B%E5%BB%BAJWT.png"></p>
+<h2 id="验证JWT"><a href="#验证JWT" class="headerlink" title="验证JWT"></a>验证JWT</h2><p><img src="/2021/06/15/JWT/%E9%AA%8C%E8%AF%81JWT.png"></p>
+<h2 id="异常信息"><a href="#异常信息" class="headerlink" title="异常信息"></a>异常信息</h2><p><img src="/2021/06/15/JWT/%E5%BC%82%E5%B8%B8.png"></p>
+<h1 id="JWT封装为工具类"><a href="#JWT封装为工具类" class="headerlink" title="JWT封装为工具类"></a>JWT封装为工具类</h1><h2 id="密钥"><a href="#密钥" class="headerlink" title="密钥"></a>密钥</h2><h2 id="创建JWT"><a href="#创建JWT" class="headerlink" title="创建JWT"></a>创建JWT</h2><h3 id="创建Map"><a href="#创建Map" class="headerlink" title="创建Map"></a>创建Map</h3><p>Map保存用户的Payload的信息</p>
+<h3 id="生成JWT-1"><a href="#生成JWT-1" class="headerlink" title="生成JWT"></a>生成JWT</h3><p>使用map.foreach把对应信息放到Payload里</p>
+<h2 id="验证JWT-1"><a href="#验证JWT-1" class="headerlink" title="验证JWT"></a>验证JWT</h2><h2 id="获取JWT的内部信息"><a href="#获取JWT的内部信息" class="headerlink" title="获取JWT的内部信息"></a>获取JWT的内部信息</h2><p>返回DecodedJWT</p>
+<h2 id="返回JWT"><a href="#返回JWT" class="headerlink" title="返回JWT"></a>返回JWT</h2><h1 id="SpringBoot整合"><a href="#SpringBoot整合" class="headerlink" title="SpringBoot整合"></a>SpringBoot整合</h1><h2 id="导包-1"><a href="#导包-1" class="headerlink" title="导包"></a>导包</h2><ol>
+<li>java-jwt</li>
+<li>lombok</li>
+<li>druid</li>
+<li>mysql</li>
+</ol>
+<h2 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h2>
+    </div>
+
+    
+    
+    
+
+      <div>
+        
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------希望对您有所帮助------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%89%E5%85%A8%E6%A0%A1%E9%AA%8C/" rel="tag"><i class="fa fa-tag"></i> 安全校验</a>
+          </div>
+	
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/25/Hibernate-validator/" rel="prev" title="Hibernate-validator">
+      <i class="fa fa-chevron-left"></i> Hibernate-validator
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/14/enum/" rel="next" title="enum">
+      enum <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">JWT是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">2.</span> <span class="nav-text">JWT能做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%88%E6%9D%83"><span class="nav-number">2.1.</span> <span class="nav-text">授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">信息交换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8JWT"><span class="nav-number">3.</span> <span class="nav-text">为什么要使用JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E4%BC%A0%E7%BB%9FSession%E7%9A%84%E8%AE%A4%E8%AF%81%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">基于传统Session的认证问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EJWT"><span class="nav-number">3.2.</span> <span class="nav-text">基于JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">认证流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">3.2.2.</span> <span class="nav-text">优点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">JWT结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Header"><span class="nav-number">4.1.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Payload"><span class="nav-number">4.2.</span> <span class="nav-text">Payload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Signature"><span class="nav-number">4.3.</span> <span class="nav-text">Signature</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E7%AD%BE"><span class="nav-number">4.3.1.</span> <span class="nav-text">验签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JWT"><span class="nav-number">5.</span> <span class="nav-text">使用JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90JWT"><span class="nav-number">5.2.</span> <span class="nav-text">生成JWT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81JWT"><span class="nav-number">5.3.</span> <span class="nav-text">验证JWT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF"><span class="nav-number">5.4.</span> <span class="nav-text">异常信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E5%B0%81%E8%A3%85%E4%B8%BA%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">6.</span> <span class="nav-text">JWT封装为工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E9%92%A5"><span class="nav-number">6.1.</span> <span class="nav-text">密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAJWT"><span class="nav-number">6.2.</span> <span class="nav-text">创建JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAMap"><span class="nav-number">6.2.1.</span> <span class="nav-text">创建Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90JWT-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">生成JWT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81JWT-1"><span class="nav-number">6.3.</span> <span class="nav-text">验证JWT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96JWT%E7%9A%84%E5%86%85%E9%83%A8%E4%BF%A1%E6%81%AF"><span class="nav-number">6.4.</span> <span class="nav-text">获取JWT的内部信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%9B%9EJWT"><span class="nav-number">6.5.</span> <span class="nav-text">返回JWT</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot%E6%95%B4%E5%90%88"><span class="nav-number">7.</span> <span class="nav-text">SpringBoot整合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%8C%85-1"><span class="nav-number">7.1.</span> <span class="nav-text">导包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEmysql"><span class="nav-number">7.2.</span> <span class="nav-text">配置mysql</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>

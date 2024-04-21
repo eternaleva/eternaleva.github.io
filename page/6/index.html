@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false,"width":240},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="May you found your worth in the waking world">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Maktub">
+<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+<meta property="og:site_name" content="Maktub">
+<meta property="og:description" content="May you found your worth in the waking world">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Tian">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Maktub</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Maktub</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Java、程序、C和杂谈</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">42</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/14/LeetCode_Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/14/LeetCode_Java/" class="post-title-link" itemprop="url">LeetCode</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-14 20:44:33" itemprop="dateCreated datePublished" datetime="2021-04-14T20:44:33+08:00">2021-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-07 11:59:42" itemprop="dateModified" datetime="2023-03-07T11:59:42+08:00">2023-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LeetCode"><a href="#LeetCode" class="headerlink" title="LeetCode"></a>LeetCode</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/14/LeetCode_Java/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/14/MVC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/14/MVC/" class="post-title-link" itemprop="url">MVC</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-14 14:18:12" itemprop="dateCreated datePublished" datetime="2021-04-14T14:18:12+08:00">2021-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:13:13" itemprop="dateModified" datetime="2024-04-21T22:13:13+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>532</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>判断一个程序好与坏，一个比较合理的方式是看：需求更改的时候，是否需要改变大量的代码。即各个组件之间的耦合性是否过于过高，过高会带来冗余和维护困难。因此引入MVC模型。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Model-View-Controller，把一个应用的输入、处理、输出流程按照Model、View、Controller的方式进行分离，这样一个应用被分成三个块，即模型层、视图层、控制层。</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>封装的是数据模型和所有基于对这些数据的操作。在一个组件中，Model往往表示组件的状态和操作状态的方法。</p>
+<div class="note info">
+            <p>Bean和对Bean的操作，作为Model</p>
+          </div>
+<h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><p>封装的是对数据Model的一种显示。一个模型可以由多个视图，而一个视图理论上也可以同不同的模型关联起来。</p>
+<div class="note info">
+            <p>Jsp或者response作为View</p>
+          </div>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><p>封装的是外界作用于模型的操作,  通常，这些操作会转发到模型上，并调用模型中相应的一个或者多个方法。一般Controller在Model和View之间起到了沟通的作用，处理用户在View上的输入，并转发给Model。这样Model和View两者之间可以做到松散耦合，甚至可以彼此不知道对方，而由Controller连接起这两个部分。</p>
+<div class="note info">
+            <p>Servlet就是作为一个Controller</p>
+          </div>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/14/Json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/14/Json/" class="post-title-link" itemprop="url">Json</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-14 00:35:25" itemprop="dateCreated datePublished" datetime="2021-04-14T00:35:25+08:00">2021-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 23:12:26" itemprop="dateModified" datetime="2024-04-21T23:12:26+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%8F%E8%AE%AE%E6%A0%87%E5%87%86/" itemprop="url" rel="index"><span itemprop="name">协议标准</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>545</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>是数据格式，而不是语言。很多编程语言都有针对Json的解析器。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/14/Json/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/06/Tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/06/Tomcat/" class="post-title-link" itemprop="url">Tomcat</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 12:24:28" itemprop="dateCreated datePublished" datetime="2021-04-06T12:24:28+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-28 15:50:17" itemprop="dateModified" datetime="2022-07-28T15:50:17+08:00">2022-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">Web服务器</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>539</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="对外"><a href="#对外" class="headerlink" title="对外"></a>对外</h3><p>对外接受http请求，封装并解析报文，分发请求。</p>
+<h3 id="对内"><a href="#对内" class="headerlink" title="对内"></a>对内</h3><p>对War包解析，生成一系列对象，并管理这些对象，将外部请求对接到对应的对象中去。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/06/Tomcat/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/06/Servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/06/Servlet/" class="post-title-link" itemprop="url">Servlet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 12:02:24" itemprop="dateCreated datePublished" datetime="2021-04-06T12:02:24+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:46:43" itemprop="dateModified" datetime="2024-04-21T22:46:43+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">Web服务器</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Servlet是用来开发动态Web资源。Servlet是个接口（interface类）</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/06/Servlet/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/15/Java%E7%89%88%E6%9C%AC%E7%89%B9%E5%BE%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/15/Java%E7%89%88%E6%9C%AC%E7%89%B9%E5%BE%81/" class="post-title-link" itemprop="url">Java版本特征</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-15 16:28:59" itemprop="dateCreated datePublished" datetime="2021-03-15T16:28:59+08:00">2021-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:38:15" itemprop="dateModified" datetime="2024-04-21T22:38:15+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>801</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h1><h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p>箭头符号 -&gt;<br>符号左侧：表达式参数列表<br>符号右侧：表达式所执行的功能，即lambda体<br>lambda表达式需要函数式接口支持</p>
+<h3 id="语法格式一：无参数，无返回值"><a href="#语法格式一：无参数，无返回值" class="headerlink" title="语法格式一：无参数，无返回值"></a>语法格式一：无参数，无返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">() -&gt; System.out.println(&quot;Hello Lambda&quot;);</span><br><span class="line">&#x2F;&#x2F;需要用一个拥有无参无返回值的接口</span><br><span class="line">Runnable run1 &#x3D; () -&gt; System.out.println(&quot;Hello Lambda&quot;);</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <p>在Java1.7之前，匿名内部类应用了同级别的局部变量，该变量必须是final。Java1.8之后则不需要，因为会JDK会自动将变量处理为final。</p>
+          </div>
+
+<h3 id="语法格式二：有一个参数，并且无返回值"><a href="#语法格式二：有一个参数，并且无返回值" class="headerlink" title="语法格式二：有一个参数，并且无返回值"></a>语法格式二：有一个参数，并且无返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(x) -&gt; System.out.println(&quot;Hello Lambda&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法格式三：有一个参数（小括号可以不写），并且无返回值"><a href="#语法格式三：有一个参数（小括号可以不写），并且无返回值" class="headerlink" title="语法格式三：有一个参数（小括号可以不写），并且无返回值"></a>语法格式三：有一个参数（小括号可以不写），并且无返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x -&gt; System.out.println(&quot;Hello Lambda&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法格式四：有两个以上的参数，并且lambda体中有多条语句，且有返回值"><a href="#语法格式四：有两个以上的参数，并且lambda体中有多条语句，且有返回值" class="headerlink" title="语法格式四：有两个以上的参数，并且lambda体中有多条语句，且有返回值"></a>语法格式四：有两个以上的参数，并且lambda体中有多条语句，且有返回值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(x, y) -&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">  return ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法格式五：若lambda体只有一条语句，return和大括号都可以省略不写（推荐）"><a href="#语法格式五：若lambda体只有一条语句，return和大括号都可以省略不写（推荐）" class="headerlink" title="语法格式五：若lambda体只有一条语句，return和大括号都可以省略不写（推荐）"></a>语法格式五：若lambda体只有一条语句，return和大括号都可以省略不写（推荐）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comparator&lt;Integer&gt; com &#x3D; (x, y) -&gt; Integer.compare(x, y);</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法格式六：lambda表达式的数据类型可以省略不写（类型推断：JVM会从上下文自动推断）"><a href="#语法格式六：lambda表达式的数据类型可以省略不写（类型推断：JVM会从上下文自动推断）" class="headerlink" title="语法格式六：lambda表达式的数据类型可以省略不写（类型推断：JVM会从上下文自动推断）"></a>语法格式六：lambda表达式的数据类型可以省略不写（类型推断：JVM会从上下文自动推断）</h3><div class="note info">
+            <p>左右遇一括号省，左侧推断类型省</p>
+          </div>
+
+<h3 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h3><p>如果一个接口只有一个抽象方法的接口，称为函数式接口。<br>可以使用注解@FunctionalInterface来检查是不是函数式接口，如果写超过一个方法，则会报错。</p>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>:: 双冒号</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/13/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">设计模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-13 10:05:27" itemprop="dateCreated datePublished" datetime="2021-03-13T10:05:27+08:00">2021-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-28 15:16:40" itemprop="dateModified" datetime="2022-07-28T15:16:40+08:00">2022-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="学习设计模式之前"><a href="#学习设计模式之前" class="headerlink" title="学习设计模式之前"></a>学习设计模式之前</h2><h3 id="设计模式并非类库"><a href="#设计模式并非类库" class="headerlink" title="设计模式并非类库"></a>设计模式并非类库</h3><p>与类库相比，设计模式是一个更为普遍的概念。类库是由程序组合而成的组件，而设计模式是用来表现内部组件是如何被组装的，以及每一个组件是如何通过相互关联而构成一个庞大系统的。</p>
+<h3 id="类库中使用了设计模式"><a href="#类库中使用了设计模式" class="headerlink" title="类库中使用了设计模式"></a>类库中使用了设计模式</h3><p>但是Java标准库使用了许多设计模式，掌握设计模式可以帮助我们理解这些类库所扮演的角色。</p>
+<h3 id="思考设计模式能带来什么"><a href="#思考设计模式能带来什么" class="headerlink" title="思考设计模式能带来什么"></a>思考设计模式能带来什么</h3><ol>
+<li>有哪些功能可以被拓展</li>
+<li>拓展功能时必须修改哪些地方</li>
+<li>哪些类不需要修改</li>
+</ol>
+<h2 id="适应设计模式"><a href="#适应设计模式" class="headerlink" title="适应设计模式"></a>适应设计模式</h2><h3 id="迭代模式（Iterator模式）"><a href="#迭代模式（Iterator模式）" class="headerlink" title="迭代模式（Iterator模式）"></a>迭代模式（Iterator模式）</h3><h4 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h4><ol>
+<li>Iterator（迭代器）<br> 定义了按顺序遍历元素的接口，定义了hasNext和next两个方法。</li>
+<li>ConcreteIterator（具体的迭代器）<br> 实现了按顺序遍历元素的接口，实现hasNext和next两个方法。</li>
+<li>Aggregate（集合）<br> 定义了创建迭代器的接口，创造出一个可以被迭代的集合。</li>
+<li>ConcreteAggregate（具体的集合）<br> 实现了Aggregate角色所定义的接口，即实现Aggregate的类，是可以被迭代的，可以创建具体的迭代器。</li>
+</ol>
+<h4 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h4><h4 id="代码案例"><a href="#代码案例" class="headerlink" title="代码案例"></a>代码案例</h4><h5 id="Aggregate接口"><a href="#Aggregate接口" class="headerlink" title="Aggregate接口"></a>Aggregate接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123;</span><br><span class="line">  <span class="comment">//抽象一个迭代器方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Iterator <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Iterator接口"><a href="#Iterator接口" class="headerlink" title="Iterator接口"></a>Iterator接口</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">  <span class="comment">//抽象两个迭代方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">hanNext</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BookShelf类"><a href="#BookShelf类" class="headerlink" title="BookShelf类"></a>BookShelf类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span> <span class="keyword">implements</span> <span class="title">Aggregate</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Book[] books;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> last;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Book <span class="title">getBookAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &lt; books.length);</span><br><span class="line">      <span class="keyword">return</span> books[index];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendBook</span><span class="params">(Book book)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.books[last] = book;</span><br><span class="line">    last++;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.last;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Iteraotr <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个图书架迭代器</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BookShelfIterator(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="BookShelfIterator类"><a href="#BookShelfIterator类" class="headerlink" title="BookShelfIterator类"></a>BookShelfIterator类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelfIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Bookshelf bookShelf;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> index;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">BookshelfIterator</span><span class="params">(BookShelf bookShelf)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.bookShelf = bookShelf;</span><br><span class="line">    <span class="keyword">this</span>.index = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &lt; bookShelf.length)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Book book = bookShelf.getBookAt(index);</span><br><span class="line">    index++;</span><br><span class="line">    <span class="keyword">return</span> book;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Book类"><a href="#Book类" class="headerlink" title="Book类"></a>Book类</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> string name;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="拓展思路的要点"><a href="#拓展思路的要点" class="headerlink" title="拓展思路的要点"></a>拓展思路的要点</h4><h5 id="不管实现如何变化，都可以使用Iterator"><a href="#不管实现如何变化，都可以使用Iterator" class="headerlink" title="不管实现如何变化，都可以使用Iterator"></a>不管实现如何变化，都可以使用Iterator</h5><p>就是为什么不用for循环来进行遍历。因为使用Iterator并没有调用BookShelf的方法，并不依赖于BookShelf的实现。<br>如果BookShelf的开发人员决定放弃用数组来管理图书。不管BookShelf如何变化，只要BookShelf的iterator的方法能正确地返回Iterator实例，迭代代码就能正常工作。<br>这就理解为什么Iterator方法的返回不是BookShelfIterator类型，而是Iterator类型。</p>
+<h5 id="难以理解抽象类和接口"><a href="#难以理解抽象类和接口" class="headerlink" title="难以理解抽象类和接口"></a>难以理解抽象类和接口</h5><p>如果只使用具体的类来解决问题，很容易导致类之间的强耦合，从而这些类难以作为组件再次被使用。<br>所以要弱化类之间的耦合，需要引入抽象类和接口。</p>
+<div class="note info">
+            <p>核心思想：不要只使用具体类来编程，要优先使用抽象类和接口来编程</p>
+          </div>
+
+<h5 id="Aggregate和Iterator的对应-ConcreteAggregate和ConcreteIterator对应"><a href="#Aggregate和Iterator的对应-ConcreteAggregate和ConcreteIterator对应" class="headerlink" title="Aggregate和Iterator的对应/ConcreteAggregate和ConcreteIterator对应"></a>Aggregate和Iterator的对应/ConcreteAggregate和ConcreteIterator对应</h5><p>在本例子中，BookShelfIterator类知道BookShelf如何实现的，因此才能调用getBookAt来获取下一本书。<br>所以，BookShelf的实现发生改变，getBookAt的实现也发生改变时，必须修改BookShelfIterator类，即如同接口一样，BookShelf和BookShelfIterator的对应（Concrete的对应）。</p>
+<h5 id="容易弄错“下一个”"><a href="#容易弄错“下一个”" class="headerlink" title="容易弄错“下一个”"></a>容易弄错“下一个”</h5><p>next()方法是返回指针的当前值，接着指针指向下一个。</p>
+<h5 id="容易弄错“最后一个”"><a href="#容易弄错“最后一个”" class="headerlink" title="容易弄错“最后一个”"></a>容易弄错“最后一个”</h5><p>hasNext方法在返回最后一个元素前会返回true，当返回最后一个元素的时候返回false。<br>所以把hasNext理解为，接下来时候可以调用next()方法。<br>访问最后一个元素的时候，是倒数第二个元素调用next()，输出最后一个元素。</p>
+<h5 id="多个迭代器"><a href="#多个迭代器" class="headerlink" title="多个迭代器"></a>多个迭代器</h5><p>将遍历功能置于Aggregate角色之外，是Iterator模式的一个特征。因此可以编写多个ConcreteIterator迭代器。</p>
+<h5 id="迭代器的种类多种多样"><a href="#迭代器的种类多种多样" class="headerlink" title="迭代器的种类多种多样"></a>迭代器的种类多种多样</h5><ol>
+<li>可以用最后向前遍历</li>
+<li>即包含从前向后，也包含从后向前</li>
+<li>指定下标，跳跃式前进</li>
+</ol>
+<h5 id="不需要deleteIterator"><a href="#不需要deleteIterator" class="headerlink" title="不需要deleteIterator"></a>不需要deleteIterator</h5><p>因为Java的独有内存管理机制，没有被使用的对象实例会自动被GC处理。所以不需要删除迭代器方法。</p>
+<h4 id="相关的设计模式"><a href="#相关的设计模式" class="headerlink" title="相关的设计模式"></a>相关的设计模式</h4><ol>
+<li>Vistor模式：在遍历元素集合的过程中，对元素进行相同的处理。</li>
+<li>Composite模式：具有递归结构的模式，在其中使用Iterator比较困难。</li>
+<li>Factory Method模式：Iterator方法中生成Iterator的实例时可能会使用Factory Method模式。</li>
+</ol>
+<h3 id="适配器模式（Adapter-Method）"><a href="#适配器模式（Adapter-Method）" class="headerlink" title="适配器模式（Adapter Method）"></a>适配器模式（Adapter Method）</h3><h4 id="核心组件-1"><a href="#核心组件-1" class="headerlink" title="核心组件"></a>核心组件</h4><h5 id="Target（对象）"><a href="#Target（对象）" class="headerlink" title="Target（对象）"></a>Target（对象）</h5><p>定义了所需的方法。简单而言就是定义了所需要转换的最终要求。</p>
+<h5 id="Client（请求者）"><a href="#Client（请求者）" class="headerlink" title="Client（请求者）"></a>Client（请求者）</h5><p>就是谁负责调用Target对象，使用转换后的对象来进行自己操作的对象。</p>
+<h5 id="Adaptee（被适配）"><a href="#Adaptee（被适配）" class="headerlink" title="Adaptee（被适配）"></a>Adaptee（被适配）</h5><p>被适配的对象，就是原先需要被转换的对象。拥有自己方法的对象。</p>
+<h5 id="Adapter（适配者）"><a href="#Adapter（适配者）" class="headerlink" title="Adapter（适配者）"></a>Adapter（适配者）</h5><p>适配者，利用被适配的对象方法，来实现转换为适配满足Target对象的需求。</p>
+<div class="note info">
+            <p>Java的类要先继承再实现</p>
+          </div>
+
+<h4 id="UML图-1"><a href="#UML图-1" class="headerlink" title="UML图"></a>UML图</h4><h4 id="代码案例-1"><a href="#代码案例-1" class="headerlink" title="代码案例"></a>代码案例</h4><h4 id="拓展思路要点"><a href="#拓展思路要点" class="headerlink" title="拓展思路要点"></a>拓展思路要点</h4><h5 id="什么时候使用Adapter模式"><a href="#什么时候使用Adapter模式" class="headerlink" title="什么时候使用Adapter模式"></a>什么时候使用Adapter模式</h5><p>当有些类已经被测试过了，并且用于其他软件之中，我们更愿意将这些类作为组件重复使用。Adapter会对现有类进行适配，生成新的类。<br>也可以用来排查代码bug，调查扮演Adapter的类来进行排查。</p>
+<h5 id="如果没有现成的代码"><a href="#如果没有现成的代码" class="headerlink" title="如果没有现成的代码"></a>如果没有现成的代码</h5><p>让现有的类适配新的API时，常常会有“稍微改一下的”这样思想，从而修改了原有测试完成的代码。而如果使用Adapter模式，可以不修改原有代码，来适配新的API。</p>
+<h5 id="版本升级和兼容"><a href="#版本升级和兼容" class="headerlink" title="版本升级和兼容"></a>版本升级和兼容</h5><p>使用Adapter模式可以使新旧版本兼容，同时维护新旧版本。</p>
+<h5 id="功能完全不同的类（不能使用）"><a href="#功能完全不同的类（不能使用）" class="headerlink" title="功能完全不同的类（不能使用）"></a>功能完全不同的类（不能使用）</h5><p>当Adaptee类和Target类的功能完全不同的时候，是不能使用Adapter模式的。</p>
+<h2 id="交给子类"><a href="#交给子类" class="headerlink" title="交给子类"></a>交给子类</h2><h3 id="模版模式（Template-Method）"><a href="#模版模式（Template-Method）" class="headerlink" title="模版模式（Template Method）"></a>模版模式（Template Method）</h3><h4 id="核心组件-2"><a href="#核心组件-2" class="headerlink" title="核心组件"></a>核心组件</h4><h5 id="AbstractClass（抽象类）"><a href="#AbstractClass（抽象类）" class="headerlink" title="AbstractClass（抽象类）"></a>AbstractClass（抽象类）</h5><h5 id="ConcreteClass（具体类）"><a href="#ConcreteClass（具体类）" class="headerlink" title="ConcreteClass（具体类）"></a>ConcreteClass（具体类）</h5><h3 id="工厂模式（Factory-Method）"><a href="#工厂模式（Factory-Method）" class="headerlink" title="工厂模式（Factory Method）"></a>工厂模式（Factory Method）</h3><h3 id="策略设计模式"><a href="#策略设计模式" class="headerlink" title="策略设计模式"></a>策略设计模式</h3><h2 id="生成实例"><a href="#生成实例" class="headerlink" title="生成实例"></a>生成实例</h2><h3 id="单例模式（Singleton"><a href="#单例模式（Singleton" class="headerlink" title="单例模式（Singleton)"></a>单例模式（Singleton)</h3><h4 id="核心组件-3"><a href="#核心组件-3" class="headerlink" title="核心组件"></a>核心组件</h4><h5 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h5><p>Singleton只存在一个实例的类。</p>
+<h5 id="UML图-2"><a href="#UML图-2" class="headerlink" title="UML图"></a>UML图</h5><h5 id="代码案例-2"><a href="#代码案例-2" class="headerlink" title="代码案例"></a>代码案例</h5><h2 id="避免浪费"><a href="#避免浪费" class="headerlink" title="避免浪费"></a>避免浪费</h2><h3 id="代理模式（Proxy-Method）"><a href="#代理模式（Proxy-Method）" class="headerlink" title="代理模式（Proxy Method）"></a>代理模式（Proxy Method）</h3><h4 id="核心组件-4"><a href="#核心组件-4" class="headerlink" title="核心组件"></a>核心组件</h4><h5 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h5><h5 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h5><h4 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h4><p>需要提供代理类。</p>
+<h4 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h4><h5 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h5><p>被代理的类要有接口实现（生成的代理对象类型和接口相关），返回值必须用接口类来接收。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取动态代理对象</span></span><br><span class="line">HouseOwner houseOwner = <span class="keyword">new</span> HouseOwner();</span><br><span class="line">Proxy.newProxyInstance(houseOwner.getClass().getClassLoader(), </span><br><span class="line">  houseOwner.getClass().getInterface(),</span><br><span class="line">  <span class="keyword">new</span> InvocationHandler&#123;</span><br><span class="line">  <span class="comment">//使用代理对象调用方法时，就会调用这个invoke方法。</span></span><br><span class="line">  <span class="comment">//1.proxy：代理对象</span></span><br><span class="line">  <span class="comment">//2.method：代理对象所使用的方法</span></span><br><span class="line">  <span class="comment">//3.args：method对应的参数</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    <span class="comment">//一定要传被代理类的对象（houseOwner），而不是代理对象。</span></span><br><span class="line">    &#123;前代理操作...&#125;</span><br><span class="line">    Object invoke = method.invoke(houseOwner, args);</span><br><span class="line">    &#123;后代理操作...&#125;</span><br><span class="line">    <span class="keyword">return</span> invoke;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h5><p>基于继承来实现。</p>
+<ol>
+<li>导入cglib包（Spring5.0之后已经将cglib导入）</li>
+<li>创建增强器</li>
+<li>设置父类（即代理目标）</li>
+<li>设置回调（回调是个接口）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CglibTest</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Test</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myProxy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    HouseOwner houseOwner = <span class="keyword">new</span> HouseOwner();</span><br><span class="line">    <span class="comment">//创建代理类，cglib下的InvocationHandler</span></span><br><span class="line">    HouseOwner houseOwnerProxy = (HouseOwner) Enhancer.create(HouseOwner.class, <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object o, Method method, Object[] objects)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;前调用...&quot;</span>);</span><br><span class="line">        Object invoke = method.invoke(houseOwner, objects);</span><br><span class="line">        System.out.println(<span class="string">&quot;后调用...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> invoke;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//使用代理</span></span><br><span class="line">    houseOwnerProxy.rent(<span class="number">1500</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">数据结构与算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 23:44:01" itemprop="dateCreated datePublished" datetime="2021-03-10T23:44:01+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-31 15:17:25" itemprop="dateModified" datetime="2022-07-31T15:17:25+08:00">2022-07-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>算法是程序的计算方法</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>掌握数据结构和算法，对于阅读框架源码，或者理解背后的设计思想，都是极其有用的。一切实际都是以用为目的，对于程序来讲，除了可读性、健壮性等，<strong>性能的好坏是个至关重要的标准</strong>。</p>
+<h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><p>数据通过一定的组织方式存在，这种结构就叫数据结构。数据结构是服务算法的，而算法是作用在数据结构上的，两者相辅相承。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">Java面试题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-06 17:54:08" itemprop="dateCreated datePublished" datetime="2021-03-06T17:54:08+08:00">2021-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 22:28:08" itemprop="dateModified" datetime="2024-04-21T22:28:08+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/1.jpg" alt="xxx"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/06/Java%E9%9D%A2%E8%AF%95%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/22/Zookeeper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.jpeg">
+      <meta itemprop="name" content="Tian">
+      <meta itemprop="description" content="May you found your worth in the waking world">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Maktub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/22/Zookeeper/" class="post-title-link" itemprop="url">Zookeeper</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-22 17:52:55" itemprop="dateCreated datePublished" datetime="2020-09-22T17:52:55+08:00">2020-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-21 23:04:34" itemprop="dateModified" datetime="2024-04-21T23:04:34+08:00">2024-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>28</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>/etc/zookeeper/zoo.cfg</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tian"
+      src="/images/2.jpeg">
+  <p class="site-author-name" itemprop="name">Tian</p>
+  <div class="site-description" itemprop="description">May you found your worth in the waking world</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/eternaleva" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;eternaleva" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">220k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
+</html>
